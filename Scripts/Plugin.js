@@ -78,7 +78,7 @@ function CreateWidget(Opts) {
     const CloseBtn = document.createElement("button");
     CloseBtn.className = "WidgetBtn";
     CloseBtn.title = "Close";
-    CloseBtn.textContent = "×";
+    CloseBtn.textContent = "x";
     CloseBtn.addEventListener("click", () => {
         if (Opts.OnClose) Opts.OnClose();
         El.classList.add("WidgetHidden");
@@ -141,12 +141,118 @@ function GetAtoms() {
     return globalThis.Objects || [];
 }
 
+function GetCameraForward() {
+    const R = GetSim();
+    if (!R) return [0, 0, -1];
+    const Fx = R.CameraTarget[0] - R.CameraPosition[0];
+    const Fy = R.CameraTarget[1] - R.CameraPosition[1];
+    const Fz = R.CameraTarget[2] - R.CameraPosition[2];
+    const Len = Math.sqrt(Fx * Fx + Fy * Fy + Fz * Fz) || 1;
+    return [Fx / Len, Fy / Len, Fz / Len];
+}
+
+function AddSection(Parent, Title, InitiallyOpen = true) {
+    const Section = document.createElement("div");
+    Section.className = "WSection" + (InitiallyOpen ? " Open" : "");
+
+    const Header = document.createElement("div");
+    Header.className = "WSectionHeader";
+    const Chev = document.createElement("span");
+    Chev.className = "WSectionChevron";
+    Chev.textContent = ">";
+    const Text = document.createElement("span");
+    Text.textContent = Title;
+    Header.appendChild(Chev);
+    Header.appendChild(Text);
+
+    const Body = document.createElement("div");
+    Body.className = "WSectionBody";
+
+    Header.addEventListener("click", () => Section.classList.toggle("Open"));
+
+    Section.appendChild(Header);
+    Section.appendChild(Body);
+    Parent.appendChild(Section);
+    return Body;
+}
+
+function AddStatRow(Parent, Label) {
+    const Row = document.createElement("div");
+    Row.className = "WStatRow";
+    const L = document.createElement("span");
+    L.textContent = Label;
+    const V = document.createElement("span");
+    V.textContent = "-";
+    Row.appendChild(L);
+    Row.appendChild(V);
+    Parent.appendChild(Row);
+    return V;
+}
+
+function AddStepper(Parent, LabelText, Min, Max, Value, OnChange) {
+    const Row = document.createElement("div");
+    Row.className = "WRow";
+    const Lbl = document.createElement("label");
+    Lbl.textContent = LabelText;
+
+    const Box = document.createElement("div");
+    Box.className = "WStepper";
+
+    const Dec = document.createElement("button");
+    Dec.className = "WStepperBtn";
+    Dec.type = "button";
+    Dec.textContent = "-";
+
+    const Input = document.createElement("input");
+    Input.className = "WStepperInput";
+    Input.type = "number";
+    Input.min = String(Min);
+    Input.max = String(Max);
+    Input.value = String(Value);
+
+    const Inc = document.createElement("button");
+    Inc.className = "WStepperBtn";
+    Inc.type = "button";
+    Inc.textContent = "+";
+
+    const Clamp = (V) => Math.max(Min, Math.min(Max, Math.round(V)));
+
+    const Apply = (V, Emit = true) => {
+        const C = Clamp(V);
+        Input.value = String(C);
+        if (Emit) OnChange(C);
+    };
+
+    Input.addEventListener("input", () => {
+        const V = Number(Input.value);
+        if (!isNaN(V)) OnChange(Clamp(V));
+    });
+    Input.addEventListener("blur", () => Apply(Number(Input.value) || 0, false));
+    Dec.addEventListener("click", () => Apply((Number(Input.value) || 0) - 1));
+    Inc.addEventListener("click", () => Apply((Number(Input.value) || 0) + 1));
+
+    Box.appendChild(Dec);
+    Box.appendChild(Input);
+    Box.appendChild(Inc);
+    Row.appendChild(Lbl);
+    Row.appendChild(Box);
+    Parent.appendChild(Row);
+
+    return {
+        Set(V) { Input.value = String(Clamp(V)); },
+        Get() { return Number(Input.value) || 0; }
+    };
+}
+
 function CreatePluginContext(Entry) {
     return {
         Id: Entry.Id,
         CreateWidget: (Opts) => CreateWidget({ ...Opts, Id: Opts.Id || `${Entry.Id}_widget` }),
         DestroyWidget,
         GetWidget: (Id) => WidgetMap.get(Id) || null,
+        AddSection,
+        AddStatRow,
+        AddStepper,
         SpawnAtom,
         ForceBond,
         ClearAtoms: ClearAllAtoms,
@@ -154,6 +260,39 @@ function CreatePluginContext(Entry) {
         GetRenderer: GetSim,
         On,
         Emit,
+        GetSelectedAtom() {
+            const R = GetSim();
+            return R ? R.SelectedObject : null;
+        },
+        SetSelectedAtom(Atom) {
+            const R = GetSim();
+            if (!R) return;
+            R.SelectedObject = Atom || null;
+        },
+        GetCameraPosition() {
+            const R = GetSim();
+            return R ? [...R.CameraPosition] : [0, 0, 0];
+        },
+        GetCameraForward,
+        EmitParticle(Type, Position, Velocity, LifeScale = 1.0) {
+            const R = GetSim();
+            if (!R || !R.EmitParticle) return;
+            R.EmitParticle(Position, Velocity, Type, LifeScale);
+        },
+        EmitBurst(Type, Position, Count = 1, SpeedMul = 1.0) {
+            const R = GetSim();
+            if (!R || !R.EmitBurst) return;
+            R.EmitBurst(Position, Count, Type, SpeedMul);
+        },
+        GetParticles() {
+            const R = GetSim();
+            return R ? R.Particles : [];
+        },
+        DecayAtom(Atom) {
+            const R = GetSim();
+            if (!R || !R.DecayAtom) return false;
+            return R.DecayAtom(Atom || R.SelectedObject);
+        },
         SetTemperature(T) {
             const R = GetSim();
             if (R) R.Temperature = T;
@@ -173,16 +312,11 @@ function BuildPluginDock() {
     let Dock = document.getElementById("PluginDock");
     if (!Dock) {
         Dock = document.createElement("div");
-        Dock.Id = "PluginDock";
         Dock.id = "PluginDock";
         Dock.className = "PluginDock";
         document.body.appendChild(Dock);
     }
     Dock.innerHTML = "";
-    const Label = document.createElement("span");
-    Label.className = "PluginDockLabel";
-    Label.textContent = "Plugins";
-    Dock.appendChild(Label);
 
     for (const Entry of PluginRegistry.values()) {
         const Btn = document.createElement("button");

@@ -39,7 +39,6 @@ let InitialHitOffset = [0, 0, 0];
 let LastDragPosition = [0, 0, 0];
 let LastDragTime = performance.now();
 let ThrowVelocity = [0, 0, 0];
-// Recent drag samples for release velocity (only last ~60ms counts)
 let DragSamples = [];
 const DragSampleWindowMs = 60;
 
@@ -58,7 +57,8 @@ function ShowContextMenu(Atom, X, Y) {
     const Title = ContextMenu.querySelector(".CtxTitle");
     if (Title) {
         const A = Atom.Atom;
-        Title.textContent = `${Atom.Key}  |  ${A.Name || Atom.Key}`;
+        const MassNumber = (Atom.Protons || 0) + (Atom.Neutrons || 0);
+        Title.textContent = `${Atom.Key} | ${A.Name || Atom.Key} | A=${MassNumber}`;
     }
     ContextMenu.hidden = false;
     const MenuW = ContextMenu.offsetWidth || 180;
@@ -75,7 +75,6 @@ window.addEventListener("mousedown", (Event) => {
     const ClickedInsideMenu = ContextMenu && !ContextMenu.hidden && ContextMenu.contains(Event.target);
     const ClickedUi = Event.target.closest(".Area, .ContextMenu, .Tooltip, button, select, input, label");
 
-    // Clicks on UI must not start drag / orbit / deselect
     if (ClickedInsideMenu || ClickedUi) {
         if (!ClickedInsideMenu && ContextMenu && !ContextMenu.hidden) {
             HideContextMenu();
@@ -83,7 +82,6 @@ window.addEventListener("mousedown", (Event) => {
         return;
     }
 
-    // Close menu when clicking outside
     if (ContextMenu && !ContextMenu.hidden) {
         HideContextMenu();
     }
@@ -94,13 +92,11 @@ window.addEventListener("mousedown", (Event) => {
         const AtomHit = PickAtom(Ray);
 
         if (AtomHit) {
-            // RMB on atom -> select + open context menu (no camera orbit)
             ShowContextMenu(AtomHit, MousePos.x, MousePos.y);
             IsRmbDown = false;
             return;
         }
 
-        // Empty space -> camera orbit
         IsRmbDown = true;
         return;
     }
@@ -145,16 +141,13 @@ window.addEventListener("mousedown", (Event) => {
 function ComputeThrowFromSamples() {
     if (DragSamples.length < 2) return [0, 0, 0];
     const Now = DragSamples[DragSamples.length - 1].t;
-    // Only use samples from the last DragSampleWindowMs
     const Recent = DragSamples.filter((S) => Now - S.t <= DragSampleWindowMs);
     if (Recent.length < 2) {
-        // Almost no recent motion -> soft release
         return [0, 0, 0];
     }
     const First = Recent[0];
     const Last = Recent[Recent.length - 1];
     const Dt = Math.max(0.008, (Last.t - First.t) / 1000);
-    // Scale down so throws stay manageable
     const Scale = 0.085;
     return [
         (Last.p[0] - First.p[0]) / Dt * Scale,
@@ -168,7 +161,6 @@ window.addEventListener("mouseup", (Event) => {
     if (Event.button === 0) {
         if (IsInteracting && SelectedObject) {
             ThrowVelocity = ComputeThrowFromSamples();
-            // Dead zone: tiny motion does not launch
             const Mag = Math.sqrt(
                 ThrowVelocity[0] * ThrowVelocity[0] +
                 ThrowVelocity[1] * ThrowVelocity[1] +
@@ -208,7 +200,6 @@ window.addEventListener("mousemove", (Event) => {
             ];
 
             DragSamples.push({ t: CurrentTime, p: [...NewPos] });
-            // Keep only recent history
             while (DragSamples.length > 0 && CurrentTime - DragSamples[0].t > DragSampleWindowMs * 2) {
                 DragSamples.shift();
             }
@@ -227,12 +218,16 @@ window.addEventListener("mousemove", (Event) => {
 
         if (HoveredObject && Tooltip) {
             const A = HoveredObject.Atom;
-            let Text = `${HoveredObject.Key}  |  ${A.Name || HoveredObject.Key}  |  #${A.AtomicNumber ?? "?"}  |  ${A.AtomicMass ?? "?"}u  |  v${A.Valence ?? "?"}`;
+            const Z = HoveredObject.Protons || A.AtomicNumber || 0;
+            const N = HoveredObject.Neutrons || 0;
+            const MassNumber = Z + N;
+            let Text = `${HoveredObject.Key} | ${A.Name || HoveredObject.Key} | Z=${Z} N=${N} A=${MassNumber}`;
+            if (!HoveredObject.Stable) Text += ` | UNSTABLE`;
             if (HoveredObject.PartialCharge !== undefined && Math.abs(HoveredObject.PartialCharge) > 0.02) {
-                Text += `  |  q${HoveredObject.PartialCharge > 0 ? "+" : ""}${HoveredObject.PartialCharge.toFixed(2)}`;
+                Text += ` | q${HoveredObject.PartialCharge > 0 ? "+" : ""}${HoveredObject.PartialCharge.toFixed(2)}`;
             }
             if (HoveredObject.Excited > 0.05) {
-                Text += `  |  *${HoveredObject.Excited.toFixed(1)}`;
+                Text += ` | *${HoveredObject.Excited.toFixed(1)}`;
             }
             Tooltip.textContent = Text;
             Tooltip.style.opacity = "1";
@@ -253,7 +248,6 @@ window.addEventListener("keyup", (Event) => {
     KeyStates[Event.code] = false;
 });
 
-// Display mode buttons
 document.querySelectorAll(".ModeBtn").forEach((Btn) => {
     Btn.addEventListener("click", () => {
         const Mode = Btn.dataset.mode;
@@ -262,7 +256,6 @@ document.querySelectorAll(".ModeBtn").forEach((Btn) => {
     });
 });
 
-// Context menu actions  -  use mousedown so the action fires before any hide logic
 if (ContextMenu) {
     ContextMenu.addEventListener("mousedown", (Event) => {
         Event.preventDefault();
@@ -310,7 +303,6 @@ if (ContextMenu) {
             case "breakbonds": {
                 const Idx = Objects.indexOf(Atom);
                 if (Idx >= 0) {
-                    // Snapshot current bonds into Previous so energy release still fires
                     CanvasRenderer.PreviousBondPairs = new Set(CanvasRenderer.ActiveBondPairs);
                     const ToRemove = [];
                     for (const Key of CanvasRenderer.ActiveBondPairs) {
@@ -330,6 +322,12 @@ if (ContextMenu) {
             case "neutralize":
                 Atom.ExtraCharge = 0;
                 break;
+            case "decay": {
+                if (CanvasRenderer.DecayAtom) {
+                    CanvasRenderer.DecayAtom(Atom);
+                }
+                break;
+            }
             case "focus": {
                 CanvasRenderer.CameraTarget = [...Atom.Position];
                 const Fwd = GetCameraForward();
@@ -371,7 +369,6 @@ window.addEventListener("wheel", (Event) => {
         CanvasRenderer.TargetTimeScale = Number(NextScale.toFixed(2));
         if (NextScale <= 0) CanvasRenderer.TimeScale = 0;
     } else if (Event.altKey) {
-        // Alt + scroll = bath temperature
         const Snap = 0.05;
         const Delta = Event.deltaY < 0 ? Snap : -Snap;
         let NextTemp = Math.round((CanvasRenderer.Temperature + Delta) / Snap) * Snap;
@@ -391,7 +388,6 @@ window.addEventListener("wheel", (Event) => {
     }
 }, { passive: false });
 
-// Cold metastable start
 CanvasRenderer.Temperature = 0.05;
 CanvasRenderer.FreeEnergy = 0;
 CanvasRenderer.SettleFrames = 180;
@@ -522,13 +518,10 @@ const HierarchyTree = document.getElementById("HierarchyTree");
 const HierarchyCollapseAllBtn = document.getElementById("HierarchyCollapseAll");
 const HierarchyExpandAllBtn = document.getElementById("HierarchyExpandAll");
 const HierarchyCollapsed = new Set();
-let HierarchyTimer = 0;
-// null = manual, "collapse" = always collapsed, "expand" = always expanded
 let HierarchyForceMode = null;
 let LastHierarchySignature = "";
 let HierarchyPointerDown = false;
 
-// Tunable preferences (used by context menu + physics feel)
 const Prefs = {
     ExciteAmount: 0.8,
     ImpulseStrength: 8,
@@ -539,7 +532,6 @@ const Prefs = {
     BoundZ: 300
 };
 
-// Free atoms start collapsed
 HierarchyCollapsed.add("free_atoms");
 
 function SyncHierarchyForceButtons() {
@@ -630,7 +622,6 @@ function FormulaFromIndices(Indices) {
 }
 
 function HierarchySignature(Entries) {
-    // Topology only  -  ignore KE so we don't rebuild DOM every tick
     return Entries.map(([, Idx]) => Idx.slice().sort((A, B) => A - B).join(",")).join("|")
         + `#${SelectedObject ? Objects.indexOf(SelectedObject) : -1}`
         + `#${[...HierarchyCollapsed].join(",")}`;
@@ -641,7 +632,6 @@ function SelectAtomByIndex(Index) {
     const Atom = Objects[Index];
     SelectedObject = Atom;
     CanvasRenderer.SelectedObject = Atom;
-    // Light visual refresh without full rebuild
     if (HierarchyTree) {
         HierarchyTree.querySelectorAll(".HierAtom").forEach((Row) => {
             const I = Number(Row.dataset.index);
@@ -665,9 +655,7 @@ function FocusAtomByIndex(Index) {
 
 function UpdateHierarchy(ForceRebuild = false) {
     if (!HierarchyTree) return;
-    // Don't rebuild while user is pressing on the list  -  prevents missed clicks
     if (HierarchyPointerDown && !ForceRebuild) {
-        // Still update KE numbers in place
         HierarchyTree.querySelectorAll(".HierAtom").forEach((Row) => {
             const I = Number(Row.dataset.index);
             if (I >= 0 && I < Objects.length) {
@@ -691,7 +679,6 @@ function UpdateHierarchy(ForceRebuild = false) {
     const StructureChanged = ForceRebuild || Sig !== LastHierarchySignature;
 
     if (!StructureChanged) {
-        // In-place KE / state update only
         HierarchyTree.querySelectorAll(".HierAtom").forEach((Row) => {
             const I = Number(Row.dataset.index);
             if (I >= 0 && I < Objects.length) {
@@ -710,7 +697,7 @@ function UpdateHierarchy(ForceRebuild = false) {
             const Indices = (GroupEl.dataset.indices || "").split(",").map(Number).filter((N) => !isNaN(N));
             let TotalKe = 0;
             for (const i of Indices) if (Objects[i]) TotalKe += Objects[i].KineticEnergy || 0;
-            Meta.textContent = `${Indices.length}  |  KE ${TotalKe.toFixed(1)}`;
+            Meta.textContent = `${Indices.length} | KE ${TotalKe.toFixed(1)}`;
         });
         return;
     }
@@ -720,7 +707,6 @@ function UpdateHierarchy(ForceRebuild = false) {
     const Fragments = [];
     let GroupIdx = 0;
 
-    // Bundle free (unbonded) atoms into one collapsed group
     const FreeIndices = [];
     const MoleculeEntries = [];
     for (const [, Indices] of Entries) {
@@ -762,8 +748,10 @@ function UpdateHierarchy(ForceRebuild = false) {
             if (SelectedObject === AtomObj) Row.classList.add("selected");
             if ((AtomObj.KineticEnergy || 0) > 8 || (AtomObj.Excited || 0) > 0.3) Row.classList.add("hot");
             if ((AtomObj.Excited || 0) > 0.05) Row.classList.add("excited");
+            const MassNumber = (AtomObj.Protons || 0) + (AtomObj.Neutrons || 0);
+            const UnstableMark = AtomObj.Stable ? "" : " *";
             Row.innerHTML = `
-                <span class="HierAtomName">${AtomObj.Key} | ${AtomObj.Atom.Name || AtomObj.Key}</span>
+                <span class="HierAtomName">${AtomObj.Key} | ${AtomObj.Atom.Name || AtomObj.Key}${UnstableMark} (A=${MassNumber})</span>
                 <span class="HierAtomKe">${(AtomObj.KineticEnergy || 0).toFixed(1)}</span>
             `;
             Children.appendChild(Row);
@@ -787,7 +775,6 @@ function UpdateHierarchy(ForceRebuild = false) {
     HierarchyTree.replaceChildren(...Fragments);
 }
 
-// Event delegation  -  survives DOM rebuilds mid-interaction
 if (HierarchyTree) {
     HierarchyTree.addEventListener("pointerdown", (E) => {
         HierarchyPointerDown = true;
@@ -801,7 +788,6 @@ if (HierarchyTree) {
         if (Header && Header.dataset.molecule === "1") {
             E.preventDefault();
             E.stopPropagation();
-            // Manual toggle exits force mode
             HierarchyForceMode = null;
             SyncHierarchyForceButtons();
             const Key = Header.dataset.groupKey;
@@ -831,7 +817,6 @@ if (HierarchyTree) {
 if (HierarchyCollapseAllBtn) {
     HierarchyCollapseAllBtn.addEventListener("click", (E) => {
         E.stopPropagation();
-        // Toggle always-collapsed; clicking again returns to manual
         HierarchyForceMode = HierarchyForceMode === "collapse" ? null : "collapse";
         ApplyHierarchyForceMode();
         SyncHierarchyForceButtons();
@@ -851,7 +836,6 @@ if (HierarchyExpandAllBtn) {
 
 SyncHierarchyForceButtons();
 
-// ---- Atom adder ----
 const AtomSelect = document.getElementById("AtomSelect");
 const SpawnAtomBtn = document.getElementById("SpawnAtomBtn");
 const SpawnCountInput = document.getElementById("SpawnCount");
@@ -866,13 +850,12 @@ if (AtomSelect && typeof Atoms !== "undefined") {
     for (const Key of Ordered) {
         const Opt = document.createElement("option");
         Opt.value = Key;
-        Opt.textContent = `${Key}  -  ${Atoms[Key].Name}`;
+        Opt.textContent = `${Key} - ${Atoms[Key].Name}`;
         AtomSelect.appendChild(Opt);
     }
     AtomSelect.value = "C";
 }
 
-// Shared cluster so sequential spawns (C then H then O) land near each other and can bond
 let SpawnClusterCenter = null;
 let SpawnClusterTime = 0;
 
@@ -885,7 +868,6 @@ function SpawnAtoms() {
     const Fwd = GetCameraForward();
     const Now = performance.now();
 
-    // Reset cluster if it went cold (>2.5s) so new batches don't pile on old ones forever
     if (!SpawnClusterCenter || Now - SpawnClusterTime > 2500) {
         SpawnClusterCenter = [
             Cam[0] + Fwd[0] * 260,
@@ -897,7 +879,6 @@ function SpawnAtoms() {
 
     let Last = null;
     for (let i = 0; i < Count; i++) {
-        // Tight packing so H-O / C-H etc. are within bond-formation range
         const Jitter = [
             (Math.random() - 0.5) * 28,
             (Math.random() - 0.5) * 28,
@@ -928,7 +909,6 @@ if (SpawnAtomBtn) {
     });
 }
 
-// ---- Preferences wiring ----
 function WirePref(Id, Key, Format = (V) => V.toFixed(1)) {
     const El = document.getElementById(Id);
     const Val = document.getElementById(Id + "Val");

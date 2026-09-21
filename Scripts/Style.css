@@ -38,7 +38,6 @@ body {
     z-index: 0;
 }
 
-/* ---- Glass panels ---- */
 .Area {
     display: flex;
     flex-direction: column;
@@ -76,12 +75,26 @@ body {
 }
 
 .Area > small {
+    position: relative;
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 0.04em;
     text-transform: uppercase;
     color: var(--text-tertiary);
     margin-top: 2px;
+}
+
+.Area > small:has(img) {
+    margin-left: 24px;
+}
+
+.Area > small > img {
+    position: absolute;
+    left: -24px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 16px;
+    aspect-ratio: 1 / 1;
 }
 
 .Area > hr {
@@ -170,7 +183,6 @@ body {
     margin-top: 4px;
     font-size: 12px;
     width: 100%;
-    /* Fixed height so controls below don't jump when molecules change */
     height: 280px;
     min-height: 280px;
     max-height: 280px;
@@ -297,7 +309,6 @@ body {
     color: #ffd60a;
 }
 
-/* ---- Controls ---- */
 .AtomAdder {
     display: flex !important;
     flex-direction: row !important;
@@ -421,7 +432,6 @@ body {
     font-size: 11px;
 }
 
-/* ---- Tooltip ---- */
 .Tooltip {
     display: flex;
     align-items: center;
@@ -445,7 +455,6 @@ body {
     letter-spacing: -0.01em;
 }
 
-/* ---- Display modes ---- */
 .Area > .DisplayModes,
 .DisplayModes {
     display: flex !important;
@@ -482,7 +491,6 @@ body {
     color: #fff;
 }
 
-/* ---- Context menu ---- */
 .ContextMenu {
     position: fixed;
     z-index: 9999;
@@ -554,7 +562,6 @@ body {
     pointer-events: none;
 }
 
-/* ---- Plugin dock + widgets (FL-style) ---- */
 .PluginDock {
     position: fixed;
     left: 12px;
@@ -571,16 +578,7 @@ body {
     backdrop-filter: blur(18px) saturate(140%);
     -webkit-backdrop-filter: blur(18px) saturate(140%);
     z-index: 40;
-    max-width: min(520px, 70vw);
-}
-
-.PluginDockLabel {
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--text-tertiary);
-    margin-right: 4px;
+    max-width: min(560px, 70vw);
 }
 
 .PluginDockBtn {
@@ -604,9 +602,9 @@ body {
     position: fixed;
     display: flex;
     flex-direction: column;
-    min-width: 200px;
-    max-width: 420px;
-    max-height: min(70vh, 520px);
+    min-width: 220px;
+    max-width: 460px;
+    max-height: min(80vh, 640px);
     background: rgba(14, 14, 16, 0.55);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 12px;
@@ -679,6 +677,12 @@ body {
     scrollbar-color: rgba(255, 255, 255, 0.18) transparent;
 }
 
+.WidgetBody::-webkit-scrollbar { width: 6px; }
+.WidgetBody::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 3px;
+}
+
 .WRow {
     display: flex;
     flex-direction: row;
@@ -690,7 +694,7 @@ body {
     color: var(--text-secondary);
     font-size: 11px;
     font-weight: 500;
-    min-width: 56px;
+    min-width: 62px;
 }
 
 .WRow3 {
@@ -720,8 +724,15 @@ body {
     min-width: 0;
 }
 
+.WSelect option {
+    background: #1c1c1e;
+    color: var(--text);
+}
+
 .WNum {
     width: 100%;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
 }
 
 .WRange {
@@ -779,4 +790,191 @@ body {
     font-size: 10px;
     color: var(--text-tertiary);
     line-height: 1.35;
+}
+
+.WValue {
+    flex: 1;
+    text-align: right;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 11px;
+    font-variant-numeric: tabular-nums;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.WSection {
+    display: flex;
+    flex-direction: column;
+    border-radius: 9px;
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.WSectionHeader {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 10px;
+    cursor: pointer;
+    user-select: none;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.03);
+    transition: background 0.12s ease, color 0.12s ease;
+}
+
+.WSectionHeader:hover {
+    background: rgba(255, 255, 255, 0.07);
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.WSectionChevron {
+    width: 10px;
+    display: inline-block;
+    font-size: 9px;
+    opacity: 0.7;
+    transition: transform 0.18s ease;
+    transform-origin: 40% 50%;
+}
+
+.WSection.Open .WSectionChevron {
+    transform: rotate(90deg);
+}
+
+.WSectionBody {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    padding: 9px 10px 11px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.WSection.Open .WSectionBody {
+    display: flex;
+}
+
+.WStatRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-variant-numeric: tabular-nums;
+}
+
+.WStatRow > span:first-child {
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 500;
+}
+
+.WStatRow > span:last-child {
+    color: rgba(255, 255, 255, 0.9);
+    text-align: right;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 60%;
+}
+
+.WLegend {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 4px 10px;
+    font-size: 10px;
+    font-variant-numeric: tabular-nums;
+}
+
+.WLegendItem {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.WLegendDot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.WLegendVal {
+    color: rgba(255, 255, 255, 0.4);
+    font-weight: 500;
+}
+
+.WGraph {
+    width: 100%;
+    height: 130px;
+    border-radius: 7px;
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    display: block;
+}
+
+.WStepper {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 7px;
+    overflow: hidden;
+    flex: 1;
+    min-width: 0;
+}
+
+.WStepperBtn {
+    width: 24px;
+    background: rgba(255, 255, 255, 0.03);
+    border: none;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.12s ease, color 0.12s ease;
+}
+
+.WStepperBtn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.WStepperBtn:active {
+    background: var(--accent-soft);
+}
+
+.WStepperInput {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--text);
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+    text-align: center;
+    padding: 5px 2px;
+    outline: none;
+    min-width: 0;
+    width: 100%;
+}
+
+.WStepperInput::-webkit-outer-spin-button,
+.WStepperInput::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.WStepperInput[type=number] {
+    -moz-appearance: textfield;
 }

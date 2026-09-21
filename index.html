@@ -5,16 +5,22 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <link rel="stylesheet" href="Scripts/Style.css">
+        <link rel="shortcut icon" href="Images/Favicon.svg" type="image/x-icon">
+
         <script type="module" src="Scripts/Enum.js"></script>
+        <script type="module" src="Scripts/Chemistry.js"></script>
         <script type="module" src="Scripts/Plugin.js"></script>
         <script type="module" src="Scripts/Plugins/LatticeMaker.js"></script>
+        <script type="module" src="Scripts/Plugins/RadiationMonitor.js"></script>
+        <script type="module" src="Scripts/Plugins/Emitter.js"></script>
+        <script type="module" src="Scripts/Plugins/NuclearInspector.js"></script>
         <script type="module" src="Scripts/Global.d.js"></script>
 
         <title>Fent</title>
     </head>
     <body>
         <div class="Area Dashboard">
-            <small>Fent</small><hr>
+            <small><img class="Favicon" src="Images/Favicon.svg">Fent</small><hr>
             <div><span>Framerate</span><span class="Framerate">000/s</span></div>
             <div><span>Delta Time</span><span class="DeltaTime">0.000ms</span></div>
             <div><span>Timescale</span><span class="TimeScale">0.50x</span></div>
@@ -36,6 +42,7 @@
                 <button data-mode="field" class="ModeBtn">Field</button>
                 <button data-mode="force" class="ModeBtn">Force</button>
                 <button data-mode="energy" class="ModeBtn">Energy</button>
+                <button data-mode="radiation" class="ModeBtn">Radiation</button>
             </div>
         </div>
         <div class="Area Hierarchy" id="HierarchyPanel">
@@ -82,6 +89,7 @@
             <button data-action="ionize">Ionize (+charge)</button>
             <button data-action="neutralize">Neutralize</button>
             <hr>
+            <button data-action="decay">Force Decay</button>
             <button data-action="focus">Focus Camera</button>
             <button data-action="delete" class="Danger">Delete Atom</button>
         </div>

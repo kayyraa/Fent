@@ -1,47 +1,11 @@
 (function LatticeMakerPlugin() {
     const Presets = {
-        Diamond: {
-            Label: "Diamond (C)",
-            Desc: "Tetrahedral carbon lattice",
-            Element: "C",
-            Scale: 72,
-            Ionize: false
-        },
-        Graphite: {
-            Label: "Graphite (C)",
-            Desc: "Hexagonal carbon sheets",
-            Element: "C",
-            Scale: 70,
-            Ionize: false
-        },
-        NaCl: {
-            Label: "Rock salt (NaCl)",
-            Desc: "FCC ionic lattice",
-            Element: null,
-            Scale: 95,
-            Ionize: true
-        },
-        Fcc: {
-            Label: "FCC metal",
-            Desc: "Face-centered cubic",
-            Element: "Cu",
-            Scale: 85,
-            Ionize: false
-        },
-        Bcc: {
-            Label: "BCC metal",
-            Desc: "Body-centered cubic",
-            Element: "Fe",
-            Scale: 90,
-            Ionize: false
-        },
-        Sc: {
-            Label: "Simple cubic",
-            Desc: "Primitive cubic cell",
-            Element: "Po",
-            Scale: 100,
-            Ionize: false
-        }
+        Diamond: { Label: "Diamond (C)", Desc: "Tetrahedral carbon lattice", Element: "C", Scale: 72, Ionize: false },
+        Graphite: { Label: "Graphite (C)", Desc: "Hexagonal carbon sheets", Element: "C", Scale: 70, Ionize: false },
+        NaCl: { Label: "Rock salt (NaCl)", Desc: "FCC ionic lattice", Element: null, Scale: 95, Ionize: true },
+        Fcc: { Label: "FCC metal", Desc: "Face-centered cubic", Element: "Cu", Scale: 85, Ionize: false },
+        Bcc: { Label: "BCC metal", Desc: "Body-centered cubic", Element: "Fe", Scale: 90, Ionize: false },
+        Sc: { Label: "Simple cubic", Desc: "Primitive cubic cell", Element: "Po", Scale: 100, Ionize: false }
     };
 
     function CellPositions(Type, Nx, Ny, Nz, Scale) {
@@ -53,9 +17,7 @@
             for (let Ix = 0; Ix < Nx; Ix++) {
                 for (let Iy = 0; Iy < Ny; Iy++) {
                     for (let Iz = 0; Iz < Nz; Iz++) {
-                        const Fcc = [
-                            [0, 0, 0], [0.5, 0.5, 0], [0.5, 0, 0.5], [0, 0.5, 0.5]
-                        ];
+                        const Fcc = [[0, 0, 0], [0.5, 0.5, 0], [0.5, 0, 0.5], [0, 0.5, 0.5]];
                         for (const F of Fcc) {
                             for (const B of Basis) {
                                 Pts.push({
@@ -80,12 +42,7 @@
                         const Y0 = Iy * A * Math.sqrt(3) * 0.5;
                         const Z0 = Iz * C;
                         Pts.push({ X: X0, Y: Y0, Z: Z0, Key: "C" });
-                        Pts.push({
-                            X: X0 + A * 0.5,
-                            Y: Y0 + A * Math.sqrt(3) / 6,
-                            Z: Z0,
-                            Key: "C"
-                        });
+                        Pts.push({ X: X0 + A * 0.5, Y: Y0 + A * Math.sqrt(3) / 6, Z: Z0, Key: "C" });
                     }
                 }
             }
@@ -95,9 +52,7 @@
                     for (let Iz = 0; Iz < Nz; Iz++) {
                         const Even = (Ix + Iy + Iz) % 2 === 0;
                         Pts.push({
-                            X: Ix * S,
-                            Y: Iy * S,
-                            Z: Iz * S,
+                            X: Ix * S, Y: Iy * S, Z: Iz * S,
                             Key: Even ? "Na" : "Cl",
                             Charge: Even ? 1 : -1
                         });
@@ -108,16 +63,9 @@
             for (let Ix = 0; Ix < Nx; Ix++) {
                 for (let Iy = 0; Iy < Ny; Iy++) {
                     for (let Iz = 0; Iz < Nz; Iz++) {
-                        const Fcc = [
-                            [0, 0, 0], [0.5, 0.5, 0], [0.5, 0, 0.5], [0, 0.5, 0.5]
-                        ];
+                        const Fcc = [[0, 0, 0], [0.5, 0.5, 0], [0.5, 0, 0.5], [0, 0.5, 0.5]];
                         for (const F of Fcc) {
-                            Pts.push({
-                                X: (Ix + F[0]) * S,
-                                Y: (Iy + F[1]) * S,
-                                Z: (Iz + F[2]) * S,
-                                Key: null
-                            });
+                            Pts.push({ X: (Ix + F[0]) * S, Y: (Iy + F[1]) * S, Z: (Iz + F[2]) * S, Key: null });
                         }
                     }
                 }
@@ -127,12 +75,7 @@
                 for (let Iy = 0; Iy < Ny; Iy++) {
                     for (let Iz = 0; Iz < Nz; Iz++) {
                         Pts.push({ X: Ix * S, Y: Iy * S, Z: Iz * S, Key: null });
-                        Pts.push({
-                            X: (Ix + 0.5) * S,
-                            Y: (Iy + 0.5) * S,
-                            Z: (Iz + 0.5) * S,
-                            Key: null
-                        });
+                        Pts.push({ X: (Ix + 0.5) * S, Y: (Iy + 0.5) * S, Z: (Iz + 0.5) * S, Key: null });
                     }
                 }
             }
@@ -178,9 +121,7 @@
             const Key = P.Key || Element;
             const AtomObj = Api.SpawnAtom(Key, [P.X, P.Y, P.Z], [0, 0, 0]);
             if (!AtomObj) continue;
-            if (Preset.Ionize && P.Charge) {
-                AtomObj.ExtraCharge = P.Charge;
-            }
+            if (Preset.Ionize && P.Charge) AtomObj.ExtraCharge = P.Charge;
             Indices.push(Api.GetAtoms().length - 1);
         }
 
@@ -236,75 +177,162 @@
             Title: "Lattice Maker",
             X: 16,
             Y: 200,
-            Width: 280,
+            Width: 290,
             Build(Body) {
-                Body.innerHTML = `
-                    <div class="WRow"><label>Structure</label>
-                        <select id="LmType" class="WSelect"></select>
-                    </div>
-                    <div class="WHint" id="LmDesc"></div>
-                    <div class="WRow"><label>Element</label>
-                        <input id="LmElement" class="WInput" value="C" maxlength="2">
-                    </div>
-                    <div class="WRow3">
-                        <label>Nx <input id="LmNx" type="number" min="1" max="6" value="2" class="WNum"></label>
-                        <label>Ny <input id="LmNy" type="number" min="1" max="6" value="2" class="WNum"></label>
-                        <label>Nz <input id="LmNz" type="number" min="1" max="6" value="2" class="WNum"></label>
-                    </div>
-                    <div class="WRow"><label>Scale</label>
-                        <input id="LmScale" type="range" min="45" max="140" value="72" class="WRange">
-                        <span id="LmScaleVal">72</span>
-                    </div>
-                    <div class="WRow"><label>Bath T</label>
-                        <input id="LmTemp" type="range" min="0" max="0.8" step="0.02" value="0.08" class="WRange">
-                        <span id="LmTempVal">0.08</span>
-                    </div>
-                    <div class="WRow">
-                        <label class="WCheck"><input id="LmClear" type="checkbox" checked> Clear existing atoms</label>
-                    </div>
-                    <div class="WActions">
-                        <button id="LmBuild" class="WPrimary">Build lattice</button>
-                    </div>
-                    <div class="WHint">Keep Nx·Ny·Nz small (≤ ~3³) for performance.</div>
-                `;
-
-                const TypeSel = Body.querySelector("#LmType");
+                const Structure = Api.AddSection(Body, "Structure", true);
+                const TypeRow = document.createElement("div");
+                TypeRow.className = "WRow";
+                TypeRow.innerHTML = `<label>Type</label>`;
+                const TypeSel = document.createElement("select");
+                TypeSel.className = "WSelect";
                 for (const [Id, P] of Object.entries(Presets)) {
                     const Opt = document.createElement("option");
                     Opt.value = Id;
                     Opt.textContent = P.Label;
                     TypeSel.appendChild(Opt);
                 }
+                TypeRow.appendChild(TypeSel);
+                Structure.appendChild(TypeRow);
+
+                const DescEl = document.createElement("div");
+                DescEl.className = "WHint";
+                Structure.appendChild(DescEl);
+
+                const ElementRow = document.createElement("div");
+                ElementRow.className = "WRow";
+                ElementRow.innerHTML = `<label>Element</label>`;
+                const ElementInput = document.createElement("input");
+                ElementInput.className = "WInput";
+                ElementInput.value = "C";
+                ElementInput.maxLength = 2;
+                ElementRow.appendChild(ElementInput);
+                Structure.appendChild(ElementRow);
+
+                const Dims = Api.AddSection(Body, "Cell Repeats", true);
+                const DimRow = document.createElement("div");
+                DimRow.className = "WRow3";
+                const NxLabel = document.createElement("label");
+                NxLabel.innerHTML = `Nx`;
+                const NxInput = document.createElement("input");
+                NxInput.type = "number";
+                NxInput.className = "WNum";
+                NxInput.min = "1";
+                NxInput.max = "8";
+                NxInput.value = "2";
+                NxLabel.appendChild(NxInput);
+                const NyLabel = document.createElement("label");
+                NyLabel.innerHTML = `Ny`;
+                const NyInput = document.createElement("input");
+                NyInput.type = "number";
+                NyInput.className = "WNum";
+                NyInput.min = "1";
+                NyInput.max = "8";
+                NyInput.value = "2";
+                NyLabel.appendChild(NyInput);
+                const NzLabel = document.createElement("label");
+                NzLabel.innerHTML = `Nz`;
+                const NzInput = document.createElement("input");
+                NzInput.type = "number";
+                NzInput.className = "WNum";
+                NzInput.min = "1";
+                NzInput.max = "8";
+                NzInput.value = "2";
+                NzLabel.appendChild(NzInput);
+                DimRow.appendChild(NxLabel);
+                DimRow.appendChild(NyLabel);
+                DimRow.appendChild(NzLabel);
+                Dims.appendChild(DimRow);
+
+                const ScaleRow = document.createElement("div");
+                ScaleRow.className = "WRow";
+                ScaleRow.innerHTML = `<label>Scale</label>`;
+                const ScaleInput = document.createElement("input");
+                ScaleInput.type = "range";
+                ScaleInput.className = "WRange";
+                ScaleInput.min = "45";
+                ScaleInput.max = "140";
+                ScaleInput.value = "72";
+                const ScaleVal = document.createElement("span");
+                ScaleVal.className = "WHint";
+                ScaleVal.style.minWidth = "34px";
+                ScaleVal.style.textAlign = "right";
+                ScaleVal.textContent = "72";
+                ScaleRow.appendChild(ScaleInput);
+                ScaleRow.appendChild(ScaleVal);
+                Dims.appendChild(ScaleRow);
+
+                const Env = Api.AddSection(Body, "Environment", false);
+                const TempRow = document.createElement("div");
+                TempRow.className = "WRow";
+                TempRow.innerHTML = `<label>Bath T</label>`;
+                const TempInput = document.createElement("input");
+                TempInput.type = "range";
+                TempInput.className = "WRange";
+                TempInput.min = "0";
+                TempInput.max = "0.8";
+                TempInput.step = "0.02";
+                TempInput.value = "0.08";
+                const TempVal = document.createElement("span");
+                TempVal.className = "WHint";
+                TempVal.style.minWidth = "34px";
+                TempVal.style.textAlign = "right";
+                TempVal.textContent = "0.08";
+                TempRow.appendChild(TempInput);
+                TempRow.appendChild(TempVal);
+                Env.appendChild(TempRow);
+
+                const ClearRow = document.createElement("div");
+                ClearRow.className = "WRow";
+                const ClearLabel = document.createElement("label");
+                ClearLabel.className = "WCheck";
+                const ClearInput = document.createElement("input");
+                ClearInput.type = "checkbox";
+                ClearInput.checked = true;
+                ClearLabel.appendChild(ClearInput);
+                ClearLabel.appendChild(document.createTextNode("Clear existing atoms"));
+                ClearRow.appendChild(ClearLabel);
+                Env.appendChild(ClearRow);
+
+                const Action = Api.AddSection(Body, "Build", true);
+                const Hint = document.createElement("div");
+                Hint.className = "WHint";
+                Hint.textContent = "Keep Nx Ny Nz small (<= ~3^3) for performance.";
+                Action.appendChild(Hint);
+                const BuildRow = document.createElement("div");
+                BuildRow.className = "WActions";
+                const BuildBtn = document.createElement("button");
+                BuildBtn.className = "WPrimary";
+                BuildBtn.textContent = "Build lattice";
+                BuildRow.appendChild(BuildBtn);
+                Action.appendChild(BuildRow);
 
                 const SyncDesc = () => {
                     const P = Presets[TypeSel.value];
-                    Body.querySelector("#LmDesc").textContent = P?.Desc || "";
-                    if (P?.Element) Body.querySelector("#LmElement").value = P.Element;
+                    DescEl.textContent = P?.Desc || "";
+                    if (P?.Element) ElementInput.value = P.Element;
                     if (P?.Scale) {
-                        Body.querySelector("#LmScale").value = String(P.Scale);
-                        Body.querySelector("#LmScaleVal").textContent = String(P.Scale);
+                        ScaleInput.value = String(P.Scale);
+                        ScaleVal.textContent = String(P.Scale);
                     }
-                    Body.querySelector("#LmElement").disabled = TypeSel.value === "NaCl";
+                    ElementInput.disabled = TypeSel.value === "NaCl";
                 };
                 TypeSel.addEventListener("change", SyncDesc);
                 SyncDesc();
 
-                Body.querySelector("#LmScale").addEventListener("input", (E) => {
-                    Body.querySelector("#LmScaleVal").textContent = E.target.value;
-                });
-                Body.querySelector("#LmTemp").addEventListener("input", (E) => {
-                    Body.querySelector("#LmTempVal").textContent = Number(E.target.value).toFixed(2);
+                ScaleInput.addEventListener("input", () => { ScaleVal.textContent = ScaleInput.value; });
+                TempInput.addEventListener("input", () => {
+                    TempVal.textContent = Number(TempInput.value).toFixed(2);
                 });
 
-                Body.querySelector("#LmBuild").addEventListener("click", () => {
+                BuildBtn.addEventListener("click", () => {
                     State.Type = TypeSel.value;
-                    State.Nx = Number(Body.querySelector("#LmNx").value) || 2;
-                    State.Ny = Number(Body.querySelector("#LmNy").value) || 2;
-                    State.Nz = Number(Body.querySelector("#LmNz").value) || 2;
-                    State.Scale = Number(Body.querySelector("#LmScale").value) || 72;
-                    State.Element = Body.querySelector("#LmElement").value.trim() || "C";
-                    State.Clear = Body.querySelector("#LmClear").checked;
-                    State.Temp = Number(Body.querySelector("#LmTemp").value) || 0.08;
+                    State.Nx = Number(NxInput.value) || 2;
+                    State.Ny = Number(NyInput.value) || 2;
+                    State.Nz = Number(NzInput.value) || 2;
+                    State.Scale = Number(ScaleInput.value) || 72;
+                    State.Element = ElementInput.value.trim() || "C";
+                    State.Clear = ClearInput.checked;
+                    State.Temp = Number(TempInput.value) || 0.08;
                     BuildLattice(Api, State);
                 });
             }
@@ -314,7 +342,7 @@
     const Entry = {
         Id: "lattice-maker",
         Name: "Lattice Maker",
-        Version: "1.0.0",
+        Version: "1.1.0",
         Description: "Build diamond, graphite, NaCl, FCC, BCC, and cubic lattices",
         Setup(Api) {
             Api.On("OpenPlugin", ({ Id }) => {

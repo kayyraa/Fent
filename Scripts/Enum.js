@@ -1,509 +1,148 @@
 globalThis.Atoms = {
-    "H": {
-        Name: "Hydrogen", AtomicNumber: 1, AtomicMass: 1.008, Electronegativity: 2.20,
-        AtomicRadius: 53, IonizationEnergy: 1312.0, Valence: 1
-    },
-    "He": {
-        Name: "Helium", AtomicNumber: 2, AtomicMass: 4.0026, Electronegativity: null,
-        AtomicRadius: 31, IonizationEnergy: 2372.3, Valence: 2
-    },
-    "Li": {
-        Name: "Lithium", AtomicNumber: 3, AtomicMass: 6.94, Electronegativity: 0.98,
-        AtomicRadius: 167, IonizationEnergy: 520.2, Valence: 1
-    },
-    "Be": {
-        Name: "Beryllium", AtomicNumber: 4, AtomicMass: 9.0122, Electronegativity: 1.57,
-        AtomicRadius: 112, IonizationEnergy: 899.5, Valence: 2
-    },
-    "B": {
-        Name: "Boron", AtomicNumber: 5, AtomicMass: 10.81, Electronegativity: 2.04,
-        AtomicRadius: 87, IonizationEnergy: 800.6, Valence: 3
-    },
-    "C": {
-        Name: "Carbon", AtomicNumber: 6, AtomicMass: 12.011, Electronegativity: 2.55,
-        AtomicRadius: 67, IonizationEnergy: 1086.5, Valence: 4
-    },
-    "N": {
-        Name: "Nitrogen", AtomicNumber: 7, AtomicMass: 14.007, Electronegativity: 3.04,
-        AtomicRadius: 56, IonizationEnergy: 1402.3, Valence: 5
-    },
-    "O": {
-        Name: "Oxygen", AtomicNumber: 8, AtomicMass: 15.999, Electronegativity: 3.44,
-        AtomicRadius: 48, IonizationEnergy: 1313.9, Valence: 6
-    },
-    "F": {
-        Name: "Fluorine", AtomicNumber: 9, AtomicMass: 18.998, Electronegativity: 3.98,
-        AtomicRadius: 42, IonizationEnergy: 1681.0, Valence: 7
-    },
-    "Ne": {
-        Name: "Neon", AtomicNumber: 10, AtomicMass: 20.180, Electronegativity: null,
-        AtomicRadius: 38, IonizationEnergy: 2080.7, Valence: 8
-    },
-    "Na": {
-        Name: "Sodium", AtomicNumber: 11, AtomicMass: 22.990, Electronegativity: 0.93,
-        AtomicRadius: 190, IonizationEnergy: 495.8, Valence: 1
-    },
-    "Mg": {
-        Name: "Magnesium", AtomicNumber: 12, AtomicMass: 24.305, Electronegativity: 1.31,
-        AtomicRadius: 145, IonizationEnergy: 737.7, Valence: 2
-    },
-    "Al": {
-        Name: "Aluminium", AtomicNumber: 13, AtomicMass: 26.982, Electronegativity: 1.61,
-        AtomicRadius: 118, IonizationEnergy: 577.5, Valence: 3
-    },
-    "Si": {
-        Name: "Silicon", AtomicNumber: 14, AtomicMass: 28.085, Electronegativity: 1.90,
-        AtomicRadius: 111, IonizationEnergy: 786.5, Valence: 4
-    },
-    "P": {
-        Name: "Phosphorus", AtomicNumber: 15, AtomicMass: 30.974, Electronegativity: 2.19,
-        AtomicRadius: 98, IonizationEnergy: 1011.8, Valence: 5
-    },
-    "S": {
-        Name: "Sulfur", AtomicNumber: 16, AtomicMass: 32.06, Electronegativity: 2.58,
-        AtomicRadius: 88, IonizationEnergy: 999.6, Valence: 6
-    },
-    "Cl": {
-        Name: "Chlorine", AtomicNumber: 17, AtomicMass: 35.45, Electronegativity: 3.16,
-        AtomicRadius: 79, IonizationEnergy: 1251.2, Valence: 7
-    },
-    "Ar": {
-        Name: "Argon", AtomicNumber: 18, AtomicMass: 39.948, Electronegativity: null,
-        AtomicRadius: 71, IonizationEnergy: 1520.6, Valence: 8
-    },
-    "K": {
-        Name: "Potassium", AtomicNumber: 19, AtomicMass: 39.098, Electronegativity: 0.82,
-        AtomicRadius: 243, IonizationEnergy: 418.8, Valence: 1
-    },
-    "Ca": {
-        Name: "Calcium", AtomicNumber: 20, AtomicMass: 40.078, Electronegativity: 1.00,
-        AtomicRadius: 194, IonizationEnergy: 589.8, Valence: 2
-    },
-    "Sc": {
-        Name: "Scandium", AtomicNumber: 21, AtomicMass: 44.956, Electronegativity: 1.36,
-        AtomicRadius: 184, IonizationEnergy: 633.1, Valence: 2
-    },
-    "Ti": {
-        Name: "Titanium", AtomicNumber: 22, AtomicMass: 47.867, Electronegativity: 1.54,
-        AtomicRadius: 176, IonizationEnergy: 658.8, Valence: 2
-    },
-    "V": {
-        Name: "Vanadium", AtomicNumber: 23, AtomicMass: 50.942, Electronegativity: 1.63,
-        AtomicRadius: 171, IonizationEnergy: 650.9, Valence: 2
-    },
-    "Cr": {
-        Name: "Chromium", AtomicNumber: 24, AtomicMass: 51.996, Electronegativity: 1.66,
-        AtomicRadius: 166, IonizationEnergy: 652.9, Valence: 1
-    },
-    "Mn": {
-        Name: "Manganese", AtomicNumber: 25, AtomicMass: 54.938, Electronegativity: 1.55,
-        AtomicRadius: 161, IonizationEnergy: 717.3, Valence: 2
-    },
-    "Fe": {
-        Name: "Iron", AtomicNumber: 26, AtomicMass: 55.845, Electronegativity: 1.83,
-        AtomicRadius: 156, IonizationEnergy: 762.5, Valence: 2
-    },
-    "Co": {
-        Name: "Cobalt", AtomicNumber: 27, AtomicMass: 58.933, Electronegativity: 1.88,
-        AtomicRadius: 152, IonizationEnergy: 760.4, Valence: 2
-    },
-    "Ni": {
-        Name: "Nickel", AtomicNumber: 28, AtomicMass: 58.693, Electronegativity: 1.91,
-        AtomicRadius: 149, IonizationEnergy: 737.1, Valence: 2
-    },
-    "Cu": {
-        Name: "Copper", AtomicNumber: 29, AtomicMass: 63.546, Electronegativity: 1.90,
-        AtomicRadius: 145, IonizationEnergy: 745.5, Valence: 1
-    },
-    "Zn": {
-        Name: "Zinc", AtomicNumber: 30, AtomicMass: 65.38, Electronegativity: 1.65,
-        AtomicRadius: 142, IonizationEnergy: 906.4, Valence: 2
-    },
-    "Ga": {
-        Name: "Gallium", AtomicNumber: 31, AtomicMass: 69.723, Electronegativity: 1.81,
-        AtomicRadius: 136, IonizationEnergy: 578.8, Valence: 3
-    },
-    "Ge": {
-        Name: "Germanium", AtomicNumber: 32, AtomicMass: 72.630, Electronegativity: 2.01,
-        AtomicRadius: 125, IonizationEnergy: 762.0, Valence: 4
-    },
-    "As": {
-        Name: "Arsenic", AtomicNumber: 33, AtomicMass: 74.922, Electronegativity: 2.18,
-        AtomicRadius: 114, IonizationEnergy: 947.0, Valence: 5
-    },
-    "Se": {
-        Name: "Selenium", AtomicNumber: 34, AtomicMass: 78.971, Electronegativity: 2.55,
-        AtomicRadius: 103, IonizationEnergy: 941.0, Valence: 6
-    },
-    "Br": {
-        Name: "Bromine", AtomicNumber: 35, AtomicMass: 79.904, Electronegativity: 2.96,
-        AtomicRadius: 94, IonizationEnergy: 1139.9, Valence: 7
-    },
-    "Kr": {
-        Name: "Krypton", AtomicNumber: 36, AtomicMass: 83.798, Electronegativity: 3.00,
-        AtomicRadius: 88, IonizationEnergy: 1350.8, Valence: 8
-    },
-    "Rb": {
-        Name: "Rubidium", AtomicNumber: 37, AtomicMass: 85.468, Electronegativity: 0.82,
-        AtomicRadius: 265, IonizationEnergy: 403.0, Valence: 1
-    },
-    "Sr": {
-        Name: "Strontium", AtomicNumber: 38, AtomicMass: 87.62, Electronegativity: 0.95,
-        AtomicRadius: 219, IonizationEnergy: 549.5, Valence: 2
-    },
-    "Y": {
-        Name: "Yttrium", AtomicNumber: 39, AtomicMass: 88.906, Electronegativity: 1.22,
-        AtomicRadius: 212, IonizationEnergy: 600.0, Valence: 2
-    },
-    "Zr": {
-        Name: "Zirconium", AtomicNumber: 40, AtomicMass: 91.224, Electronegativity: 1.33,
-        AtomicRadius: 206, IonizationEnergy: 640.1, Valence: 2
-    },
-    "Nb": {
-        Name: "Niobium", AtomicNumber: 41, AtomicMass: 92.906, Electronegativity: 1.6,
-        AtomicRadius: 198, IonizationEnergy: 652.1, Valence: 1
-    },
-    "Mo": {
-        Name: "Molybdenum", AtomicNumber: 42, AtomicMass: 95.95, Electronegativity: 2.16,
-        AtomicRadius: 190, IonizationEnergy: 684.3, Valence: 1
-    },
-    "Tc": {
-        Name: "Technetium", AtomicNumber: 43, AtomicMass: 98.0, Electronegativity: 1.9,
-        AtomicRadius: 183, IonizationEnergy: 702.0, Valence: 2
-    },
-    "Ru": {
-        Name: "Ruthenium", AtomicNumber: 44, AtomicMass: 101.07, Electronegativity: 2.2,
-        AtomicRadius: 178, IonizationEnergy: 710.2, Valence: 1
-    },
-    "Rh": {
-        Name: "Rhodium", AtomicNumber: 45, AtomicMass: 102.91, Electronegativity: 2.28,
-        AtomicRadius: 173, IonizationEnergy: 719.7, Valence: 1
-    },
-    "Pd": {
-        Name: "Palladium", AtomicNumber: 46, AtomicMass: 106.42, Electronegativity: 2.20,
-        AtomicRadius: 169, IonizationEnergy: 804.4, Valence: 0
-    },
-    "Ag": {
-        Name: "Silver", AtomicNumber: 47, AtomicMass: 107.87, Electronegativity: 1.93,
-        AtomicRadius: 165, IonizationEnergy: 731.0, Valence: 1
-    },
-    "Cd": {
-        Name: "Cadmium", AtomicNumber: 48, AtomicMass: 112.41, Electronegativity: 1.69,
-        AtomicRadius: 161, IonizationEnergy: 867.8, Valence: 2
-    },
-    "In": {
-        Name: "Indium", AtomicNumber: 49, AtomicMass: 114.82, Electronegativity: 1.78,
-        AtomicRadius: 156, IonizationEnergy: 558.3, Valence: 3
-    },
-    "Sn": {
-        Name: "Tin", AtomicNumber: 50, AtomicMass: 118.71, Electronegativity: 1.96,
-        AtomicRadius: 145, IonizationEnergy: 708.6, Valence: 4
-    },
-    "Sb": {
-        Name: "Antimony", AtomicNumber: 51, AtomicMass: 121.76, Electronegativity: 2.05,
-        AtomicRadius: 133, IonizationEnergy: 834.0, Valence: 5
-    },
-    "Te": {
-        Name: "Tellurium", AtomicNumber: 52, AtomicMass: 127.60, Electronegativity: 2.1,
-        AtomicRadius: 123, IonizationEnergy: 869.3, Valence: 6
-    },
-    "I": {
-        Name: "Iodine", AtomicNumber: 53, AtomicMass: 126.90, Electronegativity: 2.66,
-        AtomicRadius: 115, IonizationEnergy: 1008.4, Valence: 7
-    },
-    "Xe": {
-        Name: "Xenon", AtomicNumber: 54, AtomicMass: 131.29, Electronegativity: 2.60,
-        AtomicRadius: 108, IonizationEnergy: 1170.4, Valence: 8
-    },
-    "Cs": {
-        Name: "Caesium", AtomicNumber: 55, AtomicMass: 132.91, Electronegativity: 0.79,
-        AtomicRadius: 298, IonizationEnergy: 375.7, Valence: 1
-    },
-    "Ba": {
-        Name: "Barium", AtomicNumber: 56, AtomicMass: 137.33, Electronegativity: 0.89,
-        AtomicRadius: 253, IonizationEnergy: 502.9, Valence: 2
-    },
-    "La": {
-        Name: "Lanthanum", AtomicNumber: 57, AtomicMass: 138.91, Electronegativity: 1.10,
-        AtomicRadius: 226, IonizationEnergy: 538.1, Valence: 2
-    },
-    "Ce": {
-        Name: "Cerium", AtomicNumber: 58, AtomicMass: 140.12, Electronegativity: 1.12,
-        AtomicRadius: 210, IonizationEnergy: 534.4, Valence: 2
-    },
-    "Pr": {
-        Name: "Praseodymium", AtomicNumber: 59, AtomicMass: 140.91, Electronegativity: 1.13,
-        AtomicRadius: 247, IonizationEnergy: 527.0, Valence: 2
-    },
-    "Nd": {
-        Name: "Neodymium", AtomicNumber: 60, AtomicMass: 144.24, Electronegativity: 1.14,
-        AtomicRadius: 206, IonizationEnergy: 533.1, Valence: 2
-    },
-    "Pm": {
-        Name: "Promethium", AtomicNumber: 61, AtomicMass: 145.0, Electronegativity: 1.13,
-        AtomicRadius: 205, IonizationEnergy: 540.0, Valence: 2
-    },
-    "Sm": {
-        Name: "Samarium", AtomicNumber: 62, AtomicMass: 150.36, Electronegativity: 1.17,
-        AtomicRadius: 238, IonizationEnergy: 544.5, Valence: 2
-    },
-    "Eu": {
-        Name: "Europium", AtomicNumber: 63, AtomicMass: 151.96, Electronegativity: 1.20,
-        AtomicRadius: 231, IonizationEnergy: 547.1, Valence: 2
-    },
-    "Gd": {
-        Name: "Gadolinium", AtomicNumber: 64, AtomicMass: 157.25, Electronegativity: 1.20,
-        AtomicRadius: 233, IonizationEnergy: 593.4, Valence: 2
-    },
-    "Tb": {
-        Name: "Terbium", AtomicNumber: 65, AtomicMass: 158.93, Electronegativity: 1.10,
-        AtomicRadius: 225, IonizationEnergy: 565.8, Valence: 2
-    },
-    "Dy": {
-        Name: "Dysprosium", AtomicNumber: 66, AtomicMass: 162.50, Electronegativity: 1.22,
-        AtomicRadius: 228, IonizationEnergy: 573.0, Valence: 2
-    },
-    "Ho": {
-        Name: "Holmium", AtomicNumber: 67, AtomicMass: 164.93, Electronegativity: 1.23,
-        AtomicRadius: 226, IonizationEnergy: 581.0, Valence: 2
-    },
-    "Er": {
-        Name: "Erbium", AtomicNumber: 68, AtomicMass: 167.26, Electronegativity: 1.24,
-        AtomicRadius: 226, IonizationEnergy: 589.3, Valence: 2
-    },
-    "Tm": {
-        Name: "Thulium", AtomicNumber: 69, AtomicMass: 168.93, Electronegativity: 1.25,
-        AtomicRadius: 222, IonizationEnergy: 596.7, Valence: 2
-    },
-    "Yb": {
-        Name: "Ytterbium", AtomicNumber: 70, AtomicMass: 173.05, Electronegativity: 1.10,
-        AtomicRadius: 222, IonizationEnergy: 603.4, Valence: 2
-    },
-    "Lu": {
-        Name: "Lutetium", AtomicNumber: 71, AtomicMass: 174.97, Electronegativity: 1.27,
-        AtomicRadius: 217, IonizationEnergy: 523.5, Valence: 2
-    },
-    "Hf": {
-        Name: "Hafnium", AtomicNumber: 72, AtomicMass: 178.49, Electronegativity: 1.30,
-        AtomicRadius: 208, IonizationEnergy: 658.5, Valence: 2
-    },
-    "Ta": {
-        Name: "Tantalum", AtomicNumber: 73, AtomicMass: 180.95, Electronegativity: 1.50,
-        AtomicRadius: 200, IonizationEnergy: 761.0, Valence: 2
-    },
-    "W": {
-        Name: "Tungsten", AtomicNumber: 74, AtomicMass: 183.84, Electronegativity: 2.36,
-        AtomicRadius: 193, IonizationEnergy: 770.0, Valence: 2
-    },
-    "Re": {
-        Name: "Rhenium", AtomicNumber: 75, AtomicMass: 186.21, Electronegativity: 1.90,
-        AtomicRadius: 188, IonizationEnergy: 760.0, Valence: 2
-    },
-    "Os": {
-        Name: "Osmium", AtomicNumber: 76, AtomicMass: 190.23, Electronegativity: 2.20,
-        AtomicRadius: 185, IonizationEnergy: 840.0, Valence: 2
-    },
-    "Ir": {
-        Name: "Iridium", AtomicNumber: 77, AtomicMass: 192.22, Electronegativity: 2.20,
-        AtomicRadius: 180, IonizationEnergy: 880.0, Valence: 2
-    },
-    "Pt": {
-        Name: "Platinum", AtomicNumber: 78, AtomicMass: 195.08, Electronegativity: 2.28,
-        AtomicRadius: 177, IonizationEnergy: 870.0, Valence: 1
-    },
-    "Au": {
-        Name: "Gold", AtomicNumber: 79, AtomicMass: 196.97, Electronegativity: 2.54,
-        AtomicRadius: 174, IonizationEnergy: 890.1, Valence: 1
-    },
-    "Hg": {
-        Name: "Mercury", AtomicNumber: 80, AtomicMass: 200.59, Electronegativity: 2.00,
-        AtomicRadius: 171, IonizationEnergy: 1007.1, Valence: 2
-    },
-    "Tl": {
-        Name: "Thallium", AtomicNumber: 81, AtomicMass: 204.38, Electronegativity: 1.62,
-        AtomicRadius: 156, IonizationEnergy: 589.4, Valence: 3
-    },
-    "Pb": {
-        Name: "Lead", AtomicNumber: 82, AtomicMass: 207.2, Electronegativity: 1.87,
-        AtomicRadius: 154, IonizationEnergy: 715.6, Valence: 4
-    },
-    "Bi": {
-        Name: "Bismuth", AtomicNumber: 83, AtomicMass: 208.98, Electronegativity: 2.02,
-        AtomicRadius: 143, IonizationEnergy: 703.0, Valence: 5
-    },
-    "Po": {
-        Name: "Polonium", AtomicNumber: 84, AtomicMass: 209.0, Electronegativity: 2.0,
-        AtomicRadius: 135, IonizationEnergy: 812.1, Valence: 6
-    },
-    "At": {
-        Name: "Astatine", AtomicNumber: 85, AtomicMass: 210.0, Electronegativity: 2.2,
-        AtomicRadius: 127, IonizationEnergy: 899.0, Valence: 7
-    },
-    "Rn": {
-        Name: "Radon", AtomicNumber: 86, AtomicMass: 222.0, Electronegativity: 2.2,
-        AtomicRadius: 120, IonizationEnergy: 1037.0, Valence: 8
-    },
-    "Fr": {
-        Name: "Francium", AtomicNumber: 87, AtomicMass: 223.0, Electronegativity: 0.79,
-        AtomicRadius: 348, IonizationEnergy: 380.0, Valence: 1
-    },
-    "Ra": {
-        Name: "Radium", AtomicNumber: 88, AtomicMass: 226.0, Electronegativity: 0.9,
-        AtomicRadius: 283, IonizationEnergy: 509.3, Valence: 2
-    },
-    "Ac": {
-        Name: "Actinium", AtomicNumber: 89, AtomicMass: 227.0, Electronegativity: 1.1,
-        AtomicRadius: 260, IonizationEnergy: 499.0, Valence: 2
-    },
-    "Th": {
-        Name: "Thorium", AtomicNumber: 90, AtomicMass: 232.04, Electronegativity: 1.3,
-        AtomicRadius: 237, IonizationEnergy: 587.0, Valence: 2
-    },
-    "Pa": {
-        Name: "Protactinium", AtomicNumber: 91, AtomicMass: 231.04, Electronegativity: 1.5,
-        AtomicRadius: 243, IonizationEnergy: 568.0, Valence: 2
-    },
-    "U": {
-        Name: "Uranium", AtomicNumber: 92, AtomicMass: 238.03, Electronegativity: 1.38,
-        AtomicRadius: 240, IonizationEnergy: 597.6, Valence: 2
-    },
-    "Np": {
-        Name: "Neptunium", AtomicNumber: 93, AtomicMass: 237.0, Electronegativity: 1.36,
-        AtomicRadius: 221, IonizationEnergy: 604.5, Valence: 2
-    },
-    "Pu": {
-        Name: "Plutonium", AtomicNumber: 94, AtomicMass: 244.0, Electronegativity: 1.28,
-        AtomicRadius: 243, IonizationEnergy: 584.7, Valence: 2
-    },
-    "Am": {
-        Name: "Americium", AtomicNumber: 95, AtomicMass: 243.0, Electronegativity: 1.13,
-        AtomicRadius: 244, IonizationEnergy: 578.0, Valence: 2
-    },
-    "Cm": {
-        Name: "Curium", AtomicNumber: 96, AtomicMass: 247.0, Electronegativity: 1.28,
-        AtomicRadius: 245, IonizationEnergy: 581.0, Valence: 2
-    },
-    "Bk": {
-        Name: "Berkelium", AtomicNumber: 97, AtomicMass: 247.0, Electronegativity: 1.3,
-        AtomicRadius: 244, IonizationEnergy: 601.0, Valence: 2
-    },
-    "Cf": {
-        Name: "Californium", AtomicNumber: 98, AtomicMass: 251.0, Electronegativity: 1.3,
-        AtomicRadius: 245, IonizationEnergy: 608.0, Valence: 2
-    },
-    "Es": {
-        Name: "Einsteinium", AtomicNumber: 99, AtomicMass: 252.0, Electronegativity: 1.3,
-        AtomicRadius: 245, IonizationEnergy: 619.0, Valence: 2
-    },
-    "Fm": {
-        Name: "Fermium", AtomicNumber: 100, AtomicMass: 257.0, Electronegativity: 1.3,
-        AtomicRadius: 245, IonizationEnergy: 627.0, Valence: 2
-    },
-    "Md": {
-        Name: "Mendelevium", AtomicNumber: 101, AtomicMass: 258.0, Electronegativity: 1.3,
-        AtomicRadius: 245, IonizationEnergy: 635.0, Valence: 2
-    },
-    "No": {
-        Name: "Nobelium", AtomicNumber: 102, AtomicMass: 259.0, Electronegativity: 1.3,
-        AtomicRadius: 245, IonizationEnergy: 642.0, Valence: 2
-    },
-    "Lr": {
-        Name: "Lawrencium", AtomicNumber: 103, AtomicMass: 266.0, Electronegativity: 1.3,
-        AtomicRadius: 245, IonizationEnergy: 470.0, Valence: 3
-    },
-    "Rf": {
-        Name: "Rutherfordium", AtomicNumber: 104, AtomicMass: 267.0, Electronegativity: null,
-        AtomicRadius: null, IonizationEnergy: 580.0, Valence: 2
-    },
-    "Db": {
-        Name: "Dubnium", AtomicNumber: 105, AtomicMass: 268.0, Electronegativity: null,
-        AtomicRadius: null, IonizationEnergy: null, Valence: 2
-    },
-    "Sg": {
-        Name: "Seaborgium", AtomicNumber: 106, AtomicMass: 269.0, Electronegativity: null,
-        AtomicRadius: null, IonizationEnergy: null, Valence: 2
-    },
-    "Bh": {
-        Name: "Bohrium", AtomicNumber: 107, AtomicMass: 270.0, Electronegativity: null,
-        AtomicRadius: null, IonizationEnergy: null, Valence: 2
-    },
-    "Hs": {
-        Name: "Hassium", AtomicNumber: 108, AtomicMass: 277.0, Electronegativity: null,
-        AtomicRadius: null, IonizationEnergy: null, Valence: 2
-    },
-    "Mt": {
-        Name: "Meitnerium", AtomicNumber: 109, AtomicMass: 278.0, Electronegativity: null,
-        AtomicRadius: null, IonizationEnergy: null, Valence: 2
-    },
-    "Ds": {
-        Name: "Darmstadtium", AtomicNumber: 110, AtomicMass: 281.0, Electronegativity: null,
-        AtomicRadius: null, IonizationEnergy: null, Valence: 1
-    },
-    "Rg": {
-        Name: "Roentgenium", AtomicNumber: 111, AtomicMass: 282.0, Electronegativity: null,
-        AtomicRadius: null, IonizationEnergy: null, Valence: 1
-    },
-    "Cn": {
-        Name: "Copernicium", AtomicNumber: 112, AtomicMass: 285.0, Electronegativity: null,
-        AtomicRadius: null, IonizationEnergy: null, Valence: 2
-    },
-    "Nh": {
-        Name: "Nihonium", AtomicNumber: 113, AtomicMass: 286.0, Electronegativity: null,
-        AtomicRadius: null, IonizationEnergy: null, Valence: 3
-    },
-    "Fl": {
-        Name: "Flerovium", AtomicNumber: 114, AtomicMass: 289.0, Electronegativity: null,
-        AtomicRadius: null, IonizationEnergy: null, Valence: 4
-    },
-    "Mc": {
-        Name: "Moscovium", AtomicNumber: 115, AtomicMass: 290.0, Electronegativity: null,
-        AtomicRadius: null, IonizationEnergy: null, Valence: 5
-    },
-    "Lv": {
-        Name: "Livermorium", AtomicNumber: 116, AtomicMass: 293.0, Electronegativity: null,
-        AtomicRadius: null, IonizationEnergy: null, Valence: 6
-    },
-    "Ts": {
-        Name: "Tennessine", AtomicNumber: 117, AtomicMass: 294.0, Electronegativity: null,
-        AtomicRadius: null, IonizationEnergy: null, Valence: 7
-    },
-    "Og": {
-        Name: "Oganesson", AtomicNumber: 118, AtomicMass: 294.0, Electronegativity: null,
-        AtomicRadius: null, IonizationEnergy: null, Valence: 8
-    }
+    "H": { Name: "Hydrogen", AtomicNumber: 1, AtomicMass: 1.008, Electronegativity: 2.20, AtomicRadius: 53, IonizationEnergy: 1312.0, Valence: 1 },
+    "He": { Name: "Helium", AtomicNumber: 2, AtomicMass: 4.0026, Electronegativity: null, AtomicRadius: 31, IonizationEnergy: 2372.3, Valence: 2 },
+    "Li": { Name: "Lithium", AtomicNumber: 3, AtomicMass: 6.94, Electronegativity: 0.98, AtomicRadius: 167, IonizationEnergy: 520.2, Valence: 1 },
+    "Be": { Name: "Beryllium", AtomicNumber: 4, AtomicMass: 9.0122, Electronegativity: 1.57, AtomicRadius: 112, IonizationEnergy: 899.5, Valence: 2 },
+    "B": { Name: "Boron", AtomicNumber: 5, AtomicMass: 10.81, Electronegativity: 2.04, AtomicRadius: 87, IonizationEnergy: 800.6, Valence: 3 },
+    "C": { Name: "Carbon", AtomicNumber: 6, AtomicMass: 12.011, Electronegativity: 2.55, AtomicRadius: 67, IonizationEnergy: 1086.5, Valence: 4 },
+    "N": { Name: "Nitrogen", AtomicNumber: 7, AtomicMass: 14.007, Electronegativity: 3.04, AtomicRadius: 56, IonizationEnergy: 1402.3, Valence: 5 },
+    "O": { Name: "Oxygen", AtomicNumber: 8, AtomicMass: 15.999, Electronegativity: 3.44, AtomicRadius: 48, IonizationEnergy: 1313.9, Valence: 6 },
+    "F": { Name: "Fluorine", AtomicNumber: 9, AtomicMass: 18.998, Electronegativity: 3.98, AtomicRadius: 42, IonizationEnergy: 1681.0, Valence: 7 },
+    "Ne": { Name: "Neon", AtomicNumber: 10, AtomicMass: 20.180, Electronegativity: null, AtomicRadius: 38, IonizationEnergy: 2080.7, Valence: 8 },
+    "Na": { Name: "Sodium", AtomicNumber: 11, AtomicMass: 22.990, Electronegativity: 0.93, AtomicRadius: 190, IonizationEnergy: 495.8, Valence: 1 },
+    "Mg": { Name: "Magnesium", AtomicNumber: 12, AtomicMass: 24.305, Electronegativity: 1.31, AtomicRadius: 145, IonizationEnergy: 737.7, Valence: 2 },
+    "Al": { Name: "Aluminium", AtomicNumber: 13, AtomicMass: 26.982, Electronegativity: 1.61, AtomicRadius: 118, IonizationEnergy: 577.5, Valence: 3 },
+    "Si": { Name: "Silicon", AtomicNumber: 14, AtomicMass: 28.085, Electronegativity: 1.90, AtomicRadius: 111, IonizationEnergy: 786.5, Valence: 4 },
+    "P": { Name: "Phosphorus", AtomicNumber: 15, AtomicMass: 30.974, Electronegativity: 2.19, AtomicRadius: 98, IonizationEnergy: 1011.8, Valence: 5 },
+    "S": { Name: "Sulfur", AtomicNumber: 16, AtomicMass: 32.06, Electronegativity: 2.58, AtomicRadius: 88, IonizationEnergy: 999.6, Valence: 6 },
+    "Cl": { Name: "Chlorine", AtomicNumber: 17, AtomicMass: 35.45, Electronegativity: 3.16, AtomicRadius: 79, IonizationEnergy: 1251.2, Valence: 7 },
+    "Ar": { Name: "Argon", AtomicNumber: 18, AtomicMass: 39.948, Electronegativity: null, AtomicRadius: 71, IonizationEnergy: 1520.6, Valence: 8 },
+    "K": { Name: "Potassium", AtomicNumber: 19, AtomicMass: 39.098, Electronegativity: 0.82, AtomicRadius: 243, IonizationEnergy: 418.8, Valence: 1 },
+    "Ca": { Name: "Calcium", AtomicNumber: 20, AtomicMass: 40.078, Electronegativity: 1.00, AtomicRadius: 194, IonizationEnergy: 589.8, Valence: 2 },
+    "Sc": { Name: "Scandium", AtomicNumber: 21, AtomicMass: 44.956, Electronegativity: 1.36, AtomicRadius: 184, IonizationEnergy: 633.1, Valence: 2 },
+    "Ti": { Name: "Titanium", AtomicNumber: 22, AtomicMass: 47.867, Electronegativity: 1.54, AtomicRadius: 176, IonizationEnergy: 658.8, Valence: 2 },
+    "V": { Name: "Vanadium", AtomicNumber: 23, AtomicMass: 50.942, Electronegativity: 1.63, AtomicRadius: 171, IonizationEnergy: 650.9, Valence: 2 },
+    "Cr": { Name: "Chromium", AtomicNumber: 24, AtomicMass: 51.996, Electronegativity: 1.66, AtomicRadius: 166, IonizationEnergy: 652.9, Valence: 1 },
+    "Mn": { Name: "Manganese", AtomicNumber: 25, AtomicMass: 54.938, Electronegativity: 1.55, AtomicRadius: 161, IonizationEnergy: 717.3, Valence: 2 },
+    "Fe": { Name: "Iron", AtomicNumber: 26, AtomicMass: 55.845, Electronegativity: 1.83, AtomicRadius: 156, IonizationEnergy: 762.5, Valence: 2 },
+    "Co": { Name: "Cobalt", AtomicNumber: 27, AtomicMass: 58.933, Electronegativity: 1.88, AtomicRadius: 152, IonizationEnergy: 760.4, Valence: 2 },
+    "Ni": { Name: "Nickel", AtomicNumber: 28, AtomicMass: 58.693, Electronegativity: 1.91, AtomicRadius: 149, IonizationEnergy: 737.1, Valence: 2 },
+    "Cu": { Name: "Copper", AtomicNumber: 29, AtomicMass: 63.546, Electronegativity: 1.90, AtomicRadius: 145, IonizationEnergy: 745.5, Valence: 1 },
+    "Zn": { Name: "Zinc", AtomicNumber: 30, AtomicMass: 65.38, Electronegativity: 1.65, AtomicRadius: 142, IonizationEnergy: 906.4, Valence: 2 },
+    "Ga": { Name: "Gallium", AtomicNumber: 31, AtomicMass: 69.723, Electronegativity: 1.81, AtomicRadius: 136, IonizationEnergy: 578.8, Valence: 3 },
+    "Ge": { Name: "Germanium", AtomicNumber: 32, AtomicMass: 72.630, Electronegativity: 2.01, AtomicRadius: 125, IonizationEnergy: 762.0, Valence: 4 },
+    "As": { Name: "Arsenic", AtomicNumber: 33, AtomicMass: 74.922, Electronegativity: 2.18, AtomicRadius: 114, IonizationEnergy: 947.0, Valence: 5 },
+    "Se": { Name: "Selenium", AtomicNumber: 34, AtomicMass: 78.971, Electronegativity: 2.55, AtomicRadius: 103, IonizationEnergy: 941.0, Valence: 6 },
+    "Br": { Name: "Bromine", AtomicNumber: 35, AtomicMass: 79.904, Electronegativity: 2.96, AtomicRadius: 94, IonizationEnergy: 1139.9, Valence: 7 },
+    "Kr": { Name: "Krypton", AtomicNumber: 36, AtomicMass: 83.798, Electronegativity: 3.00, AtomicRadius: 88, IonizationEnergy: 1350.8, Valence: 8 },
+    "Rb": { Name: "Rubidium", AtomicNumber: 37, AtomicMass: 85.468, Electronegativity: 0.82, AtomicRadius: 265, IonizationEnergy: 403.0, Valence: 1 },
+    "Sr": { Name: "Strontium", AtomicNumber: 38, AtomicMass: 87.62, Electronegativity: 0.95, AtomicRadius: 219, IonizationEnergy: 549.5, Valence: 2 },
+    "Y": { Name: "Yttrium", AtomicNumber: 39, AtomicMass: 88.906, Electronegativity: 1.22, AtomicRadius: 212, IonizationEnergy: 600.0, Valence: 2 },
+    "Zr": { Name: "Zirconium", AtomicNumber: 40, AtomicMass: 91.224, Electronegativity: 1.33, AtomicRadius: 206, IonizationEnergy: 640.1, Valence: 2 },
+    "Nb": { Name: "Niobium", AtomicNumber: 41, AtomicMass: 92.906, Electronegativity: 1.6, AtomicRadius: 198, IonizationEnergy: 652.1, Valence: 1 },
+    "Mo": { Name: "Molybdenum", AtomicNumber: 42, AtomicMass: 95.95, Electronegativity: 2.16, AtomicRadius: 190, IonizationEnergy: 684.3, Valence: 1 },
+    "Tc": { Name: "Technetium", AtomicNumber: 43, AtomicMass: 98.0, Electronegativity: 1.9, AtomicRadius: 183, IonizationEnergy: 702.0, Valence: 2 },
+    "Ru": { Name: "Ruthenium", AtomicNumber: 44, AtomicMass: 101.07, Electronegativity: 2.2, AtomicRadius: 178, IonizationEnergy: 710.2, Valence: 1 },
+    "Rh": { Name: "Rhodium", AtomicNumber: 45, AtomicMass: 102.91, Electronegativity: 2.28, AtomicRadius: 173, IonizationEnergy: 719.7, Valence: 1 },
+    "Pd": { Name: "Palladium", AtomicNumber: 46, AtomicMass: 106.42, Electronegativity: 2.20, AtomicRadius: 169, IonizationEnergy: 804.4, Valence: 0 },
+    "Ag": { Name: "Silver", AtomicNumber: 47, AtomicMass: 107.87, Electronegativity: 1.93, AtomicRadius: 165, IonizationEnergy: 731.0, Valence: 1 },
+    "Cd": { Name: "Cadmium", AtomicNumber: 48, AtomicMass: 112.41, Electronegativity: 1.69, AtomicRadius: 161, IonizationEnergy: 867.8, Valence: 2 },
+    "In": { Name: "Indium", AtomicNumber: 49, AtomicMass: 114.82, Electronegativity: 1.78, AtomicRadius: 156, IonizationEnergy: 558.3, Valence: 3 },
+    "Sn": { Name: "Tin", AtomicNumber: 50, AtomicMass: 118.71, Electronegativity: 1.96, AtomicRadius: 145, IonizationEnergy: 708.6, Valence: 4 },
+    "Sb": { Name: "Antimony", AtomicNumber: 51, AtomicMass: 121.76, Electronegativity: 2.05, AtomicRadius: 133, IonizationEnergy: 834.0, Valence: 5 },
+    "Te": { Name: "Tellurium", AtomicNumber: 52, AtomicMass: 127.60, Electronegativity: 2.1, AtomicRadius: 123, IonizationEnergy: 869.3, Valence: 6 },
+    "I": { Name: "Iodine", AtomicNumber: 53, AtomicMass: 126.90, Electronegativity: 2.66, AtomicRadius: 115, IonizationEnergy: 1008.4, Valence: 7 },
+    "Xe": { Name: "Xenon", AtomicNumber: 54, AtomicMass: 131.29, Electronegativity: 2.60, AtomicRadius: 108, IonizationEnergy: 1170.4, Valence: 8 },
+    "Cs": { Name: "Caesium", AtomicNumber: 55, AtomicMass: 132.91, Electronegativity: 0.79, AtomicRadius: 298, IonizationEnergy: 375.7, Valence: 1 },
+    "Ba": { Name: "Barium", AtomicNumber: 56, AtomicMass: 137.33, Electronegativity: 0.89, AtomicRadius: 253, IonizationEnergy: 502.9, Valence: 2 },
+    "La": { Name: "Lanthanum", AtomicNumber: 57, AtomicMass: 138.91, Electronegativity: 1.10, AtomicRadius: 226, IonizationEnergy: 538.1, Valence: 2 },
+    "Ce": { Name: "Cerium", AtomicNumber: 58, AtomicMass: 140.12, Electronegativity: 1.12, AtomicRadius: 210, IonizationEnergy: 534.4, Valence: 2 },
+    "Pr": { Name: "Praseodymium", AtomicNumber: 59, AtomicMass: 140.91, Electronegativity: 1.13, AtomicRadius: 247, IonizationEnergy: 527.0, Valence: 2 },
+    "Nd": { Name: "Neodymium", AtomicNumber: 60, AtomicMass: 144.24, Electronegativity: 1.14, AtomicRadius: 206, IonizationEnergy: 533.1, Valence: 2 },
+    "Pm": { Name: "Promethium", AtomicNumber: 61, AtomicMass: 145.0, Electronegativity: 1.13, AtomicRadius: 205, IonizationEnergy: 540.0, Valence: 2 },
+    "Sm": { Name: "Samarium", AtomicNumber: 62, AtomicMass: 150.36, Electronegativity: 1.17, AtomicRadius: 238, IonizationEnergy: 544.5, Valence: 2 },
+    "Eu": { Name: "Europium", AtomicNumber: 63, AtomicMass: 151.96, Electronegativity: 1.20, AtomicRadius: 231, IonizationEnergy: 547.1, Valence: 2 },
+    "Gd": { Name: "Gadolinium", AtomicNumber: 64, AtomicMass: 157.25, Electronegativity: 1.20, AtomicRadius: 233, IonizationEnergy: 593.4, Valence: 2 },
+    "Tb": { Name: "Terbium", AtomicNumber: 65, AtomicMass: 158.93, Electronegativity: 1.10, AtomicRadius: 225, IonizationEnergy: 565.8, Valence: 2 },
+    "Dy": { Name: "Dysprosium", AtomicNumber: 66, AtomicMass: 162.50, Electronegativity: 1.22, AtomicRadius: 228, IonizationEnergy: 573.0, Valence: 2 },
+    "Ho": { Name: "Holmium", AtomicNumber: 67, AtomicMass: 164.93, Electronegativity: 1.23, AtomicRadius: 226, IonizationEnergy: 581.0, Valence: 2 },
+    "Er": { Name: "Erbium", AtomicNumber: 68, AtomicMass: 167.26, Electronegativity: 1.24, AtomicRadius: 226, IonizationEnergy: 589.3, Valence: 2 },
+    "Tm": { Name: "Thulium", AtomicNumber: 69, AtomicMass: 168.93, Electronegativity: 1.25, AtomicRadius: 222, IonizationEnergy: 596.7, Valence: 2 },
+    "Yb": { Name: "Ytterbium", AtomicNumber: 70, AtomicMass: 173.05, Electronegativity: 1.10, AtomicRadius: 222, IonizationEnergy: 603.4, Valence: 2 },
+    "Lu": { Name: "Lutetium", AtomicNumber: 71, AtomicMass: 174.97, Electronegativity: 1.27, AtomicRadius: 217, IonizationEnergy: 523.5, Valence: 2 },
+    "Hf": { Name: "Hafnium", AtomicNumber: 72, AtomicMass: 178.49, Electronegativity: 1.30, AtomicRadius: 208, IonizationEnergy: 658.5, Valence: 2 },
+    "Ta": { Name: "Tantalum", AtomicNumber: 73, AtomicMass: 180.95, Electronegativity: 1.50, AtomicRadius: 200, IonizationEnergy: 761.0, Valence: 2 },
+    "W": { Name: "Tungsten", AtomicNumber: 74, AtomicMass: 183.84, Electronegativity: 2.36, AtomicRadius: 193, IonizationEnergy: 770.0, Valence: 2 },
+    "Re": { Name: "Rhenium", AtomicNumber: 75, AtomicMass: 186.21, Electronegativity: 1.90, AtomicRadius: 188, IonizationEnergy: 760.0, Valence: 2 },
+    "Os": { Name: "Osmium", AtomicNumber: 76, AtomicMass: 190.23, Electronegativity: 2.20, AtomicRadius: 185, IonizationEnergy: 840.0, Valence: 2 },
+    "Ir": { Name: "Iridium", AtomicNumber: 77, AtomicMass: 192.22, Electronegativity: 2.20, AtomicRadius: 180, IonizationEnergy: 880.0, Valence: 2 },
+    "Pt": { Name: "Platinum", AtomicNumber: 78, AtomicMass: 195.08, Electronegativity: 2.28, AtomicRadius: 177, IonizationEnergy: 870.0, Valence: 1 },
+    "Au": { Name: "Gold", AtomicNumber: 79, AtomicMass: 196.97, Electronegativity: 2.54, AtomicRadius: 174, IonizationEnergy: 890.1, Valence: 1 },
+    "Hg": { Name: "Mercury", AtomicNumber: 80, AtomicMass: 200.59, Electronegativity: 2.00, AtomicRadius: 171, IonizationEnergy: 1007.1, Valence: 2 },
+    "Tl": { Name: "Thallium", AtomicNumber: 81, AtomicMass: 204.38, Electronegativity: 1.62, AtomicRadius: 156, IonizationEnergy: 589.4, Valence: 3 },
+    "Pb": { Name: "Lead", AtomicNumber: 82, AtomicMass: 207.2, Electronegativity: 1.87, AtomicRadius: 154, IonizationEnergy: 715.6, Valence: 4 },
+    "Bi": { Name: "Bismuth", AtomicNumber: 83, AtomicMass: 208.98, Electronegativity: 2.02, AtomicRadius: 143, IonizationEnergy: 703.0, Valence: 5 },
+    "Po": { Name: "Polonium", AtomicNumber: 84, AtomicMass: 209.0, Electronegativity: 2.0, AtomicRadius: 135, IonizationEnergy: 812.1, Valence: 6 },
+    "At": { Name: "Astatine", AtomicNumber: 85, AtomicMass: 210.0, Electronegativity: 2.2, AtomicRadius: 127, IonizationEnergy: 899.0, Valence: 7 },
+    "Rn": { Name: "Radon", AtomicNumber: 86, AtomicMass: 222.0, Electronegativity: 2.2, AtomicRadius: 120, IonizationEnergy: 1037.0, Valence: 8 },
+    "Fr": { Name: "Francium", AtomicNumber: 87, AtomicMass: 223.0, Electronegativity: 0.79, AtomicRadius: 348, IonizationEnergy: 380.0, Valence: 1 },
+    "Ra": { Name: "Radium", AtomicNumber: 88, AtomicMass: 226.0, Electronegativity: 0.9, AtomicRadius: 283, IonizationEnergy: 509.3, Valence: 2 },
+    "Ac": { Name: "Actinium", AtomicNumber: 89, AtomicMass: 227.0, Electronegativity: 1.1, AtomicRadius: 260, IonizationEnergy: 499.0, Valence: 2 },
+    "Th": { Name: "Thorium", AtomicNumber: 90, AtomicMass: 232.04, Electronegativity: 1.3, AtomicRadius: 237, IonizationEnergy: 587.0, Valence: 2 },
+    "Pa": { Name: "Protactinium", AtomicNumber: 91, AtomicMass: 231.04, Electronegativity: 1.5, AtomicRadius: 243, IonizationEnergy: 568.0, Valence: 2 },
+    "U": { Name: "Uranium", AtomicNumber: 92, AtomicMass: 238.03, Electronegativity: 1.38, AtomicRadius: 240, IonizationEnergy: 597.6, Valence: 2 },
+    "Np": { Name: "Neptunium", AtomicNumber: 93, AtomicMass: 237.0, Electronegativity: 1.36, AtomicRadius: 221, IonizationEnergy: 604.5, Valence: 2 },
+    "Pu": { Name: "Plutonium", AtomicNumber: 94, AtomicMass: 244.0, Electronegativity: 1.28, AtomicRadius: 243, IonizationEnergy: 584.7, Valence: 2 },
+    "Am": { Name: "Americium", AtomicNumber: 95, AtomicMass: 243.0, Electronegativity: 1.13, AtomicRadius: 244, IonizationEnergy: 578.0, Valence: 2 },
+    "Cm": { Name: "Curium", AtomicNumber: 96, AtomicMass: 247.0, Electronegativity: 1.28, AtomicRadius: 245, IonizationEnergy: 581.0, Valence: 2 },
+    "Bk": { Name: "Berkelium", AtomicNumber: 97, AtomicMass: 247.0, Electronegativity: 1.3, AtomicRadius: 244, IonizationEnergy: 601.0, Valence: 2 },
+    "Cf": { Name: "Californium", AtomicNumber: 98, AtomicMass: 251.0, Electronegativity: 1.3, AtomicRadius: 245, IonizationEnergy: 608.0, Valence: 2 },
+    "Es": { Name: "Einsteinium", AtomicNumber: 99, AtomicMass: 252.0, Electronegativity: 1.3, AtomicRadius: 245, IonizationEnergy: 619.0, Valence: 2 },
+    "Fm": { Name: "Fermium", AtomicNumber: 100, AtomicMass: 257.0, Electronegativity: 1.3, AtomicRadius: 245, IonizationEnergy: 627.0, Valence: 2 },
+    "Md": { Name: "Mendelevium", AtomicNumber: 101, AtomicMass: 258.0, Electronegativity: 1.3, AtomicRadius: 245, IonizationEnergy: 635.0, Valence: 2 },
+    "No": { Name: "Nobelium", AtomicNumber: 102, AtomicMass: 259.0, Electronegativity: 1.3, AtomicRadius: 245, IonizationEnergy: 642.0, Valence: 2 },
+    "Lr": { Name: "Lawrencium", AtomicNumber: 103, AtomicMass: 266.0, Electronegativity: 1.3, AtomicRadius: 245, IonizationEnergy: 470.0, Valence: 3 },
+    "Rf": { Name: "Rutherfordium", AtomicNumber: 104, AtomicMass: 267.0, Electronegativity: null, AtomicRadius: null, IonizationEnergy: 580.0, Valence: 2 },
+    "Db": { Name: "Dubnium", AtomicNumber: 105, AtomicMass: 268.0, Electronegativity: null, AtomicRadius: null, IonizationEnergy: null, Valence: 2 },
+    "Sg": { Name: "Seaborgium", AtomicNumber: 106, AtomicMass: 269.0, Electronegativity: null, AtomicRadius: null, IonizationEnergy: null, Valence: 2 },
+    "Bh": { Name: "Bohrium", AtomicNumber: 107, AtomicMass: 270.0, Electronegativity: null, AtomicRadius: null, IonizationEnergy: null, Valence: 2 },
+    "Hs": { Name: "Hassium", AtomicNumber: 108, AtomicMass: 277.0, Electronegativity: null, AtomicRadius: null, IonizationEnergy: null, Valence: 2 },
+    "Mt": { Name: "Meitnerium", AtomicNumber: 109, AtomicMass: 278.0, Electronegativity: null, AtomicRadius: null, IonizationEnergy: null, Valence: 2 },
+    "Ds": { Name: "Darmstadtium", AtomicNumber: 110, AtomicMass: 281.0, Electronegativity: null, AtomicRadius: null, IonizationEnergy: null, Valence: 1 },
+    "Rg": { Name: "Roentgenium", AtomicNumber: 111, AtomicMass: 282.0, Electronegativity: null, AtomicRadius: null, IonizationEnergy: null, Valence: 1 },
+    "Cn": { Name: "Copernicium", AtomicNumber: 112, AtomicMass: 285.0, Electronegativity: null, AtomicRadius: null, IonizationEnergy: null, Valence: 2 },
+    "Nh": { Name: "Nihonium", AtomicNumber: 113, AtomicMass: 286.0, Electronegativity: null, AtomicRadius: null, IonizationEnergy: null, Valence: 3 },
+    "Fl": { Name: "Flerovium", AtomicNumber: 114, AtomicMass: 289.0, Electronegativity: null, AtomicRadius: null, IonizationEnergy: null, Valence: 4 },
+    "Mc": { Name: "Moscovium", AtomicNumber: 115, AtomicMass: 290.0, Electronegativity: null, AtomicRadius: null, IonizationEnergy: null, Valence: 5 },
+    "Lv": { Name: "Livermorium", AtomicNumber: 116, AtomicMass: 293.0, Electronegativity: null, AtomicRadius: null, IonizationEnergy: null, Valence: 6 },
+    "Ts": { Name: "Tennessine", AtomicNumber: 117, AtomicMass: 294.0, Electronegativity: null, AtomicRadius: null, IonizationEnergy: null, Valence: 7 },
+    "Og": { Name: "Oganesson", AtomicNumber: 118, AtomicMass: 294.0, Electronegativity: null, AtomicRadius: null, IonizationEnergy: null, Valence: 8 }
 };
 
 globalThis.Enum = {};
 
 function BuildIcosphere(Subdivisions) {
     const T = (1 + Math.sqrt(5)) / 2;
-
     let Vertices = [
         [-1, T, 0], [1, T, 0], [-1, -T, 0], [1, -T, 0],
         [0, -1, T], [0, 1, T], [0, -1, -T], [0, 1, -T],
         [T, 0, -1], [T, 0, 1], [-T, 0, -1], [-T, 0, 1]
     ];
-
     let Faces = [
         [0, 11, 5], [0, 5, 1], [0, 1, 7], [0, 7, 10], [0, 10, 11],
         [1, 5, 9], [5, 11, 4], [11, 10, 2], [10, 7, 6], [7, 1, 8],
         [3, 9, 4], [3, 4, 2], [3, 2, 6], [3, 6, 8], [3, 8, 9],
         [4, 9, 5], [2, 4, 11], [6, 2, 10], [8, 6, 7], [9, 8, 1]
     ];
-
     const Normalize = (V) => {
         const Length = Math.sqrt(V[0] * V[0] + V[1] * V[1] + V[2] * V[2]);
         return [V[0] / Length, V[1] / Length, V[2] / Length];
     };
-
     Vertices = Vertices.map(Normalize);
-
     const MidpointCache = new Map();
-
     const GetMidpoint = (IndexA, IndexB) => {
         const Key = IndexA < IndexB ? `${IndexA}_${IndexB}` : `${IndexB}_${IndexA}`;
         if (MidpointCache.has(Key)) return MidpointCache.get(Key);
-
         const VertexA = Vertices[IndexA];
         const VertexB = Vertices[IndexB];
         const Middle = Normalize([
@@ -511,13 +150,11 @@ function BuildIcosphere(Subdivisions) {
             (VertexA[1] + VertexB[1]) / 2,
             (VertexA[2] + VertexB[2]) / 2
         ]);
-
         Vertices.push(Middle);
         const NewIndex = Vertices.length - 1;
         MidpointCache.set(Key, NewIndex);
         return NewIndex;
     };
-
     for (let Iteration = 0; Iteration < Subdivisions; Iteration++) {
         const NewFaces = [];
         for (const Face of Faces) {
@@ -529,20 +166,16 @@ function BuildIcosphere(Subdivisions) {
         }
         Faces = NewFaces;
     }
-
     const PositionData = [];
     const NormalData = [];
     const IndexData = [];
-
     for (const Vertex of Vertices) {
         PositionData.push(Vertex[0], Vertex[1], Vertex[2]);
         NormalData.push(Vertex[0], Vertex[1], Vertex[2]);
     }
-
     for (const Face of Faces) {
         IndexData.push(Face[0], Face[1], Face[2]);
     }
-
     return {
         Positions: new Float32Array(PositionData),
         Normals: new Float32Array(NormalData),
@@ -550,9 +183,7 @@ function BuildIcosphere(Subdivisions) {
     };
 }
 
-Enum.Mesh = {
-    Sphere: BuildIcosphere(2)
-};
+Enum.Mesh = { Sphere: BuildIcosphere(2) };
 
 globalThis.Objects = [];
 
@@ -573,22 +204,21 @@ globalThis.ElementColors = {
     U: [0.4, 0.8, 0.3]
 };
 
-globalThis.Atom = (Key, Position, Velocity) => {
-    // Realistic common bonding valences (not group numbers) so molecules form properly
-    const RealisticValence = {
-        H: 1, He: 0, Li: 1, Be: 2, B: 3, C: 4, N: 3, O: 2, F: 1, Ne: 0,
-        Na: 1, Mg: 2, Al: 3, Si: 4, P: 3, S: 2, Cl: 1, Ar: 0,
-        K: 1, Ca: 2, Sc: 3, Ti: 4, V: 5, Cr: 3, Mn: 2, Fe: 3, Co: 2, Ni: 2, Cu: 2, Zn: 2,
-        Ga: 3, Ge: 4, As: 3, Se: 2, Br: 1, Kr: 0,
-        Rb: 1, Sr: 2, Y: 3, Zr: 4, Nb: 5, Mo: 6, Tc: 5, Ru: 3, Rh: 3, Pd: 2, Ag: 1, Cd: 2,
-        In: 3, Sn: 4, Sb: 3, Te: 2, I: 1, Xe: 0,
-        Cs: 1, Ba: 2, La: 3, Ce: 3, Pr: 3, Nd: 3, Pm: 3, Sm: 3, Eu: 2, Gd: 3, Tb: 3, Dy: 3, Ho: 3, Er: 3, Tm: 3, Yb: 2, Lu: 3,
-        Hf: 4, Ta: 5, W: 6, Re: 5, Os: 4, Ir: 3, Pt: 2, Au: 1, Hg: 2,
-        Tl: 3, Pb: 4, Bi: 3, Po: 2, At: 1, Rn: 0,
-        Fr: 1, Ra: 2, Ac: 3, Th: 4, Pa: 5, U: 6, Np: 5, Pu: 4, Am: 3, Cm: 3, Bk: 3, Cf: 3, Es: 3, Fm: 3, Md: 3, No: 2, Lr: 3,
-        Rf: 4, Db: 5, Sg: 6, Bh: 5, Hs: 4, Mt: 3, Ds: 2, Rg: 1, Cn: 2, Nh: 3, Fl: 4, Mc: 3, Lv: 2, Ts: 1, Og: 0
-    };
+const RealisticValence = globalThis.RealisticValence = {
+    H: 1, He: 0, Li: 1, Be: 2, B: 3, C: 4, N: 3, O: 2, F: 1, Ne: 0,
+    Na: 1, Mg: 2, Al: 3, Si: 4, P: 3, S: 2, Cl: 1, Ar: 0,
+    K: 1, Ca: 2, Sc: 3, Ti: 4, V: 5, Cr: 3, Mn: 2, Fe: 3, Co: 2, Ni: 2, Cu: 2, Zn: 2,
+    Ga: 3, Ge: 4, As: 3, Se: 2, Br: 1, Kr: 0,
+    Rb: 1, Sr: 2, Y: 3, Zr: 4, Nb: 5, Mo: 6, Tc: 5, Ru: 3, Rh: 3, Pd: 2, Ag: 1, Cd: 2,
+    In: 3, Sn: 4, Sb: 3, Te: 2, I: 1, Xe: 0,
+    Cs: 1, Ba: 2, La: 3, Ce: 3, Pr: 3, Nd: 3, Pm: 3, Sm: 3, Eu: 2, Gd: 3, Tb: 3, Dy: 3, Ho: 3, Er: 3, Tm: 3, Yb: 2, Lu: 3,
+    Hf: 4, Ta: 5, W: 6, Re: 5, Os: 4, Ir: 3, Pt: 2, Au: 1, Hg: 2,
+    Tl: 3, Pb: 4, Bi: 3, Po: 2, At: 1, Rn: 0,
+    Fr: 1, Ra: 2, Ac: 3, Th: 4, Pa: 5, U: 6, Np: 5, Pu: 4, Am: 3, Cm: 3, Bk: 3, Cf: 3, Es: 3, Fm: 3, Md: 3, No: 2, Lr: 3,
+    Rf: 4, Db: 5, Sg: 6, Bh: 5, Hs: 4, Mt: 3, Ds: 2, Rg: 1, Cn: 2, Nh: 3, Fl: 4, Mc: 3, Lv: 2, Ts: 1, Og: 0
+};
 
+globalThis.Atom = (Key, Position, Velocity) => {
     const DefaultData = {
         AtomicRadius: 50,
         Valence: RealisticValence[Key] ?? 1,
@@ -596,13 +226,24 @@ globalThis.Atom = (Key, Position, Velocity) => {
         AtomicMass: 1.0,
         Name: Key
     };
-
     const Source = (typeof Atoms !== "undefined" && Atoms[Key]) ? Atoms[Key] : DefaultData;
-    // Always use realistic bonding valence for the simulation
     const AtomData = {
         ...Source,
         Valence: RealisticValence[Key] ?? Source.Valence ?? 1
     };
+
+    let Protons = AtomData.AtomicNumber || 1;
+    let Neutrons = Math.max(0, Math.round(AtomData.AtomicMass || Protons * 2) - Protons);
+    if (globalThis.Chemistry && globalThis.Chemistry.GetIsotope) {
+        const Isotope = globalThis.Chemistry.GetIsotope(Key, AtomData);
+        Protons = Isotope[0];
+        Neutrons = Isotope[1];
+    }
+
+    let Stable = true;
+    if (globalThis.Chemistry && globalThis.Chemistry.DecayProbability) {
+        Stable = globalThis.Chemistry.DecayProbability(Protons, Neutrons) === 0;
+    }
 
     const AtomObject = {
         Key: Key,
@@ -611,7 +252,10 @@ globalThis.Atom = (Key, Position, Velocity) => {
         Force: [0, 0, 0],
         Atom: AtomData,
         Mesh: Enum.Mesh.Sphere,
-        Rotation: 0
+        Rotation: 0,
+        Protons: Protons,
+        Neutrons: Neutrons,
+        Stable: Stable
     };
 
     Objects.push(AtomObject);
@@ -772,34 +416,28 @@ globalThis.CompileShader = function(Gl, Source, Type) {
     const Shader = Gl.createShader(Type);
     Gl.shaderSource(Shader, Source);
     Gl.compileShader(Shader);
-
     if (!Gl.getShaderParameter(Shader, Gl.COMPILE_STATUS)) {
         throw new Error(Gl.getShaderInfoLog(Shader));
     }
-
     return Shader;
 };
 
 globalThis.CreateProgram = function(Gl, VertexSource, FragmentSource) {
     const VertexShader = CompileShader(Gl, VertexSource, Gl.VERTEX_SHADER);
     const FragmentShader = CompileShader(Gl, FragmentSource, Gl.FRAGMENT_SHADER);
-
     const Program = Gl.createProgram();
     Gl.attachShader(Program, VertexShader);
     Gl.attachShader(Program, FragmentShader);
     Gl.linkProgram(Program);
-
     if (!Gl.getProgramParameter(Program, Gl.LINK_STATUS)) {
         throw new Error(Gl.getProgramInfoLog(Program));
     }
-
     return Program;
 };
 
 globalThis.Perspective = function(FieldOfView, Aspect, Near, Far) {
     const F = 1.0 / Math.tan(FieldOfView / 2);
     const RangeInverse = 1 / (Near - Far);
-
     return new Float32Array([
         F / Aspect, 0, 0, 0,
         0, F, 0, 0,
@@ -812,7 +450,6 @@ globalThis.LookAt = function(EyePosition, TargetPosition, UpVector) {
     const ZAxis = Normalize3(Subtract3(EyePosition, TargetPosition));
     const XAxis = Normalize3(Cross3(UpVector, ZAxis));
     const YAxis = Cross3(ZAxis, XAxis);
-
     return new Float32Array([
         XAxis[0], YAxis[0], ZAxis[0], 0,
         XAxis[1], YAxis[1], ZAxis[1], 0,
@@ -886,14 +523,11 @@ globalThis.Normalize3 = function(V) {
     return [V[0] / Length, V[1] / Length, V[2] / Length];
 };
 
-// Relative bond dissociation energy + chemical stability (0 = highly unstable / forbidden, 1 = very stable)
-// Used to decide whether a bond can form and how much energy is released when it breaks.
 globalThis.GetBondInfo = function(KeyA, KeyB) {
     const A = KeyA < KeyB ? KeyA : KeyB;
     const B = KeyA < KeyB ? KeyB : KeyA;
     const Pair = `${A}-${B}`;
 
-    // Strong / common bonds. explosive 0..1 = how violently energy dumps on rupture
     const Strong = {
         "C-C": { energy: 350, stability: 0.95, explosive: 0.05 },
         "C-H": { energy: 410, stability: 0.98, explosive: 0.05 },
@@ -905,9 +539,9 @@ globalThis.GetBondInfo = function(KeyA, KeyB) {
         "H-N": { energy: 390, stability: 0.90, explosive: 0.08 },
         "H-F": { energy: 570, stability: 0.95, explosive: 0.05 },
         "H-Cl": { energy: 430, stability: 0.90, explosive: 0.05 },
-        "N-N": { energy: 160, stability: 0.18, explosive: 0.45 },  // almost never forms cold
-        "O-O": { energy: 140, stability: 0.10, explosive: 0.90 },  // blocked when cold (below MinStability)
-        "N-O": { energy: 200, stability: 0.65, explosive: 0.95 },  // nitro linkage; violent only when truly ruptured
+        "N-N": { energy: 160, stability: 0.18, explosive: 0.45 },
+        "O-O": { energy: 140, stability: 0.10, explosive: 0.90 },
+        "N-O": { energy: 200, stability: 0.65, explosive: 0.95 },
         "O-F": { energy: 190, stability: 0.22, explosive: 0.8 },
         "S-S": { energy: 225, stability: 0.60, explosive: 0.2 },
         "S-O": { energy: 265, stability: 0.70, explosive: 0.15 },
@@ -918,39 +552,32 @@ globalThis.GetBondInfo = function(KeyA, KeyB) {
 
     if (Strong[Pair]) return Strong[Pair];
 
-    // Noble gases almost never bond
     const Nobles = new Set(["He", "Ne", "Ar", "Kr", "Xe", "Rn", "Og"]);
     if (Nobles.has(KeyA) || Nobles.has(KeyB)) {
-        return { energy: 5, stability: 0.02 };
+        return { energy: 5, stability: 0.02, explosive: 0 };
     }
 
-    // Actinides / heavy metals
     const Heavy = new Set(["U", "Np", "Pu", "Am", "Cm", "Th", "Pa", "Ac", "Rf", "Db", "Sg"]);
     const Halogens = new Set(["F", "Cl", "Br", "I", "At"]);
     const Organic = new Set(["C", "H", "N", "O", "S", "P"]);
 
-    // UF, UCl etc. can exist (esp. ionic) but are fragile / high-energy on rupture
     if ((Heavy.has(KeyA) && Halogens.has(KeyB)) || (Heavy.has(KeyB) && Halogens.has(KeyA))) {
         return { energy: 220, stability: 0.14, explosive: 0.7 };
     }
-    // Heavy + organics -> almost never stable
     if ((Heavy.has(KeyA) && Organic.has(KeyB)) || (Heavy.has(KeyB) && Organic.has(KeyA))) {
         return { energy: 70, stability: 0.07, explosive: 0.9 };
     }
 
-    // Two highly electronegative atoms (F-O already covered, general)
     const HighEN = new Set(["F", "O", "Cl", "N"]);
     if (HighEN.has(KeyA) && HighEN.has(KeyB) && KeyA !== KeyB) {
         return { energy: 150, stability: 0.30, explosive: 0.35 };
     }
 
-    // Metal-metal or default weak
     const Metals = new Set(["Li","Na","K","Rb","Cs","Be","Mg","Ca","Sr","Ba","Fe","Cu","Au","Ag","Zn","Al"]);
     if (Metals.has(KeyA) && Metals.has(KeyB)) {
-        return { energy: 100, stability: 0.45 };
+        return { energy: 100, stability: 0.45, explosive: 0.1 };
     }
 
-    // Generic fallback
     return { energy: 180, stability: 0.50, explosive: 0.15 };
 };
 
@@ -1003,8 +630,8 @@ globalThis.Renderer = class {
         this.RadiusScale = 0.6;
         this.TimeScale = 0.5;
         this.TargetTimeScale = 0.5;
-        this.Temperature = 0.35;          // thermal bath / noise
-        this.FreeEnergy = 0;              // global energy injection (adds noise + instability)
+        this.Temperature = 0.35;
+        this.FreeEnergy = 0;
         this.ShakeIntensity = 1.0;
         this.BoundaryX = 400;
         this.BoundaryY = 400;
@@ -1020,10 +647,11 @@ globalThis.Renderer = class {
         this.LastEnergyRelease = 0;
         this.OverlayBuffer = null;
         this.Particles = [];
-        // Grace period after load: form bonds, damp motion, no rupture energy
         this.SettleFrames = 180;
-        // Locked topology (e.g. nitroglycerin) - always preferred while in range
         this.ForcedBonds = new Set();
+        this.AngleStiffness = 1.6;
+        this.VdwStrength = 0.6;
+        this.MaxParticles = 800;
 
         this.SetupBuffers();
         this.Gl.enable(this.Gl.DEPTH_TEST);
@@ -1078,10 +706,8 @@ globalThis.Renderer = class {
                 const RadiusB = (AtomB.Atom.AtomicRadius || 50) * 0.35;
                 const EquilibriumDistance = RadiusA + RadiusB + 28.0;
 
-                // Only consider pairs that are close enough to interact
-                if (Distance < EquilibriumDistance * 2.4) {
+                if (Distance < EquilibriumDistance * 2.6) {
                     const Info = GetBondInfo(AtomA.Key, AtomB.Key);
-                    // Stability score also penalises extreme stretch (harder to form far away)
                     const StretchFactor = Math.max(0, 1 - (Distance - EquilibriumDistance) / (EquilibriumDistance * 1.2));
                     const Score = Info.stability * StretchFactor * (Info.energy / 400);
                     Pairs.push({
@@ -1092,7 +718,6 @@ globalThis.Renderer = class {
             }
         }
 
-        // Prefer chemically stable + closer pairs
         Pairs.sort((A, B) => B.Score - A.Score || A.Distance - B.Distance);
 
         const BondCounts = new Map(Objects.map(O => [O, 0]));
@@ -1101,7 +726,7 @@ globalThis.Renderer = class {
         const NewBondData = new Map();
         const PairByKey = new Map(Pairs.map((P) => [`${P.IndexA}_${P.IndexB}`, P]));
 
-        const CommitBond = (IndexA, IndexB, Distance, EquilibriumDistance, Info, Forced) => {
+        const CommitBond = (IndexA, IndexB, Distance, BaseEq, Info, Forced) => {
             const AtomA = Objects[IndexA];
             const AtomB = Objects[IndexB];
             if (!AtomA || !AtomB) return false;
@@ -1112,14 +737,38 @@ globalThis.Renderer = class {
             const Key = IndexA < IndexB ? `${IndexA}_${IndexB}` : `${IndexB}_${IndexA}`;
             if (ValidBondPairs.has(Key)) return false;
 
-            // Forced bonds tolerate larger stretch; break only when really torn
+            let EqDist = BaseEq;
+            let Order = 1;
+            let UseInfo = Info;
+
+            if (!Forced && globalThis.Chemistry && globalThis.Chemistry.ProposeBondOrder) {
+                const SlackA = AtomA.Atom.Valence - CountA;
+                const SlackB = AtomB.Atom.Valence - CountB;
+                const Proposed = globalThis.Chemistry.ProposeBondOrder(
+                    AtomA.Key, AtomB.Key, SlackA, SlackB, Distance, BaseEq
+                );
+                if (Proposed > 1) {
+                    const Ordered = globalThis.Chemistry.GetOrderedBondInfo(AtomA.Key, AtomB.Key, Proposed);
+                    const Single = globalThis.Chemistry.GetOrderedBondInfo(AtomA.Key, AtomB.Key, 1);
+                    if (Ordered && Single) {
+                        Order = Ordered.order;
+                        EqDist = BaseEq * (Ordered.length / Single.length);
+                        UseInfo = {
+                            energy: Ordered.energy,
+                            stability: Ordered.stability,
+                            explosive: Ordered.explosive
+                        };
+                    }
+                }
+            }
+
             const WasBonded = this.PreviousBondPairs.has(Key);
             const FormMul = Forced
                 ? (2.4 + this.Temperature * 0.5)
                 : WasBonded
-                    ? (1.85 + this.Temperature * 0.4 + (1 - Info.stability) * 0.25)
-                    : (1.15 + Info.stability * 0.45);
-            if (Distance > EquilibriumDistance * FormMul) {
+                    ? (1.85 + this.Temperature * 0.4 + (1 - UseInfo.stability) * 0.25)
+                    : (1.15 + UseInfo.stability * 0.45);
+            if (Distance > EqDist * FormMul) {
                 if (Forced) this.ForcedBonds.delete(Key);
                 return false;
             }
@@ -1128,21 +777,21 @@ globalThis.Renderer = class {
             ValidBondPairs.add(Key);
             const Prev = this.BondData.get(Key);
             NewBondData.set(Key, {
-                energy: Info.energy,
-                stability: Forced ? Math.max(Info.stability, 0.7) : Info.stability,
-                explosive: Info.explosive ?? (1 - Info.stability),
-                eqDist: EquilibriumDistance,
+                energy: UseInfo.energy,
+                stability: Forced ? Math.max(UseInfo.stability, 0.7) : UseInfo.stability,
+                explosive: UseInfo.explosive ?? (1 - UseInfo.stability),
+                eqDist: EqDist,
+                order: Order,
                 IndexA: Math.min(IndexA, IndexB),
                 IndexB: Math.max(IndexA, IndexB),
                 Age: Prev ? (Prev.Age || 0) + 1 : 1,
                 Forced: !!Forced
             });
-            BondCounts.set(AtomA, CountA + 1);
-            BondCounts.set(AtomB, CountB + 1);
+            BondCounts.set(AtomA, CountA + Order);
+            BondCounts.set(AtomB, CountB + Order);
             return true;
         };
 
-        // 1) Locked topology first (nitroglycerin etc.)
         for (const Key of [...this.ForcedBonds]) {
             const [A, B] = Key.split("_").map(Number);
             if (A >= Objects.length || B >= Objects.length) {
@@ -1151,7 +800,6 @@ globalThis.Renderer = class {
             }
             const P = PairByKey.get(Key) || PairByKey.get(`${B}_${A}`);
             if (!P) {
-                // Still force if close enough by direct distance
                 const AtomA = Objects[A];
                 const AtomB = Objects[B];
                 const Dx = AtomB.Position[0] - AtomA.Position[0];
@@ -1168,7 +816,6 @@ globalThis.Renderer = class {
             CommitBond(P.IndexA, P.IndexB, P.Distance, P.EquilibriumDistance, P.Info, true);
         }
 
-        // 2) Greedy fill for remaining valence
         const MinStability = Math.max(0.03, 0.16 - this.Temperature * 0.18 - (this.FreeEnergy || 0) * 0.04);
         for (const P of Pairs) {
             const { AtomA, AtomB, IndexA, IndexB, Distance, EquilibriumDistance, Info } = P;
@@ -1188,28 +835,30 @@ globalThis.Renderer = class {
         return ValidBondPositions;
     }
 
-    // Particle profiles: speed scale, life, trail, color, hit radius, kick, excite
     ParticleProfile(Type) {
         const Table = {
-            visible:  { speed: 28, life: 0.7,  trail: 12, color: [1.0, 0.95, 0.55, 0.85], hit: 9,  kick: 0.15, excite: 0.05, absorb: true },
-            xray:     { speed: 55, life: 1.1,  trail: 18, color: [0.75, 0.9, 1.0, 0.7],   hit: 8,  kick: 0.35, excite: 0.2,  absorb: false },
-            gamma:    { speed: 70, life: 1.4,  trail: 22, color: [0.95, 0.55, 1.0, 0.75], hit: 7,  kick: 0.5,  excite: 0.35, absorb: false },
-            beta:     { speed: 32, life: 1.0,  trail: 11, color: [0.35, 0.85, 1.0, 0.85], hit: 12, kick: 0.9,  excite: 0.25, absorb: true },
-            alpha:    { speed: 12, life: 0.85, trail: 7,  color: [1.0, 0.45, 0.2, 0.9],   hit: 20, kick: 2.2,  excite: 0.4,  absorb: true },
-            neutron:  { speed: 18, life: 1.3,  trail: 9,  color: [0.85, 0.85, 0.9, 0.8],  hit: 16, kick: 1.4,  excite: 0.3,  absorb: true }
+            visible:  { speed: 32, life: 1.0, color: [1.0, 0.95, 0.55, 0.9],  glow: [1.0, 1.0, 0.75], size: 6.0, hit: 9,  kick: 0.15, excite: 0.05, absorb: true },
+            photon:   { speed: 50, life: 1.1, color: [1.0, 0.95, 0.6, 0.9],   glow: [1.0, 1.0, 0.8],  size: 5.5, hit: 6,  kick: 0.2,  excite: 0.4,  absorb: false },
+            xray:     { speed: 65, life: 1.4, color: [0.75, 0.9, 1.0, 0.85],  glow: [0.85, 0.95, 1.0], size: 5.5, hit: 8,  kick: 0.35, excite: 0.2,  absorb: false },
+            gamma:    { speed: 80, life: 1.7, color: [0.95, 0.55, 1.0, 0.9],  glow: [1.0, 0.7, 1.0],  size: 5.5, hit: 7,  kick: 0.5,  excite: 0.35, absorb: false },
+            beta:     { speed: 38, life: 1.3, color: [0.35, 0.85, 1.0, 0.95],  glow: [0.5, 0.95, 1.0], size: 6.5, hit: 12, kick: 0.9,  excite: 0.25, absorb: true },
+            positron: { speed: 38, life: 1.3, color: [1.0, 0.9, 0.2, 0.95],   glow: [1.0, 1.0, 0.4],  size: 6.5, hit: 12, kick: 0.9,  excite: 0.25, absorb: true },
+            alpha:    { speed: 16, life: 1.2, color: [1.0, 0.45, 0.2, 0.95],  glow: [1.0, 0.6, 0.3],  size: 9.0, hit: 20, kick: 2.2,  excite: 0.4,  absorb: true },
+            neutron:  { speed: 22, life: 1.6, color: [0.85, 0.85, 0.9, 0.9],  glow: [1.0, 1.0, 1.0],  size: 7.5, hit: 16, kick: 1.4,  excite: 0.3,  absorb: true }
         };
         return Table[Type] || Table.visible;
     }
 
     EmitParticle(Pos, Vel, Type, LifeScale = 1.0) {
-        if (this.Particles.length > 500) this.Particles.shift();
+        if (this.Particles.length > this.MaxParticles) this.Particles.shift();
         const Prof = this.ParticleProfile(Type);
         this.Particles.push({
             X: Pos[0], Y: Pos[1], Z: Pos[2],
             Vx: Vel[0], Vy: Vel[1], Vz: Vel[2],
             Type,
             Life: Prof.life * LifeScale,
-            MaxLife: Prof.life * LifeScale
+            MaxLife: Prof.life * LifeScale,
+            Age: 0
         });
     }
 
@@ -1227,8 +876,237 @@ globalThis.Renderer = class {
         }
     }
 
+    RandomUnitVector() {
+        const Theta = Math.random() * Math.PI * 2;
+        const Phi = Math.acos(2 * Math.random() - 1);
+        return [
+            Math.sin(Phi) * Math.cos(Theta),
+            Math.sin(Phi) * Math.sin(Theta),
+            Math.cos(Phi)
+        ];
+    }
+
+    ApplyAngleForce(AtomA, AtomB, AtomC, IdealAngle, Strength) {
+        const Ax = AtomA.Position[0] - AtomB.Position[0];
+        const Ay = AtomA.Position[1] - AtomB.Position[1];
+        const Az = AtomA.Position[2] - AtomB.Position[2];
+        const Cx = AtomC.Position[0] - AtomB.Position[0];
+        const Cy = AtomC.Position[1] - AtomB.Position[1];
+        const Cz = AtomC.Position[2] - AtomB.Position[2];
+
+        const LA = Math.sqrt(Ax * Ax + Ay * Ay + Az * Az) + 0.001;
+        const LC = Math.sqrt(Cx * Cx + Cy * Cy + Cz * Cz) + 0.001;
+        const Uax = Ax / LA, Uay = Ay / LA, Uaz = Az / LA;
+        const Ucx = Cx / LC, Ucy = Cy / LC, Ucz = Cz / LC;
+
+        const Dot = Math.max(-1, Math.min(1, Uax * Ucx + Uay * Ucy + Uaz * Ucz));
+        const Angle = Math.acos(Dot);
+        const Delta = Angle - IdealAngle;
+        if (Math.abs(Delta) < 0.002) return;
+
+        let Nx = Uay * Ucz - Uaz * Ucy;
+        let Ny = Uaz * Ucx - Uax * Ucz;
+        let Nz = Uax * Ucy - Uay * Ucx;
+        const NL = Math.sqrt(Nx * Nx + Ny * Ny + Nz * Nz);
+        if (NL < 1e-5) return;
+        Nx /= NL; Ny /= NL; Nz /= NL;
+
+        const Pax = Ny * Uaz - Nz * Uay;
+        const Pay = Nz * Uax - Nx * Uaz;
+        const Paz = Nx * Uay - Ny * Uax;
+        const Pcx = Ny * Ucz - Nz * Ucy;
+        const Pcy = Nz * Ucx - Nx * Ucz;
+        const Pcz = Nx * Ucy - Ny * Ucx;
+
+        const Force = Math.max(-40, Math.min(40, -Strength * Delta));
+
+        AtomA.Force[0] += Pax * Force;
+        AtomA.Force[1] += Pay * Force;
+        AtomA.Force[2] += Paz * Force;
+        AtomC.Force[0] += Pcx * Force;
+        AtomC.Force[1] += Pcy * Force;
+        AtomC.Force[2] += Pcz * Force;
+        AtomB.Force[0] -= (Pax + Pcx) * Force;
+        AtomB.Force[1] -= (Pay + Pcy) * Force;
+        AtomB.Force[2] -= (Paz + Pcz) * Force;
+    }
+
+    ApplyAngleForces() {
+        const Neighbors = new Map();
+        for (const Key of this.ActiveBondPairs) {
+            const [A, B] = Key.split("_").map(Number);
+            if (!Objects[A] || !Objects[B]) continue;
+            if (!Neighbors.has(A)) Neighbors.set(A, []);
+            if (!Neighbors.has(B)) Neighbors.set(B, []);
+            Neighbors.get(A).push(B);
+            Neighbors.get(B).push(A);
+        }
+
+        const Strength = this.AngleStiffness * Math.max(0.2, Math.min(1.4, 1.0 - this.Temperature * 0.35));
+        const HasChem = !!(globalThis.Chemistry && globalThis.Chemistry.StericNumber && globalThis.Chemistry.IdealAngle);
+
+        for (const [Central, NeighborList] of Neighbors) {
+            if (NeighborList.length < 2) continue;
+            const B = Objects[Central];
+            if (!B) continue;
+            const BondCount = NeighborList.length;
+            const IdealAngle = HasChem
+                ? globalThis.Chemistry.IdealAngle(globalThis.Chemistry.StericNumber(B.Key, BondCount))
+                : Math.PI;
+
+            for (let i = 0; i < NeighborList.length; i++) {
+                for (let j = i + 1; j < NeighborList.length; j++) {
+                    const AtomA = Objects[NeighborList[i]];
+                    const AtomC = Objects[NeighborList[j]];
+                    if (!AtomA || !AtomC) continue;
+                    this.ApplyAngleForce(AtomA, B, AtomC, IdealAngle, Strength);
+                }
+            }
+        }
+    }
+
+    ApplyVanDerWaals() {
+        if (this.VdwStrength <= 0) return;
+        const Soft = 20;
+        for (let IndexA = 0; IndexA < Objects.length; IndexA++) {
+            const AtomA = Objects[IndexA];
+            for (let IndexB = IndexA + 1; IndexB < Objects.length; IndexB++) {
+                const AtomB = Objects[IndexB];
+                const Key = `${IndexA}_${IndexB}`;
+                if (this.ActiveBondPairs.has(Key)) continue;
+                const Dx = AtomB.Position[0] - AtomA.Position[0];
+                const Dy = AtomB.Position[1] - AtomA.Position[1];
+                const Dz = AtomB.Position[2] - AtomA.Position[2];
+                const D2 = Dx * Dx + Dy * Dy + Dz * Dz + 0.01;
+                const Distance = Math.sqrt(D2);
+                const Ra = (AtomA.Atom.AtomicRadius || 50) * 0.35;
+                const Rb = (AtomB.Atom.AtomicRadius || 50) * 0.35;
+                const Contact = Ra + Rb + Soft;
+                if (Distance > Contact * 2.0) continue;
+
+                const Sigma = Contact / Math.pow(2, 1 / 6);
+                const Ratio = Sigma / Distance;
+                const R6 = Math.pow(Ratio, 6);
+                const R12 = R6 * R6;
+                const Well = 0.9 * this.VdwStrength;
+                const ForceMag = Math.max(-3, Math.min(3, 24 * Well * (R12 - R6) / Distance));
+                if (Math.abs(ForceMag) < 0.001) continue;
+
+                const InvD = 1 / Distance;
+                const Fx = Dx * InvD * ForceMag;
+                const Fy = Dy * InvD * ForceMag;
+                const Fz = Dz * InvD * ForceMag;
+                AtomA.Force[0] += Fx;
+                AtomA.Force[1] += Fy;
+                AtomA.Force[2] += Fz;
+                AtomB.Force[0] -= Fx;
+                AtomB.Force[1] -= Fy;
+                AtomB.Force[2] -= Fz;
+            }
+        }
+    }
+
+    DecayAtom(Obj) {
+        if (!Obj || !globalThis.Chemistry || !globalThis.Chemistry.DecayMode) return false;
+        const Z = Obj.Protons;
+        const N = Obj.Neutrons;
+        if (Z <= 0) return false;
+        const Mode = globalThis.Chemistry.DecayMode(Z, N);
+        const Decay = globalThis.Chemistry.ApplyDecay(Z, N, Mode);
+        if (!Decay) return false;
+
+        const OldKey = Obj.Key;
+        Obj.Protons = Decay.Z;
+        Obj.Neutrons = Decay.N;
+
+        const Dir = this.RandomUnitVector();
+
+        switch (Mode) {
+            case "alpha": {
+                const Speed = 22;
+                this.EmitParticle(Obj.Position, [Dir[0] * Speed, Dir[1] * Speed, Dir[2] * Speed], "alpha", 1.0);
+                Obj.Velocity[0] -= Dir[0] * 2.2;
+                Obj.Velocity[1] -= Dir[1] * 2.2;
+                Obj.Velocity[2] -= Dir[2] * 2.2;
+                Obj.Excited = Math.min(3, (Obj.Excited || 0) + 0.35);
+                break;
+            }
+            case "beta-minus": {
+                const Speed = 34;
+                this.EmitParticle(Obj.Position, [Dir[0] * Speed, Dir[1] * Speed, Dir[2] * Speed], "beta", 1.0);
+                Obj.Velocity[0] -= Dir[0] * 0.6;
+                Obj.Velocity[1] -= Dir[1] * 0.6;
+                Obj.Velocity[2] -= Dir[2] * 0.6;
+                Obj.Excited = Math.min(3, (Obj.Excited || 0) + 0.15);
+                break;
+            }
+            case "beta-plus": {
+                const Speed = 34;
+                this.EmitParticle(Obj.Position, [Dir[0] * Speed, Dir[1] * Speed, Dir[2] * Speed], "positron", 1.0);
+                const AD = this.RandomUnitVector();
+                this.EmitParticle(Obj.Position, [AD[0] * 70, AD[1] * 70, AD[2] * 70], "gamma", 0.75);
+                Obj.Velocity[0] -= Dir[0] * 0.6;
+                Obj.Velocity[1] -= Dir[1] * 0.6;
+                Obj.Velocity[2] -= Dir[2] * 0.6;
+                Obj.Excited = Math.min(3, (Obj.Excited || 0) + 0.15);
+                break;
+            }
+            case "gamma":
+            default: {
+                const Speed = 80;
+                this.EmitParticle(Obj.Position, [Dir[0] * Speed, Dir[1] * Speed, Dir[2] * Speed], "gamma", 1.0);
+                Obj.Excited = Math.max(0, (Obj.Excited || 0) - 0.5);
+                break;
+            }
+        }
+
+        if (Decay.Z !== Z && globalThis.Chemistry.SymbolFromZ) {
+            const NewSym = globalThis.Chemistry.SymbolFromZ(Decay.Z);
+            if (NewSym && Atoms[NewSym]) {
+                Obj.Key = NewSym;
+                const NewData = Atoms[NewSym];
+                Obj.Atom = {
+                    ...NewData,
+                    Valence: RealisticValence[NewSym] ?? NewData.Valence ?? 1
+                };
+            }
+        }
+
+        if (globalThis.Chemistry.DecayProbability) {
+            Obj.Stable = globalThis.Chemistry.DecayProbability(Obj.Protons, Obj.Neutrons) === 0;
+        }
+
+        const PrevPairs = new Set(this.ActiveBondPairs);
+        const Idx = Objects.indexOf(Obj);
+        if (Idx >= 0) {
+            for (const Key of PrevPairs) {
+                const [A, B] = Key.split("_").map(Number);
+                if (A === Idx || B === Idx) {
+                    this.ActiveBondPairs.delete(Key);
+                    this.BondData.delete(Key);
+                }
+            }
+        }
+
+        if (globalThis.Plugin && globalThis.Plugin.Emit) {
+            globalThis.Plugin.Emit("Decay", {
+                Atom: Obj,
+                Mode,
+                FromZ: Z,
+                FromN: N,
+                ToZ: Decay.Z,
+                ToN: Decay.N,
+                FromKey: OldKey,
+                ToKey: Obj.Key,
+                Particle: Decay.Particle,
+                Position: [...Obj.Position]
+            });
+        }
+
+        return true;
+    }
+
     Step() {
-        // Snap to target; hard-pause when timescale is 0
         if (this.TargetTimeScale <= 0) {
             this.TimeScale = 0;
             return;
@@ -1242,13 +1120,11 @@ globalThis.Renderer = class {
         const TimeStep = 0.008 * this.TimeScale;
         const Damping = Math.pow(0.992 - this.Temperature * 0.004, Math.max(0.25, this.TimeScale));
 
-        // Snapshot previous bonds so we can detect breaks and release energy
         this.PreviousBondPairs = new Set(this.ActiveBondPairs);
         const PreviousBondData = new Map(this.BondData);
 
         this.ActiveBonds = this.GenerateBonds();
 
-        // ---- Energy release on bond rupture (critical bonds = violent) ----
         let TotalReleased = 0;
         for (const Key of this.PreviousBondPairs) {
             if (this.ActiveBondPairs.has(Key)) continue;
@@ -1256,7 +1132,6 @@ globalThis.Renderer = class {
             const Data = PreviousBondData.get(Key);
             if (!Data) continue;
 
-            // Ignore flicker / settle period: no explosion until bonds have lived
             if ((Data.Age || 0) < 40) continue;
             if ((this.SettleFrames || 0) > 0) continue;
 
@@ -1274,12 +1149,11 @@ globalThis.Renderer = class {
 
             const Stretch = Math.max(0, Dist - Data.eqDist) / Data.eqDist;
             const Explosive = Data.explosive ?? (1 - Data.stability);
-            // Nitro / peroxide style: huge energy dump
+            const OrderBoost = 1 + ((Data.order || 1) - 1) * 0.8;
             const InstabilityBoost = 1.0 + (1.0 - Data.stability) * 6.0 + Explosive * 8.0;
-            const Released = (Data.energy * 0.04 + Stretch * Data.energy * 0.06) * InstabilityBoost;
+            const Released = (Data.energy * 0.04 + Stretch * Data.energy * 0.06) * InstabilityBoost * OrderBoost;
             TotalReleased += Released;
 
-            // Strong equal-and-opposite kick  -  scales hard with explosiveness
             const Impulse = Released * (0.9 + Explosive * 2.5);
             const MassA = AtomA.Atom.AtomicMass || 1;
             const MassB = AtomB.Atom.AtomicMass || 1;
@@ -1293,21 +1167,20 @@ globalThis.Renderer = class {
             AtomB.Velocity[1] += DirY * VB;
             AtomB.Velocity[2] += DirZ * VB;
 
-            // Radiation flash from energetic rupture
             if (Explosive > 0.35 || Released > 8) {
                 const Mid = [
                     (AtomA.Position[0] + AtomB.Position[0]) * 0.5,
                     (AtomA.Position[1] + AtomB.Position[1]) * 0.5,
                     (AtomA.Position[2] + AtomB.Position[2]) * 0.5
                 ];
-                const Flash = Math.min(20, 3 + Math.floor(Released * 0.3 + Explosive * 8));
+                const Flash = Math.min(24, 4 + Math.floor(Released * 0.4 + Explosive * 10));
                 this.EmitBurst(Mid, Flash, "visible", 0.9 + Explosive * 0.6);
+                this.EmitBurst(Mid, Math.max(1, Math.floor(Flash * 0.35)), "photon", 1.1);
                 if (Explosive > 0.55) this.EmitBurst(Mid, 2 + Math.floor(Explosive * 3), "xray", 1.0);
                 if (Explosive > 0.8) this.EmitBurst(Mid, 2, "gamma", 1.1);
                 if (Explosive > 0.7) this.EmitBurst(Mid, 2, "beta", 0.9);
             }
 
-            // Blast neighbors that were in the same molecule (chain reaction feel)
             if (Explosive > 0.5) {
                 for (let i = 0; i < Objects.length; i++) {
                     if (i === Data.IndexA || i === Data.IndexB) continue;
@@ -1326,7 +1199,6 @@ globalThis.Renderer = class {
         }
         this.LastEnergyRelease = TotalReleased;
 
-        // ---- Forces ----
         for (let Index = 0; Index < Objects.length; Index++) {
             Objects[Index].Force = [0, 0, 0];
         }
@@ -1349,7 +1221,7 @@ globalThis.Renderer = class {
 
                 const RadiusA = (AtomA.Atom.AtomicRadius || 50) * 0.35;
                 const RadiusB = (AtomB.Atom.AtomicRadius || 50) * 0.35;
-                const EquilibriumDistance = RadiusA + RadiusB + 28.0;
+                const BaseEq = RadiusA + RadiusB + 28.0;
 
                 const Key = `${IndexA}_${IndexB}`;
                 const IsBonded = this.ActiveBondPairs.has(Key);
@@ -1360,37 +1232,35 @@ globalThis.Renderer = class {
                     const Stability = Data ? Data.stability : 0.5;
                     const Energy = Data ? Data.energy : 180;
                     const Explosive = Data ? (Data.explosive ?? 0) : 0;
+                    const EqDist = Data ? Data.eqDist : BaseEq;
+                    const Order = Data ? (Data.order || 1) : 1;
 
-                    // Stronger chemical bonds -> stiffer spring
-                    const SpringStiffness = 3.5 + (Energy / 400) * 6.0;
-                    const Displacement = Distance - EquilibriumDistance;
+                    const OrderBoost = 1 + (Order - 1) * 0.7;
+                    const SpringStiffness = (3.5 + (Energy / 400) * 6.0) * OrderBoost;
+                    const Displacement = Distance - EqDist;
 
-                    // Metastable when cold: almost no outward bias until heated / strained
                     const HeatFactor = Math.max(0, (this.Temperature - 0.25) / 0.75);
-                    const StrainFactor = Math.max(0, (Displacement - EquilibriumDistance * 0.15) / Math.max(10, EquilibriumDistance * 0.35));
+                    const StrainFactor = Math.max(0, (Displacement - EqDist * 0.15) / Math.max(10, EqDist * 0.35));
                     const Settling = (this.SettleFrames || 0) > 0 ? 0 : 1;
                     const InstabilityRepulsion =
                         ((1.0 - Stability) * 3.0 + Explosive * 4.0) *
                         (0.02 + HeatFactor * 0.75 + Math.max(0, StrainFactor) * 0.85 + (this.FreeEnergy || 0) * 0.3) *
                         Settling;
 
-                    // Stronger restoring spring while settling / cold
                     const ColdBoost = (this.Temperature < 0.2 || (this.SettleFrames || 0) > 0) ? 1.6 : 1.0;
                     ForceMagnitude = SpringStiffness * ColdBoost * Displacement - InstabilityRepulsion;
 
-                    // Extra hard wall when compressed too much
-                    if (Distance < EquilibriumDistance * 0.75) {
-                        ForceMagnitude -= 40.0 * (EquilibriumDistance * 0.75 - Distance);
+                    if (Distance < EqDist * 0.75) {
+                        ForceMagnitude -= 40.0 * (EqDist * 0.75 - Distance);
                     }
                 } else {
-                    // Soft repulsion only (no long-range attraction for non-bonded)
-                    if (Distance < EquilibriumDistance * 1.05) {
-                        const Overlap = EquilibriumDistance * 1.05 - Distance;
+                    if (Distance < BaseEq * 1.05) {
+                        const Overlap = BaseEq * 1.05 - Distance;
                         ForceMagnitude = -25.0 * Overlap;
                     }
                 }
 
-                const MaxForce = 280.0;
+                const MaxForce = 320.0;
                 ForceMagnitude = Math.max(-MaxForce, Math.min(MaxForce, ForceMagnitude));
 
                 const ForceX = DirX * ForceMagnitude;
@@ -1407,10 +1277,11 @@ globalThis.Renderer = class {
             }
         }
 
-        // Thermal noise + free energy + excitation
+        this.ApplyAngleForces();
+        this.ApplyVanDerWaals();
+
         {
             const Free = this.FreeEnergy || 0;
-            // Near-zero thermal noise when cold so metastable molecules settle
             const BaseNoise = Math.max(0, this.Temperature - 0.04) * 2.6 + Free * 3.5;
             for (const Obj of Objects) {
                 const Mass = Obj.Atom.AtomicMass || 1.0;
@@ -1441,6 +1312,16 @@ globalThis.Renderer = class {
 
                 if (Obj.Excited > 0) {
                     Obj.Excited = Math.max(0, Obj.Excited - 0.0025 * this.TimeScale);
+                    if ((Obj.Excited || 0) > 0.6 && Math.random() < 0.008 * this.TimeScale) {
+                        const D = this.RandomUnitVector();
+                        const Speed = 45;
+                        this.EmitParticle(
+                            Obj.Position,
+                            [D[0] * Speed, D[1] * Speed, D[2] * Speed],
+                            "photon", 0.85
+                        );
+                        Obj.Excited = Math.max(0, Obj.Excited - 0.05);
+                    }
                 }
             }
         }
@@ -1449,10 +1330,7 @@ globalThis.Renderer = class {
         const BoundaryY = this.BoundaryY || 400;
         const BoundaryZ = this.BoundaryZ || 300;
 
-        // Allow high speeds after explosive bond rupture
         const SpeedLimit = 35.0 + this.Temperature * 40.0 + Math.min(80, this.LastEnergyRelease * 0.8);
-
-        // Extra-heavy damping while settling so structure can lock in
         const SettleDamp = (this.SettleFrames || 0) > 0 ? 0.82 : 1.0;
 
         for (const Object of Objects) {
@@ -1496,33 +1374,16 @@ globalThis.Renderer = class {
             }
         }
 
-        // ---- Radioactive decay (simplified) + free-energy emission ----
-        if ((this.SettleFrames || 0) > 0) {
-            // skip emissions while settling
-        } else {
-        const Radioactive = new Set(["U", "Th", "Ra", "Rn", "Pu", "Am", "Cm", "Np", "Pa", "Ac"]);
-        for (const Obj of Objects) {
-            const Key = Obj.Key;
-            let Rate = 0;
-            if (Radioactive.has(Key)) Rate = 0.0007 * this.TimeScale;
-            if ((Obj.Excited || 0) > 0.5) Rate += 0.0015 * this.TimeScale * (Obj.Excited || 0);
-            if ((this.FreeEnergy || 0) > 1.2 && Math.random() < 0.00025 * this.TimeScale) {
-                this.EmitBurst(Obj.Position, 1, "visible", 1.0);
-            }
-            if (Rate > 0 && Math.random() < Rate) {
-                const R = Math.random();
-                if (R < 0.25) this.EmitBurst(Obj.Position, 1, "alpha", 1.0);
-                else if (R < 0.45) this.EmitBurst(Obj.Position, 1, "beta", 1.0);
-                else if (R < 0.6) this.EmitBurst(Obj.Position, 1, "neutron", 1.0);
-                else if (R < 0.78) this.EmitBurst(Obj.Position, 2, "gamma", 1.0);
-                else if (R < 0.9) this.EmitBurst(Obj.Position, 2, "xray", 1.0);
-                else this.EmitBurst(Obj.Position, 2, "visible", 1.0);
-                Obj.Excited = Math.min(3, (Obj.Excited || 0) + 0.12);
+        if ((this.SettleFrames || 0) <= 0 && globalThis.Chemistry && globalThis.Chemistry.DecayProbability) {
+            for (const Obj of Objects) {
+                if (Obj.Stable) continue;
+                const Rate = globalThis.Chemistry.DecayProbability(Obj.Protons, Obj.Neutrons) * this.TimeScale;
+                if (Rate > 0 && Math.random() < Rate) {
+                    this.DecayAtom(Obj);
+                }
             }
         }
-        } // end settle skip
 
-        // ---- Integrate radiation particles ----
         const Hx = this.BoundaryX || 400;
         const Hy = this.BoundaryY || 400;
         const Hz = this.BoundaryZ || 300;
@@ -1533,6 +1394,7 @@ globalThis.Renderer = class {
             P.Y += P.Vy * this.TimeScale;
             P.Z += P.Vz * this.TimeScale;
             P.Life -= 0.012 * this.TimeScale;
+            P.Age += this.TimeScale;
 
             for (const Obj of Objects) {
                 const Dx = Obj.Position[0] - P.X;
@@ -1545,8 +1407,16 @@ globalThis.Renderer = class {
                     Obj.Velocity[1] += (P.Vy * Prof.kick) / Mass;
                     Obj.Velocity[2] += (P.Vz * Prof.kick) / Mass;
                     Obj.Excited = Math.min(3, (Obj.Excited || 0) + Prof.excite);
-                    // Neutrons can crack unstable bonds more easily by local heat
-                    if (P.Type === "neutron") Obj.Excited = Math.min(3, (Obj.Excited || 0) + 0.2);
+                    if (P.Type === "neutron") {
+                        Obj.Excited = Math.min(3, (Obj.Excited || 0) + 0.2);
+                        if (!Obj.Stable && globalThis.Chemistry) {
+                            const Boost = globalThis.Chemistry.DecayProbability(Obj.Protons, Obj.Neutrons) * 200;
+                            if (Math.random() < Math.min(0.05, Boost)) this.DecayAtom(Obj);
+                        }
+                    }
+                    if (P.Type === "positron") {
+                        this.EmitBurst([P.X, P.Y, P.Z], 2, "gamma", 1.0);
+                    }
                     if (Prof.absorb) P.Life = 0;
                     else P.Life *= 0.65;
                     break;
@@ -1567,7 +1437,6 @@ globalThis.Renderer = class {
         const RadiusPm = Object.Atom.AtomicRadius ?? 100;
         const SphereScale = Math.max(8, RadiusPm * this.RadiusScale * 0.3);
 
-        // Visual shake offset (high energy / temperature)  -  does not affect physics position
         const Sx = Object.Shake?.[0] || 0;
         const Sy = Object.Shake?.[1] || 0;
         const Sz = Object.Shake?.[2] || 0;
@@ -1593,7 +1462,6 @@ globalThis.Renderer = class {
 
         let Color = ElementColors[Object.Key] || [0.7, 0.7, 0.7];
 
-        // Charge visualization: tint red (+) / blue (-)
         if (this.DisplayMode === "charge" || this.DisplayMode === "field") {
             const Q = Object.PartialCharge || 0;
             if (Math.abs(Q) > 0.02) {
@@ -1614,13 +1482,22 @@ globalThis.Renderer = class {
             }
         }
 
-        // Excited atoms get a warm glow tint
         if (Object.Excited && Object.Excited > 0) {
             const E = Math.min(1, Object.Excited);
             Color = [
                 Color[0] * (1 - E) + 1.0 * E,
                 Color[1] * (1 - E) + 0.7 * E,
                 Color[2] * (1 - E) + 0.15 * E
+            ];
+        }
+
+        if (!Object.Stable && Object.Protons > 0) {
+            const Pulse = (Math.sin(performance.now() * 0.006 + Object.Protons) + 1) * 0.5;
+            const Glow = 0.15 + Pulse * 0.25;
+            Color = [
+                Math.min(1, Color[0] + Glow * 0.6),
+                Math.min(1, Color[1] + Glow * 0.1),
+                Math.min(1, Color[2] + Glow * 0.5)
             ];
         }
 
@@ -1693,12 +1570,11 @@ globalThis.Renderer = class {
 
             const EnA = AtomA.Atom.Electronegativity ?? 2.2;
             const EnB = AtomB.Atom.Electronegativity ?? 2.2;
-            // Partial charge transfer proportional to EN difference
-            const Delta = (EnB - EnA) * 0.18;
+            const OrderMul = 1 + ((Data.order || 1) - 1) * 0.4;
+            const Delta = (EnB - EnA) * 0.18 * OrderMul;
             AtomA.PartialCharge += Delta;
             AtomB.PartialCharge -= Delta;
 
-            // Bond dipole contribution (from + toward -)
             const Dx = AtomB.Position[0] - AtomA.Position[0];
             const Dy = AtomB.Position[1] - AtomA.Position[1];
             const Dz = AtomB.Position[2] - AtomA.Position[2];
@@ -1733,7 +1609,6 @@ globalThis.Renderer = class {
         Gl.enable(Gl.DEPTH_TEST);
     }
 
-    // Wireframe sphere rings (3 axes) centered at Pos with radius R
     PushSphereShell(Out, Pos, R, Segments = 16) {
         const [Cx, Cy, Cz] = Pos;
         for (let Axis = 0; Axis < 3; Axis++) {
@@ -1745,13 +1620,13 @@ globalThis.Renderer = class {
                 const C1 = Math.cos(A1) * R;
                 const S1 = Math.sin(A1) * R;
                 let X0, Y0, Z0, X1, Y1, Z1;
-                if (Axis === 0) { // XY
+                if (Axis === 0) {
                     X0 = Cx + C0; Y0 = Cy + S0; Z0 = Cz;
                     X1 = Cx + C1; Y1 = Cy + S1; Z1 = Cz;
-                } else if (Axis === 1) { // XZ
+                } else if (Axis === 1) {
                     X0 = Cx + C0; Y0 = Cy; Z0 = Cz + S0;
                     X1 = Cx + C1; Y1 = Cy; Z1 = Cz + S1;
-                } else { // YZ
+                } else {
                     X0 = Cx; Y0 = Cy + C0; Z0 = Cz + S0;
                     X1 = Cx; Y1 = Cy + C1; Z1 = Cz + S1;
                 }
@@ -1765,7 +1640,6 @@ globalThis.Renderer = class {
 
         this.ComputePartialCharges();
 
-        // ---- CHARGE: spherical shells sized by |q| / electronegativity ----
         if (this.DisplayMode === "charge") {
             const PosShells = [];
             const NegShells = [];
@@ -1776,34 +1650,22 @@ globalThis.Renderer = class {
                 const En = Obj.Atom.Electronegativity ?? 2.2;
                 const RadiusPm = Obj.Atom.AtomicRadius ?? 100;
                 const BaseR = Math.max(10, RadiusPm * this.RadiusScale * 0.3);
-
-                // Always show an EN-scaled outer halo (how "greedy" the atom is for electrons)
                 const EnRadius = BaseR * (1.15 + (En / 4.0) * 0.9);
 
                 if (Math.abs(Q) < 0.03) {
-                    // Neutral but still show EN sphere faintly
                     this.PushSphereShell(NeutralShells, Obj.Position, EnRadius, 12);
                 } else {
-                    // Inner shell = atom surface, outer = charge cloud size
                     const ChargeRadius = BaseR * (1.25 + Math.min(1.8, Math.abs(Q) * 2.8));
                     this.PushSphereShell(Q > 0 ? PosShells : NegShells, Obj.Position, ChargeRadius, 14);
-                    // Thin EN reference ring slightly outside base
                     this.PushSphereShell(Q > 0 ? PosShells : NegShells, Obj.Position, EnRadius, 10);
                 }
             }
 
-            if (PosShells.length) {
-                this.DrawLines(PosShells, ViewMatrix, ProjectionMatrix, [1.0, 0.3, 0.2, 0.75], 1.5);
-            }
-            if (NegShells.length) {
-                this.DrawLines(NegShells, ViewMatrix, ProjectionMatrix, [0.25, 0.45, 1.0, 0.75], 1.5);
-            }
-            if (NeutralShells.length) {
-                this.DrawLines(NeutralShells, ViewMatrix, ProjectionMatrix, [0.55, 0.55, 0.55, 0.35], 1.0);
-            }
+            if (PosShells.length) this.DrawLines(PosShells, ViewMatrix, ProjectionMatrix, [1.0, 0.3, 0.2, 0.75], 1.5);
+            if (NegShells.length) this.DrawLines(NegShells, ViewMatrix, ProjectionMatrix, [0.25, 0.45, 1.0, 0.75], 1.5);
+            if (NeutralShells.length) this.DrawLines(NeutralShells, ViewMatrix, ProjectionMatrix, [0.55, 0.55, 0.55, 0.35], 1.0);
         }
 
-        // ---- DIPOLE: arrows along polar bonds only ----
         if (this.DisplayMode === "dipole") {
             const DipoleLines = [];
             for (const Key of this.ActiveBondPairs) {
@@ -1842,10 +1704,9 @@ globalThis.Renderer = class {
             }
         }
 
-        // ---- FIELD: electrostatic streamlines from partial charges ----
         if (this.DisplayMode === "field") {
             const FieldLines = [];
-            const Soft = 12; // soft-core so field stays finite near atoms
+            const Soft = 12;
 
             const SampleE = (X, Y, Z) => {
                 let Ex = 0, Ey = 0, Ez = 0;
@@ -1864,7 +1725,6 @@ globalThis.Renderer = class {
                 return [Ex, Ey, Ez];
             };
 
-            // Seed streamlines near charged atoms (outward from +, reverse from -)
             const Seeds = [];
             for (const C of Objects) {
                 const Q = C.PartialCharge || 0;
@@ -1897,14 +1757,13 @@ globalThis.Renderer = class {
                     const Nx = X + Sx, Ny = Y + Sy, Nz = Z + Sz;
                     FieldLines.push(X, Y, Z, Nx, Ny, Nz);
                     X = Nx; Y = Ny; Z = Nz;
-                    // Stop if we wander too far or hit an opposite charge core
                     if (Math.abs(X) > (this.BoundaryX || 400) * 1.2) break;
                     if (Math.abs(Y) > (this.BoundaryY || 400) * 1.2) break;
                     if (Math.abs(Z) > (this.BoundaryZ || 300) * 1.2) break;
                     let Hit = false;
                     for (const Src of Objects) {
                         const Q = Src.PartialCharge || 0;
-                        if (Q * Seed.dir >= 0) continue; // only stop near opposite polarity
+                        if (Q * Seed.dir >= 0) continue;
                         const Dx = X - Src.Position[0];
                         const Dy = Y - Src.Position[1];
                         const Dz = Z - Src.Position[2];
@@ -1958,22 +1817,85 @@ globalThis.Renderer = class {
                 this.DrawLines(Positions, ViewMatrix, ProjectionMatrix, [R, G, 0.15, 0.95], 4.0);
             }
         }
+
+        if (this.DisplayMode === "radiation") {
+            const Time = performance.now() * 0.002;
+            const Rings = [];
+            for (const Obj of Objects) {
+                if (Obj.Stable) continue;
+                const Pulse = 1 + Math.sin(Time + Obj.Protons) * 0.15;
+                const BaseR = Math.max(14, (Obj.Atom.AtomicRadius || 50) * this.RadiusScale * 0.3);
+                const R = BaseR * (1.4 + 0.15 * Math.sin(Time * 2 + Obj.Protons)) * Pulse;
+                this.PushSphereShell(Rings, Obj.Position, R, 12);
+            }
+            if (Rings.length) {
+                this.DrawLines(Rings, ViewMatrix, ProjectionMatrix, [1.0, 0.3, 0.9, 0.75], 1.5);
+            }
+        }
     }
 
     DrawBonds(ViewMatrix, ProjectionMatrix) {
-        if (this.ActiveBonds.length === 0) return;
-        // In energy mode the bonds are drawn by the overlay with stability colors
+        if (this.BondData.size === 0) return;
         if (this.DisplayMode === "energy") return;
 
         const Gl = this.Gl;
         Gl.useProgram(this.BondProgram);
 
         const BondPositions = [];
-        for (let Index = 0; Index < this.ActiveBonds.length; Index += 2) {
-            const PosA = this.ActiveBonds[Index];
-            const PosB = this.ActiveBonds[Index + 1];
-            BondPositions.push(PosA[0], PosA[1], PosA[2], PosB[0], PosB[1], PosB[2]);
+
+        for (const [Key, Data] of this.BondData) {
+            if (!this.ActiveBondPairs.has(Key)) continue;
+            const A = Objects[Data.IndexA];
+            const B = Objects[Data.IndexB];
+            if (!A || !B) continue;
+
+            const Order = Data.order || 1;
+
+            const Dx = B.Position[0] - A.Position[0];
+            const Dy = B.Position[1] - A.Position[1];
+            const Dz = B.Position[2] - A.Position[2];
+
+            let Px = -Dz, Py = 0, Pz = Dx;
+            let PL = Math.sqrt(Px * Px + Py * Py + Pz * Pz);
+            if (PL < 0.001) {
+                Px = 0; Py = Dz; Pz = -Dy;
+                PL = Math.sqrt(Px * Px + Py * Py + Pz * Pz) + 0.001;
+            }
+            Px /= PL; Py /= PL; Pz /= PL;
+
+            const Offset = 3.2;
+
+            if (Order === 1) {
+                BondPositions.push(
+                    A.Position[0], A.Position[1], A.Position[2],
+                    B.Position[0], B.Position[1], B.Position[2]
+                );
+            } else if (Order === 2) {
+                BondPositions.push(
+                    A.Position[0] + Px * Offset, A.Position[1] + Py * Offset, A.Position[2] + Pz * Offset,
+                    B.Position[0] + Px * Offset, B.Position[1] + Py * Offset, B.Position[2] + Pz * Offset
+                );
+                BondPositions.push(
+                    A.Position[0] - Px * Offset, A.Position[1] - Py * Offset, A.Position[2] - Pz * Offset,
+                    B.Position[0] - Px * Offset, B.Position[1] - Py * Offset, B.Position[2] - Pz * Offset
+                );
+            } else {
+                BondPositions.push(
+                    A.Position[0], A.Position[1], A.Position[2],
+                    B.Position[0], B.Position[1], B.Position[2]
+                );
+                BondPositions.push(
+                    A.Position[0] + Px * Offset, A.Position[1] + Py * Offset, A.Position[2] + Pz * Offset,
+                    B.Position[0] + Px * Offset, B.Position[1] + Py * Offset, B.Position[2] + Pz * Offset
+                );
+                BondPositions.push(
+                    A.Position[0] - Px * Offset, A.Position[1] - Py * Offset, A.Position[2] - Pz * Offset,
+                    B.Position[0] - Px * Offset, B.Position[1] - Py * Offset, B.Position[2] - Pz * Offset
+                );
+            }
         }
+
+        if (BondPositions.length === 0) return;
 
         Gl.bindBuffer(Gl.ARRAY_BUFFER, this.BondBuffer);
         Gl.bufferData(Gl.ARRAY_BUFFER, new Float32Array(BondPositions), Gl.DYNAMIC_DRAW);
@@ -1991,27 +1913,40 @@ globalThis.Renderer = class {
 
     DrawParticles(ViewMatrix, ProjectionMatrix) {
         if (!this.Particles.length) return;
-        // Group by type for batch draw with correct color/width
-        const Buckets = {};
+        const Gl = this.Gl;
+
+        Gl.useProgram(this.OutlineProgram);
+        Gl.bindBuffer(Gl.ARRAY_BUFFER, this.PositionBuffer);
+        Gl.vertexAttribPointer(this.OutlineLocations.Position, 3, Gl.FLOAT, false, 0, 0);
+        Gl.enableVertexAttribArray(this.OutlineLocations.Position);
+        Gl.bindBuffer(Gl.ELEMENT_ARRAY_BUFFER, this.IndexBuffer);
+
+        Gl.uniformMatrix4fv(this.OutlineLocations.View, false, ViewMatrix);
+        Gl.uniformMatrix4fv(this.OutlineLocations.Projection, false, ProjectionMatrix);
+        Gl.uniform1f(this.OutlineLocations.OutlineScale, 1.0);
+
+        Gl.disable(Gl.DEPTH_TEST);
+        Gl.enable(Gl.BLEND);
+        Gl.blendFunc(Gl.SRC_ALPHA, Gl.ONE);
+
         for (const P of this.Particles) {
-            if (!Buckets[P.Type]) Buckets[P.Type] = [];
             const Prof = this.ParticleProfile(P.Type);
-            const T = Math.max(0.12, P.Life / (P.MaxLife || 1));
-            const Mag = Math.sqrt(P.Vx * P.Vx + P.Vy * P.Vy + P.Vz * P.Vz) + 0.01;
-            const Trail = Prof.trail * T;
-            const Tx = (P.Vx / Mag) * Trail;
-            const Ty = (P.Vy / Mag) * Trail;
-            const Tz = (P.Vz / Mag) * Trail;
-            Buckets[P.Type].push(
-                P.X - Tx, P.Y - Ty, P.Z - Tz,
-                P.X + Tx * 0.25, P.Y + Ty * 0.25, P.Z + Tz * 0.25
-            );
+            const T = Math.max(0.15, P.Life / (P.MaxLife || 1));
+            const Size = Prof.size * (0.7 + T * 1.2);
+
+            const Trans = Translation(P.X, P.Y, P.Z);
+            const Sc = Scale(Size);
+            const Model = MultiplyMatrices(Trans, Sc);
+
+            Gl.uniformMatrix4fv(this.OutlineLocations.Model, false, Model);
+            const Glow = Prof.glow || Prof.color;
+            const Alpha = Math.min(1, 0.35 + T * 0.65);
+            Gl.uniform4fv(this.OutlineLocations.Color, [Glow[0], Glow[1], Glow[2], Alpha]);
+            Gl.drawElements(Gl.TRIANGLES, this.IndexCount, Gl.UNSIGNED_SHORT, 0);
         }
-        for (const Type of Object.keys(Buckets)) {
-            const Prof = this.ParticleProfile(Type);
-            const Width = Type === "alpha" ? 3.0 : Type === "neutron" ? 2.5 : Type === "gamma" ? 1.5 : 2.0;
-            this.DrawLines(Buckets[Type], ViewMatrix, ProjectionMatrix, Prof.color, Width);
-        }
+
+        Gl.disable(Gl.BLEND);
+        Gl.enable(Gl.DEPTH_TEST);
     }
 
     DrawBoundaries(ViewMatrix, ProjectionMatrix) {
@@ -2050,7 +1985,6 @@ globalThis.Renderer = class {
 
         this.DrawBoundaries(ViewMatrix, ProjectionMatrix);
         this.DrawBonds(ViewMatrix, ProjectionMatrix);
-        this.DrawParticles(ViewMatrix, ProjectionMatrix);
         this.DrawDisplayOverlays(ViewMatrix, ProjectionMatrix);
 
         if (this.SelectedObject) {
@@ -2076,5 +2010,7 @@ globalThis.Renderer = class {
         for (const Object of Objects) {
             this.DrawObject(Object, ViewMatrix, ProjectionMatrix);
         }
+
+        this.DrawParticles(ViewMatrix, ProjectionMatrix);
     }
 };
