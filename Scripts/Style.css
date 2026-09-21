@@ -1,0 +1,782 @@
+@import url("https://fonts.googleapis.com/css2?family=Cascadia+Mono:ital,wght@0,200..700;1,200..700&display=swap");
+
+:root {
+    --panel-bg: rgba(12, 12, 14, 0.42);
+    --panel-border: rgba(255, 255, 255, 0.2);
+    --panel-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    --text: rgba(255, 255, 255, 0.92);
+    --text-secondary: rgba(255, 255, 255, 0.5);
+    --text-tertiary: rgba(255, 255, 255, 0.32);
+    --accent: #0a84ff;
+    --accent-soft: rgba(10, 132, 255, 0.22);
+    --accent-border: rgba(10, 132, 255, 0.45);
+    --danger: #ff453a;
+    --radius: 12px;
+    --radius-sm: 8px;
+    --gap: 6px;
+}
+
+body {
+    background: #000;
+    color: var(--text);
+    margin: 0;
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+    font-family: "Cascadia Mono", "Cascadia Code", ui-monospace, monospace;
+    box-sizing: border-box;
+}
+
+.Canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+/* ---- Glass panels ---- */
+.Area {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    border: 1px solid var(--panel-border);
+    border-radius: var(--radius);
+    padding: 12px 14px;
+    background: var(--panel-bg);
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    box-shadow: var(--panel-shadow);
+    z-index: 5;
+}
+
+.Area > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 22px;
+    font-size: 12px;
+    letter-spacing: -0.01em;
+}
+
+.Area > div > span:first-child {
+    color: var(--text-secondary);
+    font-weight: 500;
+    font-size: 11px;
+}
+
+.Area > div > span:last-child {
+    font-variant-numeric: tabular-nums;
+    font-weight: 500;
+    color: var(--text);
+}
+
+.Area > small {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    margin-top: 2px;
+}
+
+.Area > hr {
+    width: 100%;
+    border: none;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.08);
+    margin: 8px 0;
+}
+
+.Dashboard {
+    left: 12px;
+    top: 12px;
+    width: 240px;
+}
+
+.Hierarchy {
+    right: 12px;
+    top: 12px;
+    width: 248px;
+    max-height: calc(100vh - 24px);
+    overflow-x: hidden;
+    overflow-y: auto;
+    flex-direction: column;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.18) transparent;
+}
+
+.Hierarchy::-webkit-scrollbar { width: 6px; }
+.Hierarchy::-webkit-scrollbar-track { background: transparent; }
+.Hierarchy::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 3px;
+}
+.Hierarchy::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.28);
+}
+
+.HierarchyHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.HierTools {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+}
+
+.HierarchyToggle {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: var(--text-secondary);
+    border-radius: 6px;
+    height: 24px;
+    font-size: 10px;
+    font-weight: 500;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0 8px;
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    white-space: nowrap;
+}
+
+.HierarchyToggle:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: var(--text);
+}
+
+.HierarchyToggle.active {
+    background: var(--accent-soft);
+    border-color: var(--accent-border);
+    color: #fff;
+}
+
+.Hierarchy > .HierarchyTree,
+.HierarchyTree {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+    gap: 3px;
+    margin-top: 4px;
+    font-size: 12px;
+    width: 100%;
+    /* Fixed height so controls below don't jump when molecules change */
+    height: 280px;
+    min-height: 280px;
+    max-height: 280px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    flex-shrink: 0;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.18) transparent;
+}
+
+.HierarchyTree::-webkit-scrollbar { width: 5px; }
+.HierarchyTree::-webkit-scrollbar-track { background: transparent; }
+.HierarchyTree::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.14);
+    border-radius: 3px;
+}
+
+.HierGroup {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.HierGroupHeader {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 8px;
+    border-radius: 7px;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.04);
+    user-select: none;
+    width: 100%;
+    transition: background 0.12s ease;
+}
+
+.HierGroupHeader:hover {
+    background: rgba(255, 255, 255, 0.09);
+}
+
+.HierChevron {
+    width: 12px;
+    text-align: center;
+    opacity: 0.4;
+    font-size: 9px;
+    flex-shrink: 0;
+    font-weight: 600;
+}
+
+.HierGroupLabel {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
+    font-weight: 500;
+    font-size: 12px;
+}
+
+.HierGroupMeta {
+    color: var(--text-tertiary);
+    font-size: 10px;
+    flex-shrink: 0;
+    font-variant-numeric: tabular-nums;
+}
+
+.HierChildren {
+    display: flex;
+    flex-direction: column;
+    padding-left: 12px;
+    margin-top: 2px;
+    gap: 1px;
+    border-left: 1px solid rgba(255, 255, 255, 0.08);
+    margin-left: 12px;
+}
+
+.HierChildren.collapsed {
+    display: none;
+}
+
+.HierAtom {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    gap: 6px;
+    width: 100%;
+    transition: background 0.1s ease;
+}
+
+.HierAtom:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.HierAtom.selected {
+    background: var(--accent-soft);
+    box-shadow: inset 0 0 0 1px var(--accent-border);
+}
+
+.HierAtomName {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 11px;
+}
+
+.HierAtomKe {
+    color: var(--text-tertiary);
+    font-size: 10px;
+    flex-shrink: 0;
+    font-variant-numeric: tabular-nums;
+}
+
+.HierAtom.hot .HierAtomKe {
+    color: #ff9f0a;
+}
+
+.HierAtom.excited .HierAtomName::after {
+    content: " *";
+    color: #ffd60a;
+}
+
+/* ---- Controls ---- */
+.AtomAdder {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 6px;
+    margin-top: 4px;
+    width: 100%;
+    align-items: center;
+}
+
+.AtomSelect {
+    flex: 1;
+    min-width: 0;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text);
+    border-radius: var(--radius-sm);
+    padding: 6px 8px;
+    font-size: 12px;
+    outline: none;
+    transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.AtomSelect:hover, .AtomSelect:focus {
+    border-color: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.09);
+}
+
+.AtomSelect option {
+    background: #1c1c1e;
+    color: var(--text);
+}
+
+.SpawnBtn {
+    background: var(--accent-soft);
+    border: 1px solid var(--accent-border);
+    color: #fff;
+    border-radius: var(--radius-sm);
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background 0.15s ease;
+}
+
+.SpawnBtn:hover {
+    background: rgba(10, 132, 255, 0.35);
+}
+
+.AdderOpts {
+    margin-top: 4px;
+    width: 100%;
+}
+
+.AdderOpts label,
+.Prefs label {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    color: var(--text-secondary);
+    margin-top: 5px;
+    width: 100%;
+    font-weight: 500;
+}
+
+.AdderOpts input[type="number"] {
+    width: 48px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text);
+    border-radius: 6px;
+    padding: 4px 6px;
+    font-size: 12px;
+    outline: none;
+}
+
+.Prefs {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100%;
+    gap: 1px;
+}
+
+.Prefs input[type="range"] {
+    flex: 1;
+    min-width: 0;
+    height: 4px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 2px;
+    outline: none;
+}
+
+.Prefs input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+}
+
+.Prefs label span {
+    width: 40px;
+    text-align: right;
+    color: var(--text-tertiary);
+    font-size: 10px;
+    flex-shrink: 0;
+    font-variant-numeric: tabular-nums;
+}
+
+.DashPrefs {
+    margin-top: 2px;
+}
+
+.DashPrefs label {
+    font-size: 11px;
+}
+
+/* ---- Tooltip ---- */
+.Tooltip {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    background: rgba(28, 28, 30, 0.88);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    width: fit-content;
+    height: 30px;
+    padding: 0 12px;
+    z-index: 20;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.12s ease;
+    white-space: nowrap;
+    font-size: 12px;
+    font-weight: 500;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+    letter-spacing: -0.01em;
+}
+
+/* ---- Display modes ---- */
+.Area > .DisplayModes,
+.DisplayModes {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+    gap: 5px;
+    margin-top: 6px;
+    width: 100%;
+}
+
+.ModeBtn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--text-secondary);
+    border-radius: 6px;
+    padding: 5px 9px;
+    font-size: 11px;
+    font-weight: 500;
+    cursor: pointer;
+    flex: 0 0 auto;
+    transition: background 0.12s ease, color 0.12s ease, border-color 0.12s ease;
+}
+
+.ModeBtn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text);
+}
+
+.ModeBtn.active {
+    background: var(--accent-soft);
+    border-color: var(--accent-border);
+    color: #fff;
+}
+
+/* ---- Context menu ---- */
+.ContextMenu {
+    position: fixed;
+    z-index: 9999;
+    min-width: 196px;
+    background: rgba(36, 36, 38, 0.94);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5), 0 0 0 0.5px rgba(255, 255, 255, 0.05) inset;
+    pointer-events: auto;
+    user-select: none;
+}
+
+.ContextMenu[hidden] {
+    display: none !important;
+}
+
+.ContextMenu .CtxTitle {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-tertiary);
+    padding: 6px 10px 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    margin-bottom: 3px;
+    pointer-events: none;
+    letter-spacing: 0.02em;
+}
+
+.ContextMenu button {
+    background: transparent;
+    border: none;
+    color: var(--text);
+    text-align: left;
+    padding: 7px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 400;
+    cursor: pointer;
+    pointer-events: auto;
+    transition: background 0.1s ease;
+}
+
+.ContextMenu button:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.ContextMenu button:active {
+    background: var(--accent-soft);
+}
+
+.ContextMenu button.Danger {
+    color: var(--danger);
+}
+
+.ContextMenu button.Danger:hover {
+    background: rgba(255, 69, 58, 0.15);
+}
+
+.ContextMenu hr {
+    border: none;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.08);
+    margin: 3px 4px;
+    pointer-events: none;
+}
+
+/* ---- Plugin dock + widgets (FL-style) ---- */
+.PluginDock {
+    position: fixed;
+    left: 12px;
+    bottom: 12px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 10px;
+    background: rgba(12, 12, 14, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 12px;
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    z-index: 40;
+    max-width: min(520px, 70vw);
+}
+
+.PluginDockLabel {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    margin-right: 4px;
+}
+
+.PluginDockBtn {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: var(--text);
+    border-radius: 7px;
+    padding: 5px 10px;
+    font-size: 11px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.12s ease, border-color 0.12s ease;
+}
+
+.PluginDockBtn:hover {
+    background: var(--accent-soft);
+    border-color: var(--accent-border);
+}
+
+.PluginWidget {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    min-width: 200px;
+    max-width: 420px;
+    max-height: min(70vh, 520px);
+    background: rgba(14, 14, 16, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    backdrop-filter: blur(20px) saturate(150%);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+    overflow: hidden;
+    z-index: 50;
+}
+
+.PluginWidget.WidgetHidden {
+    display: none !important;
+}
+
+.WidgetTitle {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 10px;
+    background: rgba(255, 255, 255, 0.04);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: grab;
+    user-select: none;
+    flex-shrink: 0;
+}
+
+.WidgetTitle:active {
+    cursor: grabbing;
+}
+
+.WidgetTitleText {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: -0.01em;
+}
+
+.WidgetTitleBtns {
+    display: flex;
+    gap: 4px;
+}
+
+.WidgetBtn {
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--text-secondary);
+    font-size: 14px;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0;
+}
+
+.WidgetBtn:hover {
+    background: rgba(255, 69, 58, 0.25);
+    color: #fff;
+}
+
+.WidgetBody {
+    padding: 10px 12px 12px;
+    overflow-y: auto;
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.18) transparent;
+}
+
+.WRow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+}
+
+.WRow label {
+    color: var(--text-secondary);
+    font-size: 11px;
+    font-weight: 500;
+    min-width: 56px;
+}
+
+.WRow3 {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+
+.WRow3 label {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 10px;
+    color: var(--text-secondary);
+}
+
+.WSelect, .WInput, .WNum {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: var(--text);
+    border-radius: 7px;
+    padding: 5px 8px;
+    font-size: 12px;
+    outline: none;
+    min-width: 0;
+}
+
+.WNum {
+    width: 100%;
+}
+
+.WRange {
+    flex: 1;
+    min-width: 0;
+    height: 4px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 2px;
+}
+
+.WRange::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #fff;
+    cursor: pointer;
+}
+
+.WCheck {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center;
+    gap: 8px;
+    min-width: 0 !important;
+    color: var(--text-secondary);
+    font-size: 11px;
+}
+
+.WActions {
+    display: flex;
+    gap: 6px;
+    margin-top: 4px;
+}
+
+.WPrimary {
+    flex: 1;
+    background: var(--accent-soft);
+    border: 1px solid var(--accent-border);
+    color: #fff;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.WPrimary:hover {
+    background: rgba(10, 132, 255, 0.4);
+}
+
+.WHint {
+    font-size: 10px;
+    color: var(--text-tertiary);
+    line-height: 1.35;
+}

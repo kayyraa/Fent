@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="Scripts/Style.css">
+        <script type="module" src="Scripts/Enum.js"></script>
+        <script type="module" src="Scripts/Plugin.js"></script>
+        <script type="module" src="Scripts/Plugins/LatticeMaker.js"></script>
+        <script type="module" src="Scripts/Global.d.js"></script>
+
+        <title>Fent</title>
+    </head>
+    <body>
+        <div class="Area Dashboard">
+            <small>Fent</small><hr>
+            <div><span>Framerate</span><span class="Framerate">000/s</span></div>
+            <div><span>Delta Time</span><span class="DeltaTime">0.000ms</span></div>
+            <div><span>Timescale</span><span class="TimeScale">0.50x</span></div>
+            <div><span>Sys Temp</span><span class="Temperature">0.00</span></div>
+            <div><span>Bath</span><span class="BathTemp">0.35</span></div>
+            <div><span>Bounds</span><span class="BoundsSize">400/400/300</span></div>
+            <hr>
+            <small>System</small>
+            <div class="Prefs DashPrefs">
+                <label>Bath temp <input type="range" id="PrefBath" min="0" max="2" step="0.05" value="0.35"><span id="PrefBathVal">0.35</span></label>
+                <label>Free energy <input type="range" id="PrefFreeEnergy" min="0" max="3" step="0.1" value="0"><span id="PrefFreeEnergyVal">0.0</span></label>
+            </div>
+            <hr>
+            <small>Display</small>
+            <div class="DisplayModes">
+                <button data-mode="none" class="ModeBtn active">None</button>
+                <button data-mode="charge" class="ModeBtn">Charge</button>
+                <button data-mode="dipole" class="ModeBtn">Dipole</button>
+                <button data-mode="field" class="ModeBtn">Field</button>
+                <button data-mode="force" class="ModeBtn">Force</button>
+                <button data-mode="energy" class="ModeBtn">Energy</button>
+            </div>
+        </div>
+        <div class="Area Hierarchy" id="HierarchyPanel">
+            <div class="HierarchyHeader">
+                <small>Atoms</small>
+                <div class="HierTools">
+                    <button class="HierarchyToggle" id="HierarchyCollapseAll" title="Always collapsed">Collapse</button>
+                    <button class="HierarchyToggle" id="HierarchyExpandAll" title="Always expanded">Expand</button>
+                </div>
+            </div>
+            <hr>
+            <div class="HierarchyTree" id="HierarchyTree"></div>
+            <hr>
+            <small>Add Atom</small>
+            <div class="AtomAdder">
+                <select id="AtomSelect" class="AtomSelect"></select>
+                <button id="SpawnAtomBtn" class="SpawnBtn">Spawn</button>
+            </div>
+            <div class="AdderOpts">
+                <label>Count <input type="number" id="SpawnCount" min="1" max="20" value="1"></label>
+            </div>
+            <hr>
+            <small>Preferences</small>
+            <div class="Prefs">
+                <label>Excite amount <input type="range" id="PrefExcite" min="0.2" max="3" step="0.1" value="0.8"><span id="PrefExciteVal">0.8</span></label>
+                <label>Impulse strength <input type="range" id="PrefImpulse" min="2" max="20" step="1" value="8"><span id="PrefImpulseVal">8</span></label>
+                <label>Shake intensity <input type="range" id="PrefShake" min="0" max="2" step="0.1" value="1"><span id="PrefShakeVal">1.0</span></label>
+                <label>Spawn speed <input type="range" id="PrefSpawnSpeed" min="0" max="5" step="0.1" value="0.5"><span id="PrefSpawnSpeedVal">0.5</span></label>
+                <label>Bound X <input type="range" id="PrefBoundX" min="100" max="1500" step="25" value="400"><span id="PrefBoundXVal">400</span></label>
+                <label>Bound Y <input type="range" id="PrefBoundY" min="100" max="1500" step="25" value="400"><span id="PrefBoundYVal">400</span></label>
+                <label>Bound Z <input type="range" id="PrefBoundZ" min="100" max="1500" step="25" value="300"><span id="PrefBoundZVal">300</span></label>
+            </div>
+        </div>
+        <div class="Tooltip"></div>
+        <div class="ContextMenu" id="ContextMenu" hidden>
+            <div class="CtxTitle">Atom</div>
+            <button data-action="excite">Excite (+energy)</button>
+            <button data-action="deexcite">De-excite</button>
+            <button data-action="impulse">Add Impulse</button>
+            <button data-action="heat">Local Heat</button>
+            <button data-action="cool">Local Cool</button>
+            <hr>
+            <button data-action="breakbonds">Break Bonds</button>
+            <button data-action="ionize">Ionize (+charge)</button>
+            <button data-action="neutralize">Neutralize</button>
+            <hr>
+            <button data-action="focus">Focus Camera</button>
+            <button data-action="delete" class="Danger">Delete Atom</button>
+        </div>
+        <canvas class="Canvas"></canvas>
+    </body>
+</html>
