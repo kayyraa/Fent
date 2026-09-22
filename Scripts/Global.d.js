@@ -12,9 +12,7 @@ const Tooltip = document.querySelector(".Tooltip");
 const ContextMenu = document.getElementById("ContextMenu");
 let ContextTarget = null;
 
-const ResizeCanvas = () => {
-    CanvasRenderer.Resize();
-};
+const ResizeCanvas = () => { CanvasRenderer.Resize(); };
 ResizeCanvas();
 window.addEventListener("resize", ResizeCanvas);
 
@@ -42,6 +40,14 @@ let ThrowVelocity = [0, 0, 0];
 let DragSamples = [];
 const DragSampleWindowMs = 60;
 
+const UiSelector = ".Area, .ContextMenu, .Tooltip, .PluginWidget, .PluginDock, button, select, input, label, textarea, canvas.WGraph";
+
+const IsTouchDevice = (typeof window !== "undefined") && (
+    "ontouchstart" in window ||
+    (navigator.maxTouchPoints && navigator.maxTouchPoints > 0) ||
+    (navigator.msMaxTouchPoints && navigator.msMaxTouchPoints > 0)
+);
+
 window.addEventListener("contextmenu", (Event) => Event.preventDefault());
 
 function HideContextMenu() {
@@ -58,7 +64,9 @@ function ShowContextMenu(Atom, X, Y) {
     if (Title) {
         const A = Atom.Atom;
         const MassNumber = (Atom.Protons || 0) + (Atom.Neutrons || 0);
-        Title.textContent = `${Atom.Key} | ${A.Name || Atom.Key} | A=${MassNumber}`;
+        const Charge = Atom.ExtraCharge || 0;
+        const ChargeStr = Math.abs(Charge) > 0.05 ? ` ${Charge > 0 ? "+" : ""}${Charge.toFixed(2)}e` : "";
+        Title.textContent = `${Atom.Key}${ChargeStr} | ${A.Name || Atom.Key} | A=${MassNumber}`;
     }
     ContextMenu.hidden = false;
     const MenuW = ContextMenu.offsetWidth || 180;
@@ -73,30 +81,24 @@ function ShowContextMenu(Atom, X, Y) {
 
 window.addEventListener("mousedown", (Event) => {
     const ClickedInsideMenu = ContextMenu && !ContextMenu.hidden && ContextMenu.contains(Event.target);
-    const ClickedUi = Event.target.closest(".Area, .ContextMenu, .Tooltip, button, select, input, label");
+    const ClickedUi = Event.target.closest(UiSelector);
 
     if (ClickedInsideMenu || ClickedUi) {
-        if (!ClickedInsideMenu && ContextMenu && !ContextMenu.hidden) {
-            HideContextMenu();
-        }
+        if (!ClickedInsideMenu && ContextMenu && !ContextMenu.hidden) HideContextMenu();
         return;
     }
 
-    if (ContextMenu && !ContextMenu.hidden) {
-        HideContextMenu();
-    }
+    if (ContextMenu && !ContextMenu.hidden) HideContextMenu();
 
     if (Event.button === 2) {
         const MousePos = { x: Event.clientX, y: Event.clientY };
         const Ray = GetScreenRay(MousePos.x, MousePos.y);
         const AtomHit = PickAtom(Ray);
-
         if (AtomHit) {
             ShowContextMenu(AtomHit, MousePos.x, MousePos.y);
             IsRmbDown = false;
             return;
         }
-
         IsRmbDown = true;
         return;
     }
@@ -104,17 +106,14 @@ window.addEventListener("mousedown", (Event) => {
     if (Event.button === 0) {
         const MousePos = { x: Event.clientX, y: Event.clientY };
         const Ray = GetScreenRay(MousePos.x, MousePos.y);
-
         const AtomHit = PickAtom(Ray);
         if (AtomHit) {
             SelectedObject = AtomHit;
             CanvasRenderer.SelectedObject = SelectedObject;
             IsInteracting = true;
-
             const Forward = GetCameraForward();
             DragPlaneNormal = [-Forward[0], -Forward[1], -Forward[2]];
             DragPlanePoint = [...SelectedObject.Position];
-
             const Intersection = RayPlaneIntersection(Ray.Origin, Ray.Direction, DragPlanePoint, DragPlaneNormal);
             if (Intersection) {
                 InitialHitOffset = [
@@ -142,9 +141,7 @@ function ComputeThrowFromSamples() {
     if (DragSamples.length < 2) return [0, 0, 0];
     const Now = DragSamples[DragSamples.length - 1].t;
     const Recent = DragSamples.filter((S) => Now - S.t <= DragSampleWindowMs);
-    if (Recent.length < 2) {
-        return [0, 0, 0];
-    }
+    if (Recent.length < 2) return [0, 0, 0];
     const First = Recent[0];
     const Last = Recent[Recent.length - 1];
     const Dt = Math.max(0.008, (Last.t - First.t) / 1000);
@@ -185,6 +182,12 @@ window.addEventListener("mousemove", (Event) => {
         TargetPitch = Math.max(-PitchLimit, Math.min(PitchLimit, TargetPitch));
     }
 
+    if (IsTouchDevice) return;
+    if (Event.target && Event.target.closest && Event.target.closest(".PluginWidget, .PluginDock")) {
+        if (Tooltip) Tooltip.style.opacity = "0";
+        return;
+    }
+
     const Ray = GetScreenRay(MousePos.x, MousePos.y);
 
     if (IsInteracting && SelectedObject) {
@@ -192,30 +195,25 @@ window.addEventListener("mousemove", (Event) => {
         const Intersection = RayPlaneIntersection(Ray.Origin, Ray.Direction, DragPlanePoint, DragPlaneNormal);
         if (Intersection) {
             const CurrentTime = performance.now();
-
             const NewPos = [
                 Intersection[0] + InitialHitOffset[0],
                 Intersection[1] + InitialHitOffset[1],
                 Intersection[2] + InitialHitOffset[2]
             ];
-
             DragSamples.push({ t: CurrentTime, p: [...NewPos] });
             while (DragSamples.length > 0 && CurrentTime - DragSamples[0].t > DragSampleWindowMs * 2) {
                 DragSamples.shift();
             }
-
             SelectedObject.Position[0] = NewPos[0];
             SelectedObject.Position[1] = NewPos[1];
             SelectedObject.Position[2] = NewPos[2];
             SelectedObject.Velocity = [0, 0, 0];
-
             LastDragPosition = NewPos;
             LastDragTime = CurrentTime;
         }
     } else {
         HoveredObject = PickAtom(Ray);
         CanvasRenderer.HoveredObject = HoveredObject;
-
         if (HoveredObject && Tooltip) {
             const A = HoveredObject.Atom;
             const Z = HoveredObject.Protons || A.AtomicNumber || 0;
@@ -223,12 +221,15 @@ window.addEventListener("mousemove", (Event) => {
             const MassNumber = Z + N;
             let Text = `${HoveredObject.Key} | ${A.Name || HoveredObject.Key} | Z=${Z} N=${N} A=${MassNumber}`;
             if (!HoveredObject.Stable) Text += ` | UNSTABLE`;
-            if (HoveredObject.PartialCharge !== undefined && Math.abs(HoveredObject.PartialCharge) > 0.02) {
-                Text += ` | q${HoveredObject.PartialCharge > 0 ? "+" : ""}${HoveredObject.PartialCharge.toFixed(2)}`;
+            const Charge = HoveredObject.ExtraCharge || 0;
+            if (Math.abs(Charge) > 0.05) {
+                Text += ` | q=${Charge > 0 ? "+" : ""}${Charge.toFixed(2)}e`;
             }
-            if (HoveredObject.Excited > 0.05) {
-                Text += ` | *${HoveredObject.Excited.toFixed(1)}`;
+            const Sat = HoveredObject.BondSatisfaction;
+            if (Sat !== undefined && Sat > 0.01 && Sat < 0.99) {
+                Text += ` | sat ${(Sat * 100).toFixed(0)}%`;
             }
+            if (HoveredObject.Excited > 0.05) Text += ` | *${HoveredObject.Excited.toFixed(1)}`;
             Tooltip.textContent = Text;
             Tooltip.style.opacity = "1";
             Tooltip.style.left = `${MousePos.x + 14}px`;
@@ -260,11 +261,9 @@ if (ContextMenu) {
     ContextMenu.addEventListener("mousedown", (Event) => {
         Event.preventDefault();
         Event.stopPropagation();
-
         const Btn = Event.target.closest("button[data-action]");
         if (!Btn || !ContextTarget) return;
         if (Event.button !== 0) return;
-
         const Action = Btn.dataset.action;
         const Atom = ContextTarget;
 
@@ -316,18 +315,11 @@ if (ContextMenu) {
                 }
                 break;
             }
-            case "ionize":
-                Atom.ExtraCharge = (Atom.ExtraCharge || 0) + 0.6;
+            case "ionize": Atom.ExtraCharge = (Atom.ExtraCharge || 0) + 0.6; break;
+            case "neutralize": Atom.ExtraCharge = 0; break;
+            case "decay":
+                if (CanvasRenderer.DecayAtom) CanvasRenderer.DecayAtom(Atom);
                 break;
-            case "neutralize":
-                Atom.ExtraCharge = 0;
-                break;
-            case "decay": {
-                if (CanvasRenderer.DecayAtom) {
-                    CanvasRenderer.DecayAtom(Atom);
-                }
-                break;
-            }
             case "focus": {
                 CanvasRenderer.CameraTarget = [...Atom.Position];
                 const Fwd = GetCameraForward();
@@ -342,19 +334,12 @@ if (ContextMenu) {
                 const Idx = Objects.indexOf(Atom);
                 if (Idx >= 0) {
                     Objects.splice(Idx, 1);
-                    if (SelectedObject === Atom) {
-                        SelectedObject = null;
-                        CanvasRenderer.SelectedObject = null;
-                    }
-                    if (HoveredObject === Atom) {
-                        HoveredObject = null;
-                        CanvasRenderer.HoveredObject = null;
-                    }
+                    if (SelectedObject === Atom) { SelectedObject = null; CanvasRenderer.SelectedObject = null; }
+                    if (HoveredObject === Atom) { HoveredObject = null; CanvasRenderer.HoveredObject = null; }
                 }
                 break;
             }
         }
-
         HideContextMenu();
     });
 }
@@ -390,7 +375,7 @@ window.addEventListener("wheel", (Event) => {
 
 CanvasRenderer.Temperature = 0.05;
 CanvasRenderer.FreeEnergy = 0;
-CanvasRenderer.SettleFrames = 180;
+CanvasRenderer.SettleFrames = 240;
 {
     const BathEl = document.getElementById("PrefBath");
     const BathVal = document.getElementById("PrefBathVal");
@@ -410,22 +395,18 @@ function GetScreenRay(ScreenX, ScreenY) {
     const Rect = Canvas.getBoundingClientRect();
     const NdcX = ((ScreenX - Rect.left) / Rect.width) * 2 - 1;
     const NdcY = -(((ScreenY - Rect.top) / Rect.height) * 2 - 1);
-
     const Aspect = Canvas.width / Canvas.height;
     const Fov = Math.PI / 4;
     const TanFov = Math.tan(Fov / 2);
-
     const Forward = GetCameraForward();
     const Up = [0, 1, 0];
     const Right = Normalize3(Cross3(Forward, Up));
     const TrueUp = Cross3(Right, Forward);
-
     const RayDir = Normalize3([
         Forward[0] + Right[0] * NdcX * TanFov * Aspect + TrueUp[0] * NdcY * TanFov,
         Forward[1] + Right[1] * NdcX * TanFov * Aspect + TrueUp[1] * NdcY * TanFov,
         Forward[2] + Right[2] * NdcX * TanFov * Aspect + TrueUp[2] * NdcY * TanFov
     ]);
-
     return { Origin: [...CanvasRenderer.CameraPosition], Direction: RayDir };
 }
 
@@ -453,57 +434,35 @@ function RayPlaneIntersection(RayOrigin, RayDir, PlanePoint, PlaneNormal) {
 }
 
 function PickAtom(Ray) {
-    let ClosestObject = null;
+    let Closest = null;
     let ClosestT = Infinity;
-
     for (const Obj of Objects) {
         const Radius = Math.max(8, (Obj.Atom.AtomicRadius ?? 100) * CanvasRenderer.RadiusScale * 0.3);
         const HitT = RaySphereIntersection(Ray.Origin, Ray.Direction, Obj.Position, Radius);
         if (HitT !== null && HitT < ClosestT) {
             ClosestT = HitT;
-            ClosestObject = Obj;
+            Closest = Obj;
         }
     }
-    return ClosestObject;
+    return Closest;
 }
 
 const UpdateCamera = () => {
     CurrentYaw += (TargetYaw - CurrentYaw) * 0.1;
     CurrentPitch += (TargetPitch - CurrentPitch) * 0.1;
-
     const Forward = GetCameraForward();
     const Right = [-Math.sin(CurrentYaw), 0, Math.cos(CurrentYaw)];
+    let MX = 0, MY = 0, MZ = 0;
+    if (KeyStates["KeyW"]) { MX += Forward[0] * CameraAcceleration; MY += Forward[1] * CameraAcceleration; MZ += Forward[2] * CameraAcceleration; }
+    if (KeyStates["KeyS"]) { MX -= Forward[0] * CameraAcceleration; MY -= Forward[1] * CameraAcceleration; MZ -= Forward[2] * CameraAcceleration; }
+    if (KeyStates["KeyD"]) { MX += Right[0] * CameraAcceleration; MY += Right[1] * CameraAcceleration; MZ += Right[2] * CameraAcceleration; }
+    if (KeyStates["KeyA"]) { MX -= Right[0] * CameraAcceleration; MY -= Right[1] * CameraAcceleration; MZ -= Right[2] * CameraAcceleration; }
+    if (KeyStates["Space"]) MY += CameraAcceleration;
+    if (KeyStates["ShiftLeft"] || KeyStates["ShiftRight"]) MY -= CameraAcceleration;
 
-    let MoveX = 0;
-    let MoveY = 0;
-    let MoveZ = 0;
-
-    if (KeyStates["KeyW"]) {
-        MoveX += Forward[0] * CameraAcceleration;
-        MoveY += Forward[1] * CameraAcceleration;
-        MoveZ += Forward[2] * CameraAcceleration;
-    }
-    if (KeyStates["KeyS"]) {
-        MoveX -= Forward[0] * CameraAcceleration;
-        MoveY -= Forward[1] * CameraAcceleration;
-        MoveZ -= Forward[2] * CameraAcceleration;
-    }
-    if (KeyStates["KeyD"]) {
-        MoveX += Right[0] * CameraAcceleration;
-        MoveY += Right[1] * CameraAcceleration;
-        MoveZ += Right[2] * CameraAcceleration;
-    }
-    if (KeyStates["KeyA"]) {
-        MoveX -= Right[0] * CameraAcceleration;
-        MoveY -= Right[1] * CameraAcceleration;
-        MoveZ -= Right[2] * CameraAcceleration;
-    }
-    if (KeyStates["Space"]) MoveY += CameraAcceleration;
-    if (KeyStates["ShiftLeft"] || KeyStates["ShiftRight"]) MoveY -= CameraAcceleration;
-
-    CameraVelocity[0] = (CameraVelocity[0] + MoveX) * CameraDamping;
-    CameraVelocity[1] = (CameraVelocity[1] + MoveY) * CameraDamping;
-    CameraVelocity[2] = (CameraVelocity[2] + MoveZ) * CameraDamping;
+    CameraVelocity[0] = (CameraVelocity[0] + MX) * CameraDamping;
+    CameraVelocity[1] = (CameraVelocity[1] + MY) * CameraDamping;
+    CameraVelocity[2] = (CameraVelocity[2] + MZ) * CameraDamping;
 
     CanvasRenderer.CameraPosition[0] += CameraVelocity[0];
     CanvasRenderer.CameraPosition[1] += CameraVelocity[1];
@@ -513,6 +472,150 @@ const UpdateCamera = () => {
     CanvasRenderer.CameraTarget[1] = CanvasRenderer.CameraPosition[1] + Forward[1] * 100;
     CanvasRenderer.CameraTarget[2] = CanvasRenderer.CameraPosition[2] + Forward[2] * 100;
 };
+
+const TouchState = {
+    Mode: null,
+    LastX: 0,
+    LastY: 0,
+    PinchStartDist: 0,
+    MoveThresholdExceeded: false,
+    StartX: 0,
+    StartY: 0
+};
+
+function StartDragOnAtom(AtomObj, ScreenX, ScreenY) {
+    SelectedObject = AtomObj;
+    CanvasRenderer.SelectedObject = SelectedObject;
+    IsInteracting = true;
+    const Forward = GetCameraForward();
+    DragPlaneNormal = [-Forward[0], -Forward[1], -Forward[2]];
+    DragPlanePoint = [...SelectedObject.Position];
+    const Ray = GetScreenRay(ScreenX, ScreenY);
+    const Intersection = RayPlaneIntersection(Ray.Origin, Ray.Direction, DragPlanePoint, DragPlaneNormal);
+    if (Intersection) {
+        InitialHitOffset = [
+            SelectedObject.Position[0] - Intersection[0],
+            SelectedObject.Position[1] - Intersection[1],
+            SelectedObject.Position[2] - Intersection[2]
+        ];
+        LastDragPosition = [
+            Intersection[0] + InitialHitOffset[0],
+            Intersection[1] + InitialHitOffset[1],
+            Intersection[2] + InitialHitOffset[2]
+        ];
+        LastDragTime = performance.now();
+        ThrowVelocity = [0, 0, 0];
+        DragSamples = [{ t: LastDragTime, p: [...LastDragPosition] }];
+    }
+}
+
+if (IsTouchDevice) {
+    Canvas.addEventListener("touchstart", (Event) => {
+        if (Event.touches.length === 1) {
+            Event.preventDefault();
+            const T = Event.touches[0];
+            const Ray = GetScreenRay(T.clientX, T.clientY);
+            const AtomHit = PickAtom(Ray);
+            TouchState.MoveThresholdExceeded = false;
+            TouchState.StartX = T.clientX;
+            TouchState.StartY = T.clientY;
+            if (AtomHit) {
+                TouchState.Mode = "drag";
+                StartDragOnAtom(AtomHit, T.clientX, T.clientY);
+            } else {
+                TouchState.Mode = "orbit";
+                TouchState.LastX = T.clientX;
+                TouchState.LastY = T.clientY;
+                SelectedObject = null;
+                CanvasRenderer.SelectedObject = null;
+            }
+        } else if (Event.touches.length === 2) {
+            Event.preventDefault();
+            TouchState.Mode = "pinch";
+            const T1 = Event.touches[0], T2 = Event.touches[1];
+            TouchState.PinchStartDist = Math.hypot(T2.clientX - T1.clientX, T2.clientY - T1.clientY);
+        } else {
+            Event.preventDefault();
+        }
+    }, { passive: false });
+
+    Canvas.addEventListener("touchmove", (Event) => {
+        if (TouchState.Mode === "orbit" && Event.touches.length === 1) {
+            Event.preventDefault();
+            const T = Event.touches[0];
+            const DX = T.clientX - TouchState.LastX;
+            const DY = T.clientY - TouchState.LastY;
+            const TotalDX = T.clientX - TouchState.StartX;
+            const TotalDY = T.clientY - TouchState.StartY;
+            if (Math.abs(TotalDX) > 6 || Math.abs(TotalDY) > 6) TouchState.MoveThresholdExceeded = true;
+            if (TouchState.MoveThresholdExceeded) {
+                const Sensitivity = 0.006;
+                TargetYaw += DX * Sensitivity;
+                TargetPitch -= DY * Sensitivity;
+                const PitchLimit = Math.PI / 2 - 0.01;
+                TargetPitch = Math.max(-PitchLimit, Math.min(PitchLimit, TargetPitch));
+            }
+            TouchState.LastX = T.clientX;
+            TouchState.LastY = T.clientY;
+        } else if (TouchState.Mode === "pinch" && Event.touches.length === 2) {
+            Event.preventDefault();
+            const T1 = Event.touches[0], T2 = Event.touches[1];
+            const Dist = Math.hypot(T2.clientX - T1.clientX, T2.clientY - T1.clientY);
+            const Delta = TouchState.PinchStartDist - Dist;
+            TouchState.PinchStartDist = Dist;
+            const Forward = GetCameraForward();
+            const ZoomSpeed = Math.max(-40, Math.min(40, Delta * 0.7));
+            CameraVelocity[0] += Forward[0] * ZoomSpeed;
+            CameraVelocity[1] += Forward[1] * ZoomSpeed;
+            CameraVelocity[2] += Forward[2] * ZoomSpeed;
+        } else if (TouchState.Mode === "drag" && Event.touches.length === 1 && SelectedObject) {
+            Event.preventDefault();
+            const T = Event.touches[0];
+            const Ray = GetScreenRay(T.clientX, T.clientY);
+            const Intersection = RayPlaneIntersection(Ray.Origin, Ray.Direction, DragPlanePoint, DragPlaneNormal);
+            if (Intersection) {
+                const CurrentTime = performance.now();
+                const NewPos = [
+                    Intersection[0] + InitialHitOffset[0],
+                    Intersection[1] + InitialHitOffset[1],
+                    Intersection[2] + InitialHitOffset[2]
+                ];
+                DragSamples.push({ t: CurrentTime, p: [...NewPos] });
+                while (DragSamples.length > 0 && CurrentTime - DragSamples[0].t > DragSampleWindowMs * 2) {
+                    DragSamples.shift();
+                }
+                SelectedObject.Position[0] = NewPos[0];
+                SelectedObject.Position[1] = NewPos[1];
+                SelectedObject.Position[2] = NewPos[2];
+                SelectedObject.Velocity = [0, 0, 0];
+                LastDragPosition = NewPos;
+                LastDragTime = CurrentTime;
+            }
+        } else {
+            Event.preventDefault();
+        }
+    }, { passive: false });
+
+    Canvas.addEventListener("touchend", (Event) => {
+        Event.preventDefault();
+        if (TouchState.Mode === "drag" && SelectedObject) {
+            const ThrowVel = ComputeThrowFromSamples();
+            const Mag = Math.hypot(ThrowVel[0], ThrowVel[1], ThrowVel[2]);
+            if (Mag > 0.35) SelectedObject.Velocity = [...ThrowVel];
+        }
+        if (Event.touches.length === 0) {
+            TouchState.Mode = null;
+            IsInteracting = false;
+            DragSamples = [];
+        }
+    }, { passive: false });
+
+    Canvas.addEventListener("touchcancel", () => {
+        TouchState.Mode = null;
+        IsInteracting = false;
+        DragSamples = [];
+    }, { passive: false });
+}
 
 const HierarchyTree = document.getElementById("HierarchyTree");
 const HierarchyCollapseAllBtn = document.getElementById("HierarchyCollapseAll");
@@ -535,12 +638,8 @@ const Prefs = {
 HierarchyCollapsed.add("free_atoms");
 
 function SyncHierarchyForceButtons() {
-    if (HierarchyCollapseAllBtn) {
-        HierarchyCollapseAllBtn.classList.toggle("active", HierarchyForceMode === "collapse");
-    }
-    if (HierarchyExpandAllBtn) {
-        HierarchyExpandAllBtn.classList.toggle("active", HierarchyForceMode === "expand");
-    }
+    if (HierarchyCollapseAllBtn) HierarchyCollapseAllBtn.classList.toggle("active", HierarchyForceMode === "collapse");
+    if (HierarchyExpandAllBtn) HierarchyExpandAllBtn.classList.toggle("active", HierarchyForceMode === "expand");
 }
 
 function CollectAllGroupKeys() {
@@ -553,10 +652,7 @@ function CollectAllGroupKeys() {
     let GroupIdx = 0;
     let FreeCount = 0;
     for (const [, Indices] of Entries) {
-        if (Indices.length === 1) {
-            FreeCount++;
-            continue;
-        }
+        if (Indices.length === 1) { FreeCount++; continue; }
         const Formula = FormulaFromIndices(Indices);
         Keys.push(`g${GroupIdx}_${Formula}_${Indices.length}`);
         GroupIdx++;
@@ -577,25 +673,18 @@ function ApplyHierarchyForceMode() {
 function BuildMoleculeGroups() {
     const N = Objects.length;
     const Parent = Array.from({ length: N }, (_, i) => i);
-
     const Find = (i) => {
-        while (Parent[i] !== i) {
-            Parent[i] = Parent[Parent[i]];
-            i = Parent[i];
-        }
+        while (Parent[i] !== i) { Parent[i] = Parent[Parent[i]]; i = Parent[i]; }
         return i;
     };
     const Union = (a, b) => {
-        const Ra = Find(a);
-        const Rb = Find(b);
+        const Ra = Find(a), Rb = Find(b);
         if (Ra !== Rb) Parent[Rb] = Ra;
     };
-
     for (const Key of CanvasRenderer.ActiveBondPairs) {
         const [A, B] = Key.split("_").map(Number);
         if (A < N && B < N) Union(A, B);
     }
-
     const Groups = new Map();
     for (let i = 0; i < N; i++) {
         const Root = Find(i);
@@ -668,13 +757,11 @@ function UpdateHierarchy(ForceRebuild = false) {
         });
         return;
     }
-
     const Groups = BuildMoleculeGroups();
     const Entries = [...Groups.entries()].sort((A, B) => {
         if (B[1].length !== A[1].length) return B[1].length - A[1].length;
         return FormulaFromIndices(A[1]).localeCompare(FormulaFromIndices(B[1]));
     });
-
     const Sig = HierarchySignature(Entries);
     const StructureChanged = ForceRebuild || Sig !== LastHierarchySignature;
 
@@ -706,7 +793,6 @@ function UpdateHierarchy(ForceRebuild = false) {
     if (HierarchyForceMode) ApplyHierarchyForceMode();
     const Fragments = [];
     let GroupIdx = 0;
-
     const FreeIndices = [];
     const MoleculeEntries = [];
     for (const [, Indices] of Entries) {
@@ -720,12 +806,10 @@ function UpdateHierarchy(ForceRebuild = false) {
         if (HierarchyForceMode === "expand") IsCollapsed = false;
         let TotalKe = 0;
         for (const i of Indices) TotalKe += Objects[i].KineticEnergy || 0;
-
         const GroupEl = document.createElement("div");
         GroupEl.className = "HierGroup";
         GroupEl.dataset.groupKey = GroupKey;
         GroupEl.dataset.indices = Indices.join(",");
-
         const Header = document.createElement("div");
         Header.className = "HierGroupHeader";
         Header.dataset.groupKey = GroupKey;
@@ -736,10 +820,8 @@ function UpdateHierarchy(ForceRebuild = false) {
             <span class="HierGroupMeta">${Indices.length} | KE ${TotalKe.toFixed(1)}</span>
         `;
         GroupEl.appendChild(Header);
-
         const Children = document.createElement("div");
         Children.className = "HierChildren" + (IsCollapsed ? " collapsed" : "");
-
         for (const i of Indices) {
             const AtomObj = Objects[i];
             const Row = document.createElement("div");
@@ -750,13 +832,14 @@ function UpdateHierarchy(ForceRebuild = false) {
             if ((AtomObj.Excited || 0) > 0.05) Row.classList.add("excited");
             const MassNumber = (AtomObj.Protons || 0) + (AtomObj.Neutrons || 0);
             const UnstableMark = AtomObj.Stable ? "" : " *";
+            const Charge = AtomObj.ExtraCharge || 0;
+            const ChargeStr = Math.abs(Charge) > 0.05 ? ` [${Charge > 0 ? "+" : ""}${Charge.toFixed(1)}]` : "";
             Row.innerHTML = `
-                <span class="HierAtomName">${AtomObj.Key} | ${AtomObj.Atom.Name || AtomObj.Key}${UnstableMark} (A=${MassNumber})</span>
+                <span class="HierAtomName">${AtomObj.Key}${ChargeStr} | ${AtomObj.Atom.Name || AtomObj.Key}${UnstableMark} (A=${MassNumber})</span>
                 <span class="HierAtomKe">${(AtomObj.KineticEnergy || 0).toFixed(1)}</span>
             `;
             Children.appendChild(Row);
         }
-
         GroupEl.appendChild(Children);
         Fragments.push(GroupEl);
     };
@@ -767,11 +850,9 @@ function UpdateHierarchy(ForceRebuild = false) {
         BuildGroup(GroupKey, Formula, Indices, true);
         GroupIdx++;
     }
-
     if (FreeIndices.length > 0) {
         BuildGroup("free_atoms", `Free (${FreeIndices.length})`, FreeIndices, true);
     }
-
     HierarchyTree.replaceChildren(...Fragments);
 }
 
@@ -796,15 +877,8 @@ if (HierarchyTree) {
             UpdateHierarchy(true);
         }
     });
-
-    HierarchyTree.addEventListener("pointerup", () => {
-        HierarchyPointerDown = false;
-    });
-
-    HierarchyTree.addEventListener("pointerleave", () => {
-        HierarchyPointerDown = false;
-    });
-
+    HierarchyTree.addEventListener("pointerup", () => { HierarchyPointerDown = false; });
+    HierarchyTree.addEventListener("pointerleave", () => { HierarchyPointerDown = false; });
     HierarchyTree.addEventListener("dblclick", (E) => {
         const AtomRow = E.target.closest(".HierAtom");
         if (AtomRow && AtomRow.dataset.index !== undefined) {
@@ -823,7 +897,6 @@ if (HierarchyCollapseAllBtn) {
         UpdateHierarchy(true);
     });
 }
-
 if (HierarchyExpandAllBtn) {
     HierarchyExpandAllBtn.addEventListener("click", (E) => {
         E.stopPropagation();
@@ -833,7 +906,6 @@ if (HierarchyExpandAllBtn) {
         UpdateHierarchy(true);
     });
 }
-
 SyncHierarchyForceButtons();
 
 const AtomSelect = document.getElementById("AtomSelect");
@@ -841,7 +913,7 @@ const SpawnAtomBtn = document.getElementById("SpawnAtomBtn");
 const SpawnCountInput = document.getElementById("SpawnCount");
 
 if (AtomSelect && typeof Atoms !== "undefined") {
-    const Common = ["H", "C", "N", "O", "F", "Na", "Mg", "Si", "P", "S", "Cl", "Fe", "Cu", "Zn", "Br", "I", "Au", "U"];
+    const Common = ["H","C","N","O","F","Na","Mg","Si","P","S","Cl","Fe","Cu","Zn","Br","I","Au","U"];
     const AllKeys = Object.keys(Atoms);
     const Ordered = [
         ...Common.filter((K) => Atoms[K]),
@@ -867,16 +939,10 @@ function SpawnAtoms() {
     const Cam = CanvasRenderer.CameraPosition;
     const Fwd = GetCameraForward();
     const Now = performance.now();
-
     if (!SpawnClusterCenter || Now - SpawnClusterTime > 2500) {
-        SpawnClusterCenter = [
-            Cam[0] + Fwd[0] * 260,
-            Cam[1] + Fwd[1] * 260,
-            Cam[2] + Fwd[2] * 260
-        ];
+        SpawnClusterCenter = [Cam[0] + Fwd[0] * 260, Cam[1] + Fwd[1] * 260, Cam[2] + Fwd[2] * 260];
     }
     SpawnClusterTime = Now;
-
     let Last = null;
     for (let i = 0; i < Count; i++) {
         const Jitter = [
@@ -917,12 +983,9 @@ function WirePref(Id, Key, Format = (V) => V.toFixed(1)) {
         const V = Number(El.value);
         Prefs[Key] = V;
         if (Val) Val.textContent = Format(V);
-        if (Key === "ShakeIntensity") {
-            CanvasRenderer.ShakeIntensity = V;
-        }
+        if (Key === "ShakeIntensity") CanvasRenderer.ShakeIntensity = V;
     });
 }
-
 WirePref("PrefExcite", "ExciteAmount");
 WirePref("PrefImpulse", "ImpulseStrength", (V) => String(V));
 WirePref("PrefShake", "ShakeIntensity");
@@ -980,54 +1043,39 @@ const Update = () => {
     const Now = performance.now();
     const DeltaTime = Now - LastFrameTime;
     LastFrameTime = Now;
-
     FrameCounter++;
     FpsTimer += DeltaTime;
 
-    if (DeltaTimeLabel) {
-        DeltaTimeLabel.textContent = `${DeltaTime.toFixed(3)}ms`;
-    }
+    if (DeltaTimeLabel) DeltaTimeLabel.textContent = `${DeltaTime.toFixed(3)}ms`;
     if (TimeScaleLabel) {
         const Ts = CanvasRenderer.TargetTimeScale;
         TimeScaleLabel.textContent = Ts <= 0 ? "PAUSED" : `${Ts.toFixed(2)}x`;
     }
-
     if (TemperatureLabel) {
         let SumKe = 0;
         for (const O of Objects) SumKe += O.KineticEnergy || 0;
         const AvgKe = Objects.length > 0 ? SumKe / Objects.length : 0;
         TemperatureLabel.textContent = (AvgKe * 0.12).toFixed(2);
     }
-    if (BathTempLabel) {
-        BathTempLabel.textContent = CanvasRenderer.Temperature.toFixed(2);
-    }
+    if (BathTempLabel) BathTempLabel.textContent = CanvasRenderer.Temperature.toFixed(2);
     if (BoundsSizeLabel) {
         BoundsSizeLabel.textContent =
             `${Math.round(CanvasRenderer.BoundaryX)}/${Math.round(CanvasRenderer.BoundaryY)}/${Math.round(CanvasRenderer.BoundaryZ)}`;
     }
-
     if (FpsTimer >= 1000) {
         const Fps = Math.round((FrameCounter * 1000) / FpsTimer);
-        if (FramerateLabel) {
-            FramerateLabel.textContent = `${String(Fps).padStart(3, "0")}/s`;
-        }
+        if (FramerateLabel) FramerateLabel.textContent = `${String(Fps).padStart(3, "0")}/s`;
         FrameCounter = 0;
         FpsTimer = 0;
     }
 
     UpdateHierarchy();
-
     UpdateCamera();
     CanvasRenderer.Render();
 
-    if (globalThis.Plugin) {
-        globalThis.Plugin.Tick(DeltaTime);
-    }
-
+    if (globalThis.Plugin) globalThis.Plugin.Tick(DeltaTime);
     requestAnimationFrame(Update);
 };
 
-requestAnimationFrame(() => {
-    if (globalThis.Plugin) globalThis.Plugin.Boot();
-});
+requestAnimationFrame(() => { if (globalThis.Plugin) globalThis.Plugin.Boot(); });
 requestAnimationFrame(Update);

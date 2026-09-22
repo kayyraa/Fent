@@ -16,11 +16,16 @@
     --gap: 6px;
 }
 
+html {
+    overscroll-behavior: none;
+}
+
 body {
     background: #000;
     color: var(--text);
     margin: 0;
     overflow: hidden;
+    overscroll-behavior: none;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -36,6 +41,11 @@ body {
     width: 100%;
     height: 100%;
     z-index: 0;
+    touch-action: none;
+    -ms-touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
 }
 
 .Area {
@@ -84,9 +94,7 @@ body {
     margin-top: 2px;
 }
 
-.Area > small:has(img) {
-    margin-left: 24px;
-}
+.Area > small:has(img) { margin-left: 24px; }
 
 .Area > small > img {
     position: absolute;
@@ -105,11 +113,7 @@ body {
     margin: 8px 0;
 }
 
-.Dashboard {
-    left: 12px;
-    top: 12px;
-    width: 240px;
-}
+.Dashboard { left: 12px; top: 12px; width: 240px; }
 
 .Hierarchy {
     right: 12px;
@@ -121,17 +125,13 @@ body {
     flex-direction: column;
     scrollbar-width: thin;
     scrollbar-color: rgba(255, 255, 255, 0.18) transparent;
+    touch-action: pan-y;
 }
 
 .Hierarchy::-webkit-scrollbar { width: 6px; }
 .Hierarchy::-webkit-scrollbar-track { background: transparent; }
-.Hierarchy::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.15);
-    border-radius: 3px;
-}
-.Hierarchy::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.28);
-}
+.Hierarchy::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 3px; }
+.Hierarchy::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.28); }
 
 .HierarchyHeader {
     display: flex;
@@ -141,11 +141,7 @@ body {
     width: 100%;
 }
 
-.HierTools {
-    display: flex;
-    flex-direction: row;
-    gap: 4px;
-}
+.HierTools { display: flex; flex-direction: row; gap: 4px; }
 
 .HierarchyToggle {
     background: rgba(255, 255, 255, 0.06);
@@ -162,16 +158,8 @@ body {
     white-space: nowrap;
 }
 
-.HierarchyToggle:hover {
-    background: rgba(255, 255, 255, 0.12);
-    color: var(--text);
-}
-
-.HierarchyToggle.active {
-    background: var(--accent-soft);
-    border-color: var(--accent-border);
-    color: #fff;
-}
+.HierarchyToggle:hover { background: rgba(255, 255, 255, 0.12); color: var(--text); }
+.HierarchyToggle.active { background: var(--accent-soft); border-color: var(--accent-border); color: #fff; }
 
 .Hierarchy > .HierarchyTree,
 .HierarchyTree {
@@ -195,16 +183,9 @@ body {
 
 .HierarchyTree::-webkit-scrollbar { width: 5px; }
 .HierarchyTree::-webkit-scrollbar-track { background: transparent; }
-.HierarchyTree::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.14);
-    border-radius: 3px;
-}
+.HierarchyTree::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.14); border-radius: 3px; }
 
-.HierGroup {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-}
+.HierGroup { display: flex; flex-direction: column; width: 100%; }
 
 .HierGroupHeader {
     display: flex;
@@ -220,35 +201,13 @@ body {
     transition: background 0.12s ease;
 }
 
-.HierGroupHeader:hover {
-    background: rgba(255, 255, 255, 0.09);
-}
+.HierGroupHeader:hover { background: rgba(255, 255, 255, 0.09); }
 
-.HierChevron {
-    width: 12px;
-    text-align: center;
-    opacity: 0.4;
-    font-size: 9px;
-    flex-shrink: 0;
-    font-weight: 600;
-}
+.HierChevron { width: 12px; text-align: center; opacity: 0.4; font-size: 9px; flex-shrink: 0; font-weight: 600; }
 
-.HierGroupLabel {
-    flex: 1;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    min-width: 0;
-    font-weight: 500;
-    font-size: 12px;
-}
+.HierGroupLabel { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; font-weight: 500; font-size: 12px; }
 
-.HierGroupMeta {
-    color: var(--text-tertiary);
-    font-size: 10px;
-    flex-shrink: 0;
-    font-variant-numeric: tabular-nums;
-}
+.HierGroupMeta { color: var(--text-tertiary); font-size: 10px; flex-shrink: 0; font-variant-numeric: tabular-nums; }
 
 .HierChildren {
     display: flex;
@@ -260,9 +219,7 @@ body {
     margin-left: 12px;
 }
 
-.HierChildren.collapsed {
-    display: none;
-}
+.HierChildren.collapsed { display: none; }
 
 .HierAtom {
     display: flex;
@@ -277,37 +234,12 @@ body {
     transition: background 0.1s ease;
 }
 
-.HierAtom:hover {
-    background: rgba(255, 255, 255, 0.08);
-}
-
-.HierAtom.selected {
-    background: var(--accent-soft);
-    box-shadow: inset 0 0 0 1px var(--accent-border);
-}
-
-.HierAtomName {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    font-size: 11px;
-}
-
-.HierAtomKe {
-    color: var(--text-tertiary);
-    font-size: 10px;
-    flex-shrink: 0;
-    font-variant-numeric: tabular-nums;
-}
-
-.HierAtom.hot .HierAtomKe {
-    color: #ff9f0a;
-}
-
-.HierAtom.excited .HierAtomName::after {
-    content: " *";
-    color: #ffd60a;
-}
+.HierAtom:hover { background: rgba(255, 255, 255, 0.08); }
+.HierAtom.selected { background: var(--accent-soft); box-shadow: inset 0 0 0 1px var(--accent-border); }
+.HierAtomName { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 11px; }
+.HierAtomKe { color: var(--text-tertiary); font-size: 10px; flex-shrink: 0; font-variant-numeric: tabular-nums; }
+.HierAtom.hot .HierAtomKe { color: #ff9f0a; }
+.HierAtom.excited .HierAtomName::after { content: " *"; color: #ffd60a; }
 
 .AtomAdder {
     display: flex !important;
@@ -331,15 +263,8 @@ body {
     transition: border-color 0.15s ease, background 0.15s ease;
 }
 
-.AtomSelect:hover, .AtomSelect:focus {
-    border-color: rgba(255, 255, 255, 0.2);
-    background: rgba(255, 255, 255, 0.09);
-}
-
-.AtomSelect option {
-    background: #1c1c1e;
-    color: var(--text);
-}
+.AtomSelect:hover, .AtomSelect:focus { border-color: rgba(255, 255, 255, 0.2); background: rgba(255, 255, 255, 0.09); }
+.AtomSelect option { background: #1c1c1e; color: var(--text); }
 
 .SpawnBtn {
     background: var(--accent-soft);
@@ -354,14 +279,9 @@ body {
     transition: background 0.15s ease;
 }
 
-.SpawnBtn:hover {
-    background: rgba(10, 132, 255, 0.35);
-}
+.SpawnBtn:hover { background: rgba(10, 132, 255, 0.35); }
 
-.AdderOpts {
-    margin-top: 4px;
-    width: 100%;
-}
+.AdderOpts { margin-top: 4px; width: 100%; }
 
 .AdderOpts label,
 .Prefs label {
@@ -424,13 +344,8 @@ body {
     font-variant-numeric: tabular-nums;
 }
 
-.DashPrefs {
-    margin-top: 2px;
-}
-
-.DashPrefs label {
-    font-size: 11px;
-}
+.DashPrefs { margin-top: 2px; }
+.DashPrefs label { font-size: 11px; }
 
 .Tooltip {
     display: flex;
@@ -480,16 +395,8 @@ body {
     transition: background 0.12s ease, color 0.12s ease, border-color 0.12s ease;
 }
 
-.ModeBtn:hover {
-    background: rgba(255, 255, 255, 0.1);
-    color: var(--text);
-}
-
-.ModeBtn.active {
-    background: var(--accent-soft);
-    border-color: var(--accent-border);
-    color: #fff;
-}
+.ModeBtn:hover { background: rgba(255, 255, 255, 0.1); color: var(--text); }
+.ModeBtn.active { background: var(--accent-soft); border-color: var(--accent-border); color: #fff; }
 
 .ContextMenu {
     position: fixed;
@@ -509,9 +416,7 @@ body {
     user-select: none;
 }
 
-.ContextMenu[hidden] {
-    display: none !important;
-}
+.ContextMenu[hidden] { display: none !important; }
 
 .ContextMenu .CtxTitle {
     font-size: 11px;
@@ -538,29 +443,11 @@ body {
     transition: background 0.1s ease;
 }
 
-.ContextMenu button:hover {
-    background: rgba(255, 255, 255, 0.1);
-}
-
-.ContextMenu button:active {
-    background: var(--accent-soft);
-}
-
-.ContextMenu button.Danger {
-    color: var(--danger);
-}
-
-.ContextMenu button.Danger:hover {
-    background: rgba(255, 69, 58, 0.15);
-}
-
-.ContextMenu hr {
-    border: none;
-    height: 1px;
-    background: rgba(255, 255, 255, 0.08);
-    margin: 3px 4px;
-    pointer-events: none;
-}
+.ContextMenu button:hover { background: rgba(255, 255, 255, 0.1); }
+.ContextMenu button:active { background: var(--accent-soft); }
+.ContextMenu button.Danger { color: var(--danger); }
+.ContextMenu button.Danger:hover { background: rgba(255, 69, 58, 0.15); }
+.ContextMenu hr { border: none; height: 1px; background: rgba(255, 255, 255, 0.08); margin: 3px 4px; pointer-events: none; }
 
 .PluginDock {
     position: fixed;
@@ -590,13 +477,11 @@ body {
     font-size: 11px;
     font-weight: 500;
     cursor: pointer;
-    transition: background 0.12s ease, border-color 0.12s ease;
+    transition: background 0.12s ease, border-color 0.12s ease, color 0.12s ease;
 }
 
-.PluginDockBtn:hover {
-    background: var(--accent-soft);
-    border-color: var(--accent-border);
-}
+.PluginDockBtn:hover { background: rgba(255, 255, 255, 0.12); border-color: rgba(255, 255, 255, 0.24); }
+.PluginDockBtn.active { background: var(--accent-soft); border-color: var(--accent-border); color: #fff; }
 
 .PluginWidget {
     position: fixed;
@@ -613,11 +498,10 @@ body {
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
     overflow: hidden;
     z-index: 50;
+    will-change: left, top;
 }
 
-.PluginWidget.WidgetHidden {
-    display: none !important;
-}
+.PluginWidget.WidgetHidden { display: none !important; }
 
 .WidgetTitle {
     display: flex;
@@ -630,11 +514,10 @@ body {
     cursor: grab;
     user-select: none;
     flex-shrink: 0;
+    touch-action: none;
 }
 
-.WidgetTitle:active {
-    cursor: grabbing;
-}
+.WidgetTitle:active { cursor: grabbing; }
 
 .WidgetTitleText {
     font-size: 12px;
@@ -643,10 +526,7 @@ body {
     letter-spacing: -0.01em;
 }
 
-.WidgetTitleBtns {
-    display: flex;
-    gap: 4px;
-}
+.WidgetTitleBtns { display: flex; gap: 4px; }
 
 .WidgetBtn {
     width: 22px;
@@ -661,10 +541,7 @@ body {
     padding: 0;
 }
 
-.WidgetBtn:hover {
-    background: rgba(255, 69, 58, 0.25);
-    color: #fff;
-}
+.WidgetBtn:hover { background: rgba(255, 69, 58, 0.25); color: #fff; }
 
 .WidgetBody {
     padding: 10px 12px 12px;
@@ -675,13 +552,11 @@ body {
     gap: 8px;
     scrollbar-width: thin;
     scrollbar-color: rgba(255, 255, 255, 0.18) transparent;
+    touch-action: pan-y;
 }
 
 .WidgetBody::-webkit-scrollbar { width: 6px; }
-.WidgetBody::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.15);
-    border-radius: 3px;
-}
+.WidgetBody::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 3px; }
 
 .WRow {
     display: flex;
@@ -697,11 +572,7 @@ body {
     min-width: 62px;
 }
 
-.WRow3 {
-    display: flex;
-    flex-direction: row;
-    gap: 8px;
-}
+.WRow3 { display: flex; flex-direction: row; gap: 8px; }
 
 .WRow3 label {
     flex: 1;
@@ -724,10 +595,7 @@ body {
     min-width: 0;
 }
 
-.WSelect option {
-    background: #1c1c1e;
-    color: var(--text);
-}
+.WSelect option { background: #1c1c1e; color: var(--text); }
 
 .WNum {
     width: 100%;
@@ -764,11 +632,7 @@ body {
     font-size: 11px;
 }
 
-.WActions {
-    display: flex;
-    gap: 6px;
-    margin-top: 4px;
-}
+.WActions { display: flex; gap: 6px; margin-top: 4px; }
 
 .WPrimary {
     flex: 1;
@@ -782,15 +646,9 @@ body {
     cursor: pointer;
 }
 
-.WPrimary:hover {
-    background: rgba(10, 132, 255, 0.4);
-}
+.WPrimary:hover { background: rgba(10, 132, 255, 0.4); }
 
-.WHint {
-    font-size: 10px;
-    color: var(--text-tertiary);
-    line-height: 1.35;
-}
+.WHint { font-size: 10px; color: var(--text-tertiary); line-height: 1.35; }
 
 .WValue {
     flex: 1;
@@ -830,10 +688,7 @@ body {
     transition: background 0.12s ease, color 0.12s ease;
 }
 
-.WSectionHeader:hover {
-    background: rgba(255, 255, 255, 0.07);
-    color: rgba(255, 255, 255, 0.85);
-}
+.WSectionHeader:hover { background: rgba(255, 255, 255, 0.07); color: rgba(255, 255, 255, 0.85); }
 
 .WSectionChevron {
     width: 10px;
@@ -844,9 +699,7 @@ body {
     transform-origin: 40% 50%;
 }
 
-.WSection.Open .WSectionChevron {
-    transform: rotate(90deg);
-}
+.WSection.Open .WSectionChevron { transform: rotate(90deg); }
 
 .WSectionBody {
     display: none;
@@ -856,9 +709,7 @@ body {
     border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.WSection.Open .WSectionBody {
-    display: flex;
-}
+.WSection.Open .WSectionBody { display: flex; }
 
 .WStatRow {
     display: flex;
@@ -870,10 +721,7 @@ body {
     font-variant-numeric: tabular-nums;
 }
 
-.WStatRow > span:first-child {
-    color: rgba(255, 255, 255, 0.5);
-    font-weight: 500;
-}
+.WStatRow > span:first-child { color: rgba(255, 255, 255, 0.5); font-weight: 500; }
 
 .WStatRow > span:last-child {
     color: rgba(255, 255, 255, 0.9);
@@ -893,25 +741,9 @@ body {
     font-variant-numeric: tabular-nums;
 }
 
-.WLegendItem {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 5px;
-    color: rgba(255, 255, 255, 0.7);
-}
-
-.WLegendDot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    flex-shrink: 0;
-}
-
-.WLegendVal {
-    color: rgba(255, 255, 255, 0.4);
-    font-weight: 500;
-}
+.WLegendItem { display: flex; flex-direction: row; align-items: center; gap: 5px; color: rgba(255, 255, 255, 0.7); }
+.WLegendDot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.WLegendVal { color: rgba(255, 255, 255, 0.4); font-weight: 500; }
 
 .WGraph {
     width: 100%;
@@ -946,14 +778,8 @@ body {
     transition: background 0.12s ease, color 0.12s ease;
 }
 
-.WStepperBtn:hover {
-    background: rgba(255, 255, 255, 0.1);
-    color: #fff;
-}
-
-.WStepperBtn:active {
-    background: var(--accent-soft);
-}
+.WStepperBtn:hover { background: rgba(255, 255, 255, 0.1); color: #fff; }
+.WStepperBtn:active { background: var(--accent-soft); }
 
 .WStepperInput {
     flex: 1;
@@ -970,11 +796,5 @@ body {
 }
 
 .WStepperInput::-webkit-outer-spin-button,
-.WStepperInput::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-.WStepperInput[type=number] {
-    -moz-appearance: textfield;
-}
+.WStepperInput::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.WStepperInput[type=number] { -moz-appearance: textfield; }
