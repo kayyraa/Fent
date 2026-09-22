@@ -227,6 +227,38 @@ Chemistry.IdealNZ = function (Z) {
     return 1.0 + (Z - 20) * 0.0075 + 20 * 0.002;
 };
 
+const RadioactiveElements = new Set([
+    "Tc", "Pm",
+    "Po", "At", "Rn", "Fr", "Ra", "Ac", "Th", "Pa", "U", "Np", "Pu",
+    "Am", "Cm", "Bk", "Cf", "Es", "Fm", "Md", "No", "Lr",
+    "Rf", "Db", "Sg", "Bh", "Hs", "Mt", "Ds", "Rg", "Cn",
+    "Nh", "Fl", "Mc", "Lv", "Ts", "Og"
+]);
+
+Chemistry.HasStableIsotopes = function (Z) {
+    const Sym = ElementSymbolFromZ(Z);
+    if (!Sym) return false;
+    return !RadioactiveElements.has(Sym);
+};
+
+Chemistry.IsNaturallyStable = function (Z, N) {
+    const Sym = ElementSymbolFromZ(Z);
+    if (!Sym) return false;
+    if (RadioactiveElements.has(Sym)) return false;
+
+    const Common = CommonIsotope[Sym];
+    if (Common && Common[0] === Z && Common[1] === N) return true;
+
+    const Data = globalThis.Atoms && globalThis.Atoms[Sym];
+    if (Data) {
+        const Zc = Data.AtomicNumber;
+        const A = Math.round(Data.AtomicMass || Zc * 2);
+        if (Zc === Z && Math.max(0, A - Zc) === N) return true;
+    }
+
+    return false;
+};
+
 const IsotopeData = {
     "H-3":   { hl: 3.89e8, modes: [{ mode: "beta-minus", branch: 1.0, energy: 18.6 }] },
     "C-14":  { hl: 1.81e11, modes: [{ mode: "beta-minus", branch: 1.0, energy: 156 }] },
@@ -279,11 +311,17 @@ Chemistry.DecayProbability = function (Z, N) {
     const Iso = Chemistry.GetIsotopeData(Z, N);
     if (Iso) return DecayProbabilityPerFrame(Iso.hl);
     if (N === 0 && Z <= 1) return 0;
+
+    if (Chemistry.IsNaturallyStable(Z, N)) return 0;
+
     const Ideal = Chemistry.IdealNZ(Z);
     const ActualNZ = Z > 0 ? N / Z : 0;
     const Deviation = Math.abs(ActualNZ - Ideal);
-    if (Z <= 82 && Deviation < 0.045) return 0;
+
+    if (Chemistry.HasStableIsotopes(Z) && Deviation < 0.15) return 0;
+
     if (Z > 82) return DecayProbabilityPerFrame(1e9);
+
     const Excess = Math.max(0, Deviation - 0.045);
     const PseudoHalfLife = Math.max(0.6, 1e6 / (1 + Excess * 4000));
     return DecayProbabilityPerFrame(PseudoHalfLife);
@@ -358,4 +396,116 @@ Chemistry.ReactionEnergy = function (BondsBroken, BondsFormed) {
     for (const B of BondsBroken) EnergyIn += B.energy;
     for (const F of BondsFormed) EnergyOut += F.energy;
     return EnergyOut - EnergyIn;
+};
+
+const NobleGasSet = new Set(["He", "Ne", "Ar", "Kr", "Xe", "Rn", "Og"]);
+Chemistry.NobleGases = NobleGasSet;
+
+Chemistry.IsNoble = function (Key) {
+    return NobleGasSet.has(Key);
+};
+
+Chemistry.ElectronWant = function (Key) {
+    if (NobleGasSet.has(Key)) return 0;
+    const Data = globalThis.Atoms && globalThis.Atoms[Key];
+    if (!Data) return 0.35;
+    const EA = Math.max(0, ElectronAffinity[Key] || 0);
+    const EN = Math.max(0, Data.Electronegativity || 2.0);
+    const Valence = ValenceElectronCount[Key] || 0;
+    const Target = (Data.AtomicNumber || 0) <= 2 ? 2 : 8;
+    const Deficit = Math.max(0, Target - Valence);
+    const EANorm = Math.min(1, EA / 350);
+    const ENNorm = Math.min(1, EN / 4);
+    const DefNorm = Math.min(1, Deficit / 6);
+    return Math.min(1, EANorm * 0.25 + ENNorm * 0.35 + DefNorm * 0.40);
+};
+
+Chemistry.ElectronDonate = function (Key) {
+    if (NobleGasSet.has(Key)) return 0;
+    const Data = globalThis.Atoms && globalThis.Atoms[Key];
+    if (!Data) return 0.2;
+    const IE = Data.IonizationEnergy || 1000;
+    const EN = Data.Electronegativity || 2.0;
+    const IENorm = Math.min(1, Math.max(0, 1 - IE / 1400));
+    const ENNorm = Math.min(1, Math.max(0, 1 - EN / 4));
+    return Math.min(1, IENorm * 0.55 + ENNorm * 0.45);
+};
+
+Chemistry.QuantumShells = function (Key) {
+    const Data = globalThis.Atoms && globalThis.Atoms[Key];
+    if (!Data) return [];
+    const Z = Data.AtomicNumber || 0;
+    if (Z <= 0) return [];
+    const Capacities = [2, 8, 18, 32, 32, 18, 8];
+    const Shells = [];
+    let Remaining = Z;
+    for (let i = 0; i < Capacities.length && Remaining > 0; i++) {
+        const Cap = Capacities[i];
+        const Fill = Math.min(Cap, Remaining);
+        Shells.push({
+            n: i + 1,
+            fill: Fill,
+            capacity: Cap,
+            fraction: Fill / Cap
+        });
+        Remaining -= Fill;
+    }
+    if (Shells.length > 0) Shells[Shells.length - 1].valence = true;
+    return Shells;
+};
+
+Chemistry.ValenceSatisfaction = function (Key, BondOrderSum) {
+    if (NobleGasSet.has(Key)) return 1;
+    const V = (globalThis.RealisticValence && globalThis.RealisticValence[Key]) || 1;
+    if (V <= 0) return 1;
+    return Math.min(1, BondOrderSum / V);
+};
+
+Chemistry.ChemicalStability = function (Key, BondOrderSum) {
+    if (NobleGasSet.has(Key)) return 1;
+    const V = (globalThis.RealisticValence && globalThis.RealisticValence[Key]) || 1;
+    if (V <= 0) return 1;
+    const S = Math.min(1, BondOrderSum / V);
+    return S * S * (3 - 2 * S);
+};
+
+Chemistry.BondAffinity = function (KeyA, KeyB) {
+    if (NobleGasSet.has(KeyA) || NobleGasSet.has(KeyB)) return 0;
+    if (KeyA === KeyB) return 0.72;
+    const WantA = Chemistry.ElectronWant(KeyA);
+    const WantB = Chemistry.ElectronWant(KeyB);
+    const DonA = Chemistry.ElectronDonate(KeyA);
+    const DonB = Chemistry.ElectronDonate(KeyB);
+    const Donor = Math.max(DonA, DonB);
+    const Acceptor = Math.max(WantA, WantB);
+    const Shared = WantA * WantB * 0.25 + DonA * DonB * 0.15;
+    return Math.min(1, Donor * Acceptor * 0.95 + Shared);
+};
+
+Chemistry.QuantumTunneling = function (ParticleEnergy, BarrierHeight) {
+    if (BarrierHeight <= 0) return 1;
+    const Ratio = Math.max(0.001, ParticleEnergy / BarrierHeight);
+    if (Ratio >= 1) return 1;
+    return Math.exp(-3.5 * (1 / Ratio - 1));
+};
+
+Chemistry.SpectralEmission = function (Z, ShellFrom, ShellTo) {
+    if (ShellFrom <= ShellTo || ShellTo < 1) return null;
+    const Rydberg = 13.6;
+    const DeltaE = Rydberg * Z * Z * (1 / (ShellTo * ShellTo) - 1 / (ShellFrom * ShellFrom));
+    const Lambda = 1239.84 / Math.max(0.001, DeltaE);
+    return { wavelength: Lambda, energy: DeltaE };
+};
+
+Chemistry.BondEnthalpy = function (KeyA, KeyB, Order) {
+    const Info = Chemistry.GetOrderedBondInfo(KeyA, KeyB, Order);
+    if (Info) return Info.energy;
+    const Aff = Chemistry.BondAffinity(KeyA, KeyB);
+    return 180 * (0.5 + 0.5 * Aff);
+};
+
+Chemistry.AtomStabilityScore = function (Obj, BondOrderSum) {
+    if (!Obj) return 0;
+    if (Obj.Noble) return 1;
+    return Chemistry.ChemicalStability(Obj.Key, BondOrderSum);
 };

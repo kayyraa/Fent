@@ -125,7 +125,15 @@
             Indices.push(Api.GetAtoms().length - 1);
         }
 
-        const Cut = Scale * (Type === "Graphite" ? 0.72 : Type === "Diamond" ? 0.48 : Type === "NaCl" ? 0.75 : 0.78);
+        const Cut = Scale * (
+            Type === "Graphite" ? 0.75 :
+            Type === "Diamond" ? 0.5 :
+            Type === "NaCl" ? 1.05 :
+            Type === "Bcc" ? 0.95 :
+            Type === "Fcc" ? 0.78 :
+            1.05
+        );
+
         const Atoms = Api.GetAtoms();
         for (let I = 0; I < Indices.length; I++) {
             const Ia = Indices[I];
@@ -342,7 +350,7 @@
     const Entry = {
         Id: "lattice-maker",
         Name: "Lattice Maker",
-        Version: "1.1.0",
+        Version: "1.2.0",
         Description: "Build diamond, graphite, NaCl, FCC, BCC, and cubic lattices",
         Setup(Api) {
             Api.On("OpenPlugin", ({ Id }) => {
